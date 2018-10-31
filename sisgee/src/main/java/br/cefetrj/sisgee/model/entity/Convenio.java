@@ -38,8 +38,9 @@ public class Convenio implements Serializable {
     @Column(length = 4, nullable = false)
     private String ano;
 
+    //alteração de dataAssinatura para dataRegistro
     @Column(nullable = false)
-    private Date dataAssinatura;
+    private Date dataRegistro;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Empresa empresa;
@@ -59,19 +60,19 @@ public class Convenio implements Serializable {
         this.numeroConvenio = numeroConvenio;
     }     
     
-    public Convenio(String ano, String numero, Date dataAssinatura, Empresa empresa) {
+    public Convenio(String ano, String numero, Date dataRegistro, Empresa empresa) {
         this.ano=ano;
         this.numero=numero;
-        this.dataAssinatura = dataAssinatura;
+        this.dataRegistro = dataRegistro;
         this.empresa = empresa;
         this.pessoa=null;
 
     }
 
-    public Convenio(String ano, String numero, Date dataAssinatura, Pessoa pessoa) {
+    public Convenio(String ano, String numero, Date dataRegistro, Pessoa pessoa) {
         this.ano=ano;
         this.numero=numero;
-        this.dataAssinatura = dataAssinatura;
+        this.dataRegistro = dataRegistro;
         this.pessoa = pessoa;
         this.empresa= null;
 
@@ -92,21 +93,21 @@ public class Convenio implements Serializable {
     }
 
     
-    public Date getDataAssinatura() {
-        return dataAssinatura;
+    public Date getDataRegistro() {
+        return dataRegistro;
     }
 
     public Date getDataFinal(){
         Calendar cal = Calendar.getInstance();
-        cal.setTime(this.dataAssinatura);
+        cal.setTime(this.dataRegistro);
         cal.add(Calendar.YEAR, 5);
         return cal.getTime();
         
     }    
     
-    public void setDataAssinatura(Date dataAssinatura) {
-        this.dataAssinatura = dataAssinatura;
-        this.ano = new SimpleDateFormat("yyyy").format(dataAssinatura);
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
+        this.ano = new SimpleDateFormat("yyyy").format(dataRegistro);
     }
 
     public Pessoa getPessoa() {
