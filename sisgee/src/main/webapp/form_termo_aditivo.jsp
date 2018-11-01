@@ -17,6 +17,10 @@
         </style>
     </head>
     <body onLoad="termoAditivo()">
+        <%!
+            String b;
+            String c;
+        %>
         <%@include file="import_navbar.jspf"%>
 
         <div class="container">
@@ -64,7 +68,7 @@
                             <th><fmt:message key="br.cefetrj.sisgee.13" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.12" /></th>
                             <th>Visualizar</th>
-                            <th>Excluir</th>
+                            <th><fmt:message key="br.cefetrj.sisgee.31" /></th>
 
                         </tr>
 
@@ -88,7 +92,8 @@
                                     <td>${b.getConvenio().pegaNome()}</td>
                                     <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
                                     <c:if test="${status.last}">
-                                    <td><a class="btn btn-sm btn-primary btn-block" onclick="confirmar('Você está prestes a excluir o aditivo de tipo ${c.getTipoAditivo()} do aluno ${param.matricula}. Deseja continuar?', 'ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}')">Excluir</td>
+                                        
+                                        <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#excluirAditivo"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
                                     </c:if>
                                 </tr>   
                             </c:forEach>
@@ -203,6 +208,29 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.resources.form.fechar"/></button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        
+        <div class="modal fade" id="excluirAditivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.32"/></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <c:forEach items="${listaTermoEstagio}" var="b">
+                            <c:forEach items="${b.getTermosAditivos()}" var="c" varStatus="status">
+                                <c:if test="${status.last}">
+                                    <a href ="ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.33"/></a>
+                                </c:if>  
+                            </c:forEach>
+                        </c:forEach>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.34"/></button>
                     </div>
                 </div>
             </div>

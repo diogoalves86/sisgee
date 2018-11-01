@@ -55,23 +55,20 @@ public class ExcluirTermoAditivoServlet extends HttpServlet {
 	Logger lg = Logger.getLogger(ExcluirTermoAditivoServlet.class);
 		try{
 			TermoAditivoServices.excluirTermoAditivo(termoAditivo);
-			exclusaoAditivoConcluido = "Exclusão de Termo Aditivo concluída com sucesso";// TODO alterar essa parte do codigo messages.getString("br.cefetrj.sisgee.incluir_termo_aditivo_servlet.msg_registroAditivoConcluido");
+			exclusaoAditivoConcluido = messages.getString("br.cefetrj.sisgee.excluir_termo_aditivo_servlet.msg_exclusaoAditivoConcluida");
 			req.setAttribute("msg", exclusaoAditivoConcluido);
 			lg.info(exclusaoAditivoConcluido);
 			req.getRequestDispatcher("/index.jsp").forward(req, resp);
 			
-			//TODO remover saída do console
+			
 			
 			
 		}catch(Exception e) {
-			msgOcorreuErro = "Ocorreu um erro ao Excluir o Aditivo.";// TODO alterar essa parte messages.getString("br.cefetrj.sisgee.incluir_termo_aditivo_servlet.msg_ocorreuErro");
+			msgOcorreuErro = messages.getString("br.cefetrj.sisgee.excluir_termo_aditivo_servlet.msg_ocorreuErro");
 			req.setAttribute("msg", msgOcorreuErro);
 			
 			lg.error("Exception ao tentar Excluir o Termo Aditivo", e);
 			req.getRequestDispatcher("index.jsp").forward(req, resp);
-			
-			//TODO remover saída do console
-			System.out.println(msgOcorreuErro);
 		}
 		
 		System.out.println(exclusaoAditivoConcluido);
