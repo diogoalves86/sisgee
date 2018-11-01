@@ -63,6 +63,7 @@
                             <th><fmt:message key="br.cefetrj.sisgee.13" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.12" /></th>
                             <th>Visualizar</th>
+                            <th>Excluir</th>
 
                         </tr>
 
@@ -85,6 +86,7 @@
                                     <td>${b.getConvenio().pegaCpf()}</td>
                                     <td>${b.getConvenio().pegaNome()}</td>
                                     <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
+                                    <td><a class="btn btn-sm btn-primary btn-block" onclick="confirmar('Você está prestes a excluir o aditivo de tipo ${c.getTipoAditivo()} do aluno ${param.matricula}. Deseja continuar?', 'ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}')">Excluir</td>
                                 </tr>   
                             </c:forEach>
                         </c:forEach>
@@ -202,7 +204,7 @@
                 </div>
             </div>
         </div>
-                        
+        <script type="text/javascript" src="confirmar.js"></script>                
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
         <script type="text/javascript">

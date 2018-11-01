@@ -55,6 +55,23 @@ public class TermoAditivoServices {
 		GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);	
 		return termoAditivoDao.buscar(idTermoAditivo);
 	}
+	        
+        /**
+	 * Método para excluir um termo aditivo no banco
+	 * @param termoAditivo Termo aditivo a ser persistido
+	 */
+        public static void excluirTermoAditivo(TermoAditivo termoAditivo){
+            GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);		
+		PersistenceManager.getTransaction().begin();
+		try{
+			termoAditivoDao.excluir(termoAditivo);
+			PersistenceManager.getTransaction().commit();
+		}catch(Exception e){
+			//TODO remover saída do console
+			System.out.println(e);
+			PersistenceManager.getTransaction().rollback();
+		}
+        }
 	
 	/**
 	 * 
