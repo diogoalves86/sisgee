@@ -4,6 +4,7 @@
 
 
         <%@include file="import_head.jspf"%>
+        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
         <title>
             <fmt:message key = "br.cefetrj.sisgee.resources.form.registroTermoAditivo"/>
@@ -77,7 +78,7 @@
                                 <td>${b.getConvenio().pegaNome()}</td>
                                 <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
                             </tr>
-                            <c:forEach items="${b.getTermosAditivos()}" var="c">
+                            <c:forEach items="${b.getTermosAditivos()}" var="c" varStatus="status">
                                 <tr>
                                     <td>Aditivo de ${c.getTipoAditivo()}</td>
                                     <td>--</td>
@@ -86,7 +87,9 @@
                                     <td>${b.getConvenio().pegaCpf()}</td>
                                     <td>${b.getConvenio().pegaNome()}</td>
                                     <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
+                                    <c:if test="${status.last}">
                                     <td><a class="btn btn-sm btn-primary btn-block" onclick="confirmar('Você está prestes a excluir o aditivo de tipo ${c.getTipoAditivo()} do aluno ${param.matricula}. Deseja continuar?', 'ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}')">Excluir</td>
+                                    </c:if>
                                 </tr>   
                             </c:forEach>
                         </c:forEach>

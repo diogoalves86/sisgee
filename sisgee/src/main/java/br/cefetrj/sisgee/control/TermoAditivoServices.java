@@ -60,8 +60,13 @@ public class TermoAditivoServices {
 	 * Método para excluir um termo aditivo no banco
 	 * @param termoAditivo Termo aditivo a ser persistido
 	 */
-        public static void excluirTermoAditivo(TermoAditivo termoAditivo){
-            GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);		
+        public static void excluirTermoAditivo(TermoAditivo termoAditivo) throws Exception{
+                GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);
+                List<TermoAditivo> lista = listarTermoAditivo();
+                if(!termoAditivo.equals(lista.get(lista.size()-1))){
+                    throw new Exception();
+                }
+                
 		PersistenceManager.getTransaction().begin();
 		try{
 			termoAditivoDao.excluir(termoAditivo);

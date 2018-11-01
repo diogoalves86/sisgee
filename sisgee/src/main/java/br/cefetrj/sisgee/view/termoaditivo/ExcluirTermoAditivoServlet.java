@@ -25,7 +25,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Fernando Godoy
+ * @author FernandoGodoy
  */
 @WebServlet("/ExcluirTermoAditivoServlet")
 public class ExcluirTermoAditivoServlet extends HttpServlet {
@@ -67,8 +67,8 @@ public class ExcluirTermoAditivoServlet extends HttpServlet {
 			msgOcorreuErro = "Ocorreu um erro ao Excluir o Aditivo.";// TODO alterar essa parte messages.getString("br.cefetrj.sisgee.incluir_termo_aditivo_servlet.msg_ocorreuErro");
 			req.setAttribute("msg", msgOcorreuErro);
 			
-			lg.error("Exception ao tentar inserir o Termo Aditivo", e);
-			req.getRequestDispatcher("FormTermoAditivoServlet").forward(req, resp);
+			lg.error("Exception ao tentar Excluir o Termo Aditivo", e);
+			req.getRequestDispatcher("index.jsp").forward(req, resp);
 			
 			//TODO remover saída do console
 			System.out.println(msgOcorreuErro);
