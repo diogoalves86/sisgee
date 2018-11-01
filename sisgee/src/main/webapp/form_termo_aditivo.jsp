@@ -17,10 +17,6 @@
         </style>
     </head>
     <body onLoad="termoAditivo()">
-        <%!
-            String b;
-            String c;
-        %>
         <%@include file="import_navbar.jspf"%>
 
         <div class="container">
