@@ -9,6 +9,7 @@ import br.cefetrj.sisgee.model.dao.TermoAditivoDAO;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 
+
 /**
  * Serviços de TermoAditivo. 
  * Trata a lógica de negócios
@@ -61,9 +62,17 @@ public class TermoAditivoServices {
 	 * @param termoAditivo Termo aditivo a ser persistido
 	 */
         public static void excluirTermoAditivo(TermoAditivo termoAditivo) throws Exception{
+                boolean ultimo = false;
                 GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);
-                List<TermoAditivo> lista = listarTermoAditivo();
-                if(!termoAditivo.equals(lista.get(lista.size()-1))){
+                List<TermoEstagio> listaTermoEstagio = TermoEstagioServices.listarTermoEstagio();
+                
+                for(TermoEstagio termo: TermoEstagioServices.listarTermoEstagio()){
+                    List<TermoAditivo> aditivos = termo.getTermosAditivos();
+                    if(termoAditivo.equals(aditivos.get(aditivos.size()-1))){
+                    ultimo = true;
+                }
+        }
+                if(ultimo == false){
                     throw new Exception();
                 }
                 
