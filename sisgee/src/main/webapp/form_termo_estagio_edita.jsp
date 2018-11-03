@@ -214,7 +214,7 @@
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.valorBolsaEstagio"/></legend>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="valorBolsa">Valor (R$)</label>
+                            <label for="valorBolsa"><fmt:message key = "br.cefetrj.sisgee.33"/></label>
                             <input type="text" class="form-control col-sm-6" id="valorBolsa" name="valorBolsa" value="${ showValorBolsa eq 'sim' ? '' : vavalorBolsa }">
                             <c:if test="${ not empty valorBolsaMsg }">
                                 <div class="invalid-feedback">${ valorBolsaMsg }</div>
@@ -293,7 +293,7 @@
                 
                 <!-- Aqui começa Supervisor-->
                 <fieldset class="form-group" ${ showSupervisor eq 'sim' ? '' :'disabled'}>
-                    <legend class="col-form-legend col-lg">Supervisor do Estágio</legend>    
+                    <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.20"/></legend>    
                         <div class="form-row" > 
                             <div class="form-group col-md-3"  >
                                 <label for="eEstagioObrigatorio"><fmt:message key = "br.cefetrj.sisgee.resources.form.estagioObrigatorio"/></label>
@@ -349,7 +349,8 @@
                         </div>
                 </fieldset>
                     
-                    <button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'BuscaTermoAditivoServlet'"><fmt:message key = "br.cefetrj.sisgee.17"/></button>
+                <input type="submit" class="btn btn-primary" value='<fmt:message key = "br.cefetrj.sisgee.25"/>' />
+                <button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'BuscaTermoAditivoServlet'"><fmt:message key = "br.cefetrj.sisgee.17"/></button>
                     	
             </form>
 
