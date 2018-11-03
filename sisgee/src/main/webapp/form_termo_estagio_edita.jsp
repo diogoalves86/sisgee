@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <%@include file="import_head.jspf"%>
-
+        
         <style type="text/css">
 
             div.container {
@@ -65,9 +65,9 @@
                             <div class="form-group col-md-5">
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
                                 <div class="input-group">
-                                    <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ cvNumero }">
+                                    <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ cvNumero2 }">
                                     <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value="${ cvId }"> 
-                                    <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio"  maxlength="6" value="${ cvNumero }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
+                                    <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio"  maxlength="6" value="${ cvNumero2 }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button" id="btnBuscarConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
                                     </span>    
@@ -342,6 +342,8 @@
     <%@include file="import_scripts.jspf"%>
     <script>
         $(document).ready(function () {
+            $("#btnBuscarMatricula").click();
+            $("#btnBuscarConvenio").click();
             var tamanho = $("#cnpjEcpf1").val().length;
             
             $('#cargaHorariaTermoEstagio').mask('9');
@@ -385,4 +387,7 @@
         
     </script>
 </body>
+
+
+
 </html>
