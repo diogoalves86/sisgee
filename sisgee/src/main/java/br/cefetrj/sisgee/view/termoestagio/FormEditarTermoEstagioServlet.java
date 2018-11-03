@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.cefetrj.sisgee.view.termoaditivo;
+package br.cefetrj.sisgee.view.termoestagio;
 
 import br.cefetrj.sisgee.control.AlunoServices;
 import br.cefetrj.sisgee.control.TermoAditivoServices;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author diogo
  */
-@WebServlet(name = "FormEditarTermoEstagioServlet", urlPatterns = {"/FormEditarTermoEstagioServlet"})
+@WebServlet(name = "FormEditarTermoEstagioServlet", urlPatterns = {"/EditarTermoEAditivo"})
 public class FormEditarTermoEstagioServlet extends HttpServlet {
 
     
@@ -55,6 +55,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         req.setAttribute("cvNumero", termoEstagio.getConvenio().getNumeroConvenio());
         if(termoEstagio.getConvenio().getEmpresa()==null){
             req.setAttribute("cvNome", termoEstagio.getConvenio().getPessoa().getNome());
+            req.setAttribute("cvId", termoEstagio.getConvenio().getIdConvenio());
             req.setAttribute("tConvenio","pf");
             req.setAttribute("cvCpfCnpj",termoEstagio.getConvenio().getPessoa().getCpf());
             req.setAttribute("nomeAgenciada",termoEstagio.getNomeAgenciada());
@@ -95,7 +96,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         /** Dados de Professor */
         req.setAttribute("pfnomeprofessor",termoEstagio.getProfessorOrientadorVisu(termoAditivo));
                         
-        req.getRequestDispatcher("/form_termo_Visualiza.jsp").forward(req, resp);
+        req.getRequestDispatcher("/form_termo_estagio_edita.jsp").forward(req, resp);
     }
 
    
