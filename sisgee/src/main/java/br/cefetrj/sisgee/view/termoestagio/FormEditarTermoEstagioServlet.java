@@ -53,6 +53,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
 
         /** Dados de convenio*/
         req.setAttribute("cvNumero", termoEstagio.getConvenio().getNumeroConvenio());
+        req.setAttribute("cvNumero2", termoEstagio.getConvenio().getNumero());
         if(termoEstagio.getConvenio().getEmpresa()==null){
             req.setAttribute("cvNome", termoEstagio.getConvenio().getPessoa().getNome());
             req.setAttribute("cvId", termoEstagio.getConvenio().getIdConvenio());
