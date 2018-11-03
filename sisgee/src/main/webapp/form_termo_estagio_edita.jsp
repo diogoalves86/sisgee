@@ -52,38 +52,8 @@
         </p>		
             <form action="EditarTermoEAditivo" method="post">
                 
-                <fieldset class="form-group dadosAluno">
-                    <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.dadosAluno"/></legend>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="matricula"><fmt:message key = "br.cefetrj.sisgee.resources.form.matricula"/></label>
-
-                            <div class="input-group">
-                                
-                                <input type="hidden" id="idAluno" name="idAluno" value="${ param.idAluno }">
-                                <input type="text" maxlength="100" class="form-control"  id="matricula" name="matricula" value="${ alMatricula }">
-                            </div>
-
-                        </div>
-
-                        <div class="form-group col-md">
-                            <label for="nome"><fmt:message key = "br.cefetrj.sisgee.resources.form.nome"/></label>
-                            <input type="text" class="form-control" id="nome" name="nome" value="${ alNome }">
-                        </div>
-
-                    </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="nomeCurso"><fmt:message key = "br.cefetrj.sisgee.resources.form.curso"/></label>
-                        <input type="text" class="form-control" id="nomeCurso"  name="nomeCurso" value="${ alCurso }">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="nomeCampus"><fmt:message key = "br.cefetrj.sisgee.resources.form.unidade"/></label>
-                        <input type="text" class="form-control" id="nomeCampus"  name="nomeCampus" value="${ alCampus }">
-                    </div>
-                    </div>
+                 <fieldset class="form-group dadosAluno" ${ not empty termoEstagio ? 'disabled' :'' }>
+                    <%@include file="import_busca_aluno.jspf"%>
                 </fieldset>
                 
                 <!-- AQUI VEM O CONVÊNIO-->
@@ -185,7 +155,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="dataFimTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataTermino"/></label>
-                            <input type="text" class="form-control col-sm-4 " id="dataFimTermoEstagio"   name="dataFimTermoEstagio" value="${showVigencia eq 'sim' ? '' : vidataFimTermoEstagio }" ${ showVigencia eq 'sim' ? '' :'disabled'} >
+                            <input type="text" class="form-control col-sm-4 " id="dataFimTermoEstagio"   name="dataFimTermoEstagio" value="${showVigencia eq 'sim' ? '' : vidataFimTermoEstagio }">
                             <c:if test="${ not empty dataFimMsg }">
                                 <div class="invalid-feedback">${ dataFimMsg }</div>
                             </c:if>
@@ -200,7 +170,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="cargaHorariaTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.horasDia"/></label>
-                            <input type="text" required="required" maxlength="1" pattern="[1-6]+$" class="form-control col-sm-2 " id="cargaHorariaTermoEstagio" name="cargaHorariaTermoEstagio" value="${ showCargaHoraria eq 'sim' ? '' :cacargaHorariaTermoEstagio }" ${ showCargaHoraria eq 'sim' ? '' :'disabled'}>
+                            <input type="text" required="required" maxlength="1" pattern="[1-6]+$" class="form-control col-sm-2 " id="cargaHorariaTermoEstagio" name="cargaHorariaTermoEstagio" value="${ showCargaHoraria eq 'sim' ? '' :cacargaHorariaTermoEstagio }">
                             <c:if test="${ not empty cargaHorariaMsg }">
                                 <div class="invalid-feedback">${ cargaHorariaMsg }</div>
                             </c:if>
@@ -292,7 +262,7 @@
                 <!-- Aqui começa local estágio-->
                 
                 <!-- Aqui começa Supervisor-->
-                <fieldset class="form-group" ${ showSupervisor eq 'sim' ? '' :'disabled'}>
+                <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.20"/></legend>    
                         <div class="form-row" > 
                             <div class="form-group col-md-3"  >
@@ -333,7 +303,7 @@
                 <!-- Aqui termina Supervisor-->
                 
                 <!-- Aqui começa Professor Orientador-->             
-                <fieldset class="form-group" ${ showProfessor eq 'sim' ? '' :'disabled'}>
+                <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></legend>
                         <div class="form-group col-md-8">
                                 <label for="idProfessorOrientador"></label>
