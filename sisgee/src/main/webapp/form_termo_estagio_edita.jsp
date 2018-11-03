@@ -196,7 +196,7 @@
                         <div class="form-group col-md-12">
 
                             <label for="enderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.endereco"/></label>
-                            <input type="text" required="required" pattern="[1-9,a-z\s]+$" maxlength="255" class="form-control" id="enderecoTermoEstagio" name="enderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :enenderecoTermoEstagio }">
+                            <input type="text" required="required" maxlength="255" class="form-control" id="enderecoTermoEstagio" name="enderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :enenderecoTermoEstagio }">
                             <c:if test="${ not empty enderecoMsg }">
                                 <div class="invalid-feedback">${ enderecoMsg }</div>
                             </c:if>
@@ -343,7 +343,6 @@
     <script>
         $(document).ready(function () {
             $("#btnBuscarMatricula").click();
-            $("#btnBuscarConvenio").click();
             var tamanho = $("#cnpjEcpf1").val().length;
             
             $('#cargaHorariaTermoEstagio').mask('9');
@@ -353,6 +352,7 @@
             $("#cnpjEcpf1").mask("99.999.999/9999-99");        
             $('#cepEnderecoTermoEstagio').mask('99.999-999');
             $('#dataIni').mask('99/99/9999');
+            $("#btnBuscarConvenio").click();
                       
         });
         
