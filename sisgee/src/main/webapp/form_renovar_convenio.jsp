@@ -89,6 +89,7 @@
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_razaoSocial_renovar" /></th>
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.19" /></th>
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_renovar" /></th>
+                                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.31" /></th>
 
                                 </tr>
                             </thead>
@@ -96,19 +97,38 @@
                                 <tr>
 
                                     <td>${not empty b.numeroConvenio ? b.numeroConvenio : null }</td>
-                                    <td >${ not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome } </td>
+                                    <td>${ not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome } </td>
                                     <td>${ not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }</td>
                                     <td><a class="btn btn-sm btn-primary btn-block" href="RenovarConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_renovar" /></td>
+                                    <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${ not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+                                    
 
-
-                                </tr>
+                                <!-- Modal -->
+                                <div class="modal fade" id="${ not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.32"/></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="ExcluirConvenioServlet?ncon=${not empty b.numeroConvenio ? b.numeroConvenio : null }&nome=${ not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome }&codigo=${ not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.33"/></a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.34"/></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
                             </c:forEach>
                         </table>
-                    </c:if>         
+                    </c:if>    
+                    
                 </fieldset>
 
             
-
+                        
         </div>
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
