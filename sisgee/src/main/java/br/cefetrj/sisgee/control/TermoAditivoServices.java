@@ -56,10 +56,6 @@ public class TermoAditivoServices {
 		GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);	
 		return termoAditivoDao.buscar(idTermoAditivo);
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> Godoy_EAd_ECv
 	        
         /**
 	 * Método para excluir um termo aditivo no banco
@@ -70,23 +66,12 @@ public class TermoAditivoServices {
                 GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);
                 List<TermoEstagio> listaTermoEstagio = TermoEstagioServices.listarTermoEstagio();
                 
-<<<<<<< HEAD
                 for(TermoEstagio termo: TermoEstagioServices.listarTermoEstagio()){
                     List<TermoAditivo> aditivos = termo.getTermosAditivos();
                     if(termoAditivo.equals(aditivos.get(aditivos.size()-1))){
                     ultimo = true;
                 }
         }
-=======
-                for(TermoEstagio termo: listaTermoEstagio){
-                    List<TermoAditivo> aditivos = termo.getTermosAditivos();
-                    System.out.println(termo.getTermosAditivos());//TODO retirar saida do console
-                    if(termoAditivo.equals(aditivos.get(aditivos.size()-1))){
-                    ultimo = true;
-                    break;
-                    }
-                }
->>>>>>> Godoy_EAd_ECv
                 if(ultimo == false){
                     throw new Exception();
                 }
@@ -101,10 +86,6 @@ public class TermoAditivoServices {
 			PersistenceManager.getTransaction().rollback();
 		}
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> Godoy_EAd_ECv
 	
 	/**
 	 * 

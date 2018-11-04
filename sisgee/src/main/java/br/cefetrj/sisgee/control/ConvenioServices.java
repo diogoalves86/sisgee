@@ -175,15 +175,4 @@ public class ConvenioServices {
 			PersistenceManager.getTransaction().rollback();
 		}
 	}
-    
-    public static void excluirConvenio(Convenio convenio) {
-        GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
-        PersistenceManager.getTransaction().begin();
-        try {
-            convenioDao.excluir(convenio);
-            PersistenceManager.getTransaction().commit();
-        } catch (Exception e) {
-            PersistenceManager.getTransaction().rollback();
-        }
-    }
 }
