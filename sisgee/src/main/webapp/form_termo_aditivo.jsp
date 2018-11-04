@@ -63,13 +63,9 @@
                             <th><fmt:message key="br.cefetrj.sisgee.10" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.13" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.12" /></th>
-<<<<<<< HEAD
-                            <th>Visualizar</th>
-=======
                             <th><fmt:message key="br.cefetrj.sisgee.37" /></th>
-                            <th><fmt:message key="br.cefetrj.sisgee.36" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.31" /></th>
->>>>>>> Godoy
+                            <th><fmt:message key="br.cefetrj.sisgee.36" /></th>
                         </tr>
 
                         <c:forEach items="${listaTermoEstagio}" var="b">
@@ -81,8 +77,8 @@
                                 <td>${b.getConvenio().pegaCpf()}</td>
                                 <td>${b.getConvenio().pegaNome()}</td>
                                 <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.37" /></a></td>
-                                <td><a class="btn btn-sm btn-primary btn-block" href="EditarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.36" /></a></td>
-                                <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+                                <td><a class="btn btn-sm btn-primary btn-block" href="EditarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.31" /></a></td>
+                                <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c" varStatus="status">
                                 <tr>
@@ -229,13 +225,7 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-
-=======
                         
-        
-         
->>>>>>> Godoy
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
         <script type="text/javascript">
