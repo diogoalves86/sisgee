@@ -52,6 +52,8 @@
         </p>		
             <form action="EditarTermoEAditivo" method="post">
                 <input type="hidden" id="precisaVerificarTermoEmAberto" name="precisaVerificarTermoEmAberto" value="1" />
+                <input type="hidden" id="idTermoEstagio" name="idTermoEstagio" value="${ idTermoEstagio }" />
+                
                 
                  <fieldset class="form-group dadosAluno" ${ not empty termoEstagio ? 'disabled' :'' }>
                     <%@include file="import_busca_aluno.jspf"%>
@@ -236,7 +238,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="estadoEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.estado"/></label>
-                            <select name = "estadoEnderecoTermoEstagio" id="estadoEnderecoTermoEstagio" class="form-control">
+                            <select name="estadoEnderecoTermoEstagio" id="estadoEnderecoTermoEstagio" class="form-control">
                                 <option value="" selected>${showLocal eq 'sim' ? '' :enuf}</option>
                                 <c:forEach items="${ uf }" var="uf">
                                     <option value="${ uf }">${ uf }</option>

@@ -114,12 +114,12 @@ public class TermoEstagioServices {
 		GenericDAO<TermoEstagio> termoEstagioDao = PersistenceManager.createGenericDAO(TermoEstagio.class);		
 		
 		try {
-			PersistenceManager.getTransaction().begin();
-			termoEstagioDao.alterar(termoEstagio);
-			PersistenceManager.getTransaction().commit();
+                    PersistenceManager.getTransaction().begin();
+                    termoEstagioDao.alterar(termoEstagio);
+                    PersistenceManager.getTransaction().commit();
 		} catch (Exception e) {			
-			e.printStackTrace();
-			PersistenceManager.getTransaction().rollback();
+                    e.printStackTrace();
+                    PersistenceManager.getTransaction().rollback();
 		}
 	}
 }
