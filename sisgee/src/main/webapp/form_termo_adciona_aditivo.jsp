@@ -340,8 +340,8 @@
                                 <label for="idProfessorOrientador"></label>
                             <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
                                 <option value="" selected>${ showLocal eq 'sim' ? '' : pfnomeprofessor }</option>
-                                <c:forEach items="${ professores }" var="professor">
-                                    <option value="${ professor.idProfessorOrientador }">${ professornomeProfessorOrientador }</option>
+                                <c:forEach items="${professores}" var="professor">
+                                    <option value="${professor.idProfessorOrientador}">${professor.nomeProfessorOrientador}</option>
                                 </c:forEach>					
                             </select>
                             <c:if test="${ not empty idProfessorMsg }">
@@ -399,7 +399,7 @@
             var tamanho = $("#cnpjEcpf1").val().length;
             
             $('#cargaHorariaTermoEstagio').mask('9');
-            //$('#valorBolsa').mask('000.000,00', {reverse: true});
+            $('#valorBolsa').mask('000.000,00', {reverse: true});
             $('#dataInicioTermoEstagio').mask('99/99/9999');
             $('#dataFimTermoEstagio').mask('99/99/9999');
             $("#cnpjEcpf1").mask("99.999.999/9999-99");        
