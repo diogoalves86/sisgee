@@ -9,6 +9,7 @@ import br.cefetrj.sisgee.model.dao.TermoAditivoDAO;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 
+
 /**
  * Serviços de TermoAditivo. 
  * Trata a lógica de negócios
@@ -55,6 +56,36 @@ public class TermoAditivoServices {
 		GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);	
 		return termoAditivoDao.buscar(idTermoAditivo);
 	}
+	        
+        /**
+	 * Método para excluir um termo aditivo no banco
+	 * @param termoAditivo Termo aditivo a ser persistido
+	 */
+        public static void excluirTermoAditivo(TermoAditivo termoAditivo) throws Exception{
+                boolean ultimo = false;
+                GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);
+                List<TermoEstagio> listaTermoEstagio = TermoEstagioServices.listarTermoEstagio();
+                
+                for(TermoEstagio termo: TermoEstagioServices.listarTermoEstagio()){
+                    List<TermoAditivo> aditivos = termo.getTermosAditivos();
+                    if(termoAditivo.equals(aditivos.get(aditivos.size()-1))){
+                    ultimo = true;
+                }
+        }
+                if(ultimo == false){
+                    throw new Exception();
+                }
+                
+		PersistenceManager.getTransaction().begin();
+		try{
+			termoAditivoDao.excluir(termoAditivo);
+			PersistenceManager.getTransaction().commit();
+		}catch(Exception e){
+			//TODO remover saída do console
+			System.out.println(e);
+			PersistenceManager.getTransaction().rollback();
+		}
+        }
 	
 	/**
 	 * 
