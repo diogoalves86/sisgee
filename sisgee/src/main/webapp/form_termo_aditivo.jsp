@@ -63,9 +63,15 @@
                             <th><fmt:message key="br.cefetrj.sisgee.10" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.13" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.12" /></th>
+<<<<<<< HEAD
                             <th><fmt:message key="br.cefetrj.sisgee.37" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.31" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.36" /></th>
+=======
+                            <th>Visualizar</th>
+                            <th><fmt:message key="br.cefetrj.sisgee.31" /></th>
+
+>>>>>>> Godoy_EAd_ECv
                         </tr>
 
                         <c:forEach items="${listaTermoEstagio}" var="b">
@@ -88,6 +94,7 @@
                                     <td>${c.getDataFimTermoAditivo2()}</td>
                                     <td>${b.getConvenio().pegaCpf()}</td>
                                     <td>${b.getConvenio().pegaNome()}</td>
+<<<<<<< HEAD
                                     <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.37" /></td>
                                     <td><button type="button" ${status.last? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
                                         <c:choose>
@@ -99,6 +106,12 @@
                                             </c:otherwise>
                                         </c:choose>
                                     <!-- Modal -->
+=======
+                                    <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
+                                    <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+
+                                <!-- Modal -->
+>>>>>>> Godoy_EAd_ECv
                                 <div class="modal fade" id="${c.idTermoAditivo}_${b.idTermoEstagio}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -115,7 +128,11 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
                                 </tr>
+=======
+                            </tr>
+>>>>>>> Godoy_EAd_ECv
                             </c:forEach>
                         </c:forEach>
                     </table>
@@ -232,7 +249,13 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
 
+=======
+                        
+        
+         
+>>>>>>> Godoy_EAd_ECv
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
         <script type="text/javascript">
@@ -270,6 +293,7 @@
 
                 }
             });
+<<<<<<< HEAD
             $(".alterar").on('click', function () {
                 var id = $(this).data('id'); //recuperar qual o id da linha
                 //agora vamos usar o id da linha para recuperar cada campo..
@@ -280,6 +304,18 @@
                 //depois de jogar tudo, voce pode exibir seu modal manualmente:
                 $("#DialogAlterarMaterial").modal();
             });
+=======
+            $(".alterar").on('click', function(){
+   var id = $(this).data('id'); //recuperar qual o id da linha
+   //agora vamos usar o id da linha para recuperar cada campo..
+   var nome = $('#nome' + id).text(); //vai retornar nome da linha do botão
+   var descricao = $('#descricao' + id).text(); //vai retornar descricao da linha do botao
+   //..assim por diante..
+   //agora voce pode jogar esses valores no seu modal
+   //depois de jogar tudo, voce pode exibir seu modal manualmente:
+   $("#DialogAlterarMaterial").modal();
+});
+>>>>>>> Godoy_EAd_ECv
 
             function termoAditivo() {
                 document.getElementById("termoAditivo").value = "sim";
