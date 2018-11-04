@@ -51,6 +51,7 @@
             <h5><fmt:message key = "br.cefetrj.sisgee.resources.form.editarTermoEstagio"/></h5>		
         </p>		
             <form action="EditarTermoEAditivo" method="post">
+                <input type="hidden" id="precisaVerificarTermoEmAberto" name="precisaVerificarTermoEmAberto" value="1" />
                 
                  <fieldset class="form-group dadosAluno" ${ not empty termoEstagio ? 'disabled' :'' }>
                     <%@include file="import_busca_aluno.jspf"%>
@@ -80,7 +81,7 @@
                                 <label for="nomeConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeConvenio"/></label>
                                 <div class="input-group">
                                     <input type="hidden" class="form-control nomeConvenio nomeConvenio"  id="nomeConvenio1" name="nomeConvenio1" value="${ cvNome }">                      
-                                    <input type="text" class="form-control ${ not empty nomeConvenioMsg ? 'is-invalid': 'is-valid' } nomeConvenio" placeholder="<fmt:message key="br.cefetrj.sisgee.resources.form.placeholder_nomeConvenio"/>" id="nomeConvenio" name="nomeConvenio" maxlength="100"  value="${ cvNome }" >                            
+                                    <input type="text" class="form-control ${ not empty nomeConvenioMsg ? 'is-invalid': 'is-valid' } nomeConvenio" placeholder="<fmt:message key="br.cefetrj.sisgee.resources.form.placeholder_nomeConvenio"/>" id="nomeConvenio" name="nomeConvenio" maxlength="100"  value="${ cvNome }" readonly >                            
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button" id="btnBuscarNomeConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
                                     </span>   
