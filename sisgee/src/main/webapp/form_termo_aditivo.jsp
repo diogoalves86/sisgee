@@ -63,7 +63,6 @@
                             <th><fmt:message key="br.cefetrj.sisgee.13" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.12" /></th>
                             <th>Visualizar</th>
-
                         </tr>
 
                         <c:forEach items="${listaTermoEstagio}" var="b">
@@ -78,7 +77,7 @@
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c">
                                 <tr>
-                                    <td>Aditivo de ${c.getTipoAditivo()}</td>
+                                    <td><fmt:message key="${c.getTipoAditivoMSG()}"/></td>
                                     <td>--</td>
                                     <td>${c.getDataCadastramentoTermoAditivo2()}</td>
                                     <td>${c.getDataFimTermoAditivo2()}</td>
@@ -93,7 +92,7 @@
             </div>
 
             <div class="container">
-            <label><fmt:message key = "br.cefetrj.sisgee.resources.form.EscolhaTipoAditivo"/></label>
+                <label><fmt:message key = "br.cefetrj.sisgee.resources.form.EscolhaTipoAditivo"/></label>
                 <form action="TermoAditivoServlet" method="post">
                     <div class="mx-auto" style="width: 700px;">
                         <div class="row">
@@ -202,7 +201,7 @@
                 </div>
             </div>
         </div>
-                        
+
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
         <script type="text/javascript">
