@@ -77,8 +77,8 @@
                                 <td>${b.getConvenio().pegaCpf()}</td>
                                 <td>${b.getConvenio().pegaNome()}</td>
                                 <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.37" /></a></td>
-                                <td><a class="btn btn-sm btn-primary btn-block" href="EditarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.31" /></a></td>
-                                <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
+                                <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+                                <td><a class="btn btn-sm btn-primary btn-block" href="EditarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.36" /></a></td>
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c" varStatus="status">
                                 <tr>
@@ -89,26 +89,26 @@
                                     <td>${b.getConvenio().pegaCpf()}</td>
                                     <td>${b.getConvenio().pegaNome()}</td>
                                     <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.37" /></td>
-                                    <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
+                                    <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
 
-                                <!-- Modal -->
+                                    <!-- Modal -->
                                 <div class="modal fade" id="${c.idTermoAditivo}_${b.idTermoEstagio}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.37"/></h5>
+                                                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.32"/></h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.35"/></a>
+                                                <a href="ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.33"/></a>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.34"/></button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </tr>
+                                </tr>
                             </c:forEach>
                         </c:forEach>
                     </table>
@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-                        
+
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
         <script type="text/javascript">
@@ -263,16 +263,16 @@
 
                 }
             });
-            $(".alterar").on('click', function(){
-   var id = $(this).data('id'); //recuperar qual o id da linha
-   //agora vamos usar o id da linha para recuperar cada campo..
-   var nome = $('#nome' + id).text(); //vai retornar nome da linha do botão
-   var descricao = $('#descricao' + id).text(); //vai retornar descricao da linha do botao
-   //..assim por diante..
-   //agora voce pode jogar esses valores no seu modal
-   //depois de jogar tudo, voce pode exibir seu modal manualmente:
-   $("#DialogAlterarMaterial").modal();
-});
+            $(".alterar").on('click', function () {
+                var id = $(this).data('id'); //recuperar qual o id da linha
+                //agora vamos usar o id da linha para recuperar cada campo..
+                var nome = $('#nome' + id).text(); //vai retornar nome da linha do botão
+                var descricao = $('#descricao' + id).text(); //vai retornar descricao da linha do botao
+                //..assim por diante..
+                //agora voce pode jogar esses valores no seu modal
+                //depois de jogar tudo, voce pode exibir seu modal manualmente:
+                $("#DialogAlterarMaterial").modal();
+            });
 
             function termoAditivo() {
                 document.getElementById("termoAditivo").value = "sim";

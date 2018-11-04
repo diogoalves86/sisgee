@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author mathe
  */
 @WebServlet("/AlterarTermoAditivo")
-public class AlterarTermoAditivoServlet extends HttpServlet {
+public class FormAlterarTermoAditivoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
