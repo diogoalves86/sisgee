@@ -161,6 +161,23 @@
                                 <div class="invalid-feedback">${ telefonePessoaMsg }</div>
                             </c:if>
                         </div>
+                            
+                            
+                        <div class="form-group col-md-6">
+                            <label for="numero"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
+                            <input type="text" class="form-control ${ not empty numeroMsg ? 'is-invalid': 'is-valid' }" id="numero" name="numero" value="${param.numero}">
+                            <c:if test="${ not empty numeroMsg }">
+                                <div class="invalid-feedback">${ numeroMsg }</div>
+                            </c:if>
+                        </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="ano"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
+                            <input type="text" class="form-control ${ not empty anoMsg ? 'is-invalid': 'is-valid' }" id="ano" name="ano" value="${param.ano}">
+                            <c:if test="${ not empty anoMsg }">
+                                <div class="invalid-feedback">${ anoMsg }</div>
+                            </c:if>
+                        </div>
 
                     </div>
 
