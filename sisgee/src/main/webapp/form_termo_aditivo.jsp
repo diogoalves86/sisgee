@@ -78,7 +78,8 @@
                                 <td>${b.getConvenio().pegaNome()}</td>
                                 <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.37" /></a></td>
                                 <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
-                                <td><a class="btn btn-sm btn-primary btn-block" href="EditarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.36" /></a></td>
+                                <td><button ${ b.getTermosAditivos().size() > 0 ? 'disabled="disabled"' : '' } class="btn btn-sm btn-primary btn-block" onclick="window.location.href='EditarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}'" ><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
+                                
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c" varStatus="status">
                                 <tr>
