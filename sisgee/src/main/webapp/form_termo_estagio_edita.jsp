@@ -52,6 +52,8 @@
         </p>		
             <form action="EditarTermoEAditivo" method="post">
                 <input type="hidden" id="precisaVerificarTermoEmAberto" name="precisaVerificarTermoEmAberto" value="1" />
+                <input type="hidden" id="idTermoEstagio" name="idTermoEstagio" value="${ idTermoEstagio }" />
+                
                 
                  <fieldset class="form-group dadosAluno" ${ not empty termoEstagio ? 'disabled' :'' }>
                     <%@include file="import_busca_aluno.jspf"%>
@@ -104,10 +106,10 @@
                                     <input id="isAgenteIntegracao" class="form-control isAgenteIntegracao" type="text" name="isAgenteIntegracao" value="${param.isAgenteIntegracao}" readonly> 
                                 </label>
                                     <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
-                                    <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ param.nomeAgenciada}">  
+                                    <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ nomeAgenciada }">  
                                     <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
                                     <label class="custom-control">
-                                        <input type="text" class="form-control ${ not empty agenciadaMsg ? 'is-invalid': 'is-valid' } nomeAgenciada" id="nomeAgenciada"  name="nomeAgenciada" value="${ param.nomeAgenciada }" maxlength="250">
+                                        <input type="text" class="form-control ${ not empty agenciadaMsg ? 'is-invalid': 'is-valid' } nomeAgenciada" id="nomeAgenciada"  name="nomeAgenciada" value="${ nomeAgenciada }" maxlength="250">
                                     </label>
                                 <c:if test="${ not empty agenciadaMsg }">
                                     <div class="invalid-feedback">${ agenciadaMsg }</div>
@@ -236,7 +238,7 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="estadoEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.estado"/></label>
-                            <select name = "estadoEnderecoTermoEstagio" id="estadoEnderecoTermoEstagio" class="form-control">
+                            <select name="estadoEnderecoTermoEstagio" id="estadoEnderecoTermoEstagio" class="form-control">
                                 <option value="" selected>${showLocal eq 'sim' ? '' :enuf}</option>
                                 <c:forEach items="${ uf }" var="uf">
                                     <option value="${ uf }">${ uf }</option>
