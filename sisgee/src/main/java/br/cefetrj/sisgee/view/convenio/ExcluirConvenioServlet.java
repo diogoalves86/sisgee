@@ -20,6 +20,7 @@ import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
@@ -52,6 +53,8 @@ public class ExcluirConvenioServlet extends HttpServlet {
         Convenio convenio = null;
         Pessoa pessoa = null;
         System.out.println(codigo);
+        
+        List<TermoEstagio> listaTermo = TermoEstagioServices.listarTermoEstagio();
         
         
         
