@@ -67,8 +67,9 @@ public class TermoAditivoServices {
                 
                 for(TermoEstagio termo: listaTermoEstagio){
                     List<TermoAditivo> aditivos = termo.getTermosAditivos();
+                    System.out.println(termo.getIdTermoEstagio());
                     System.out.println(termo.getTermosAditivos());//TODO retirar saida do console
-                    if(termoAditivo.equals(aditivos.get(aditivos.size()-1))){
+                    if(aditivos != null && aditivos.size() != 0 && termoAditivo.equals(aditivos.get(aditivos.size()-1))){
                     ultimo = true;
                     break;
                     }
