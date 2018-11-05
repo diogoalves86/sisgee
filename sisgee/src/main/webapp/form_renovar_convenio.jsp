@@ -5,7 +5,7 @@
         <%@include file="import_head.jspf"%>
 
         <title>
-            <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_titulo"/>
+            <fmt:message key = "br.cefetrj.sisgee.resources.form.renovarConvenio"/>
         </title>
 
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" >
@@ -24,7 +24,7 @@
             </c:if>
 
             <p class="tituloForm ">
-            <h5 class="offset-5"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_renovar" /></h5>		
+            <h5 class="offset-5"><fmt:message key="br.cefetrj.sisgee.resources.form.renovarConvenio" /></h5>		
 
 
 
@@ -89,6 +89,7 @@
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_razaoSocial_renovar" /></th>
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.19" /></th>
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_renovar" /></th>
+                                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_alterar" /></th>
 
                                 </tr>
                             </thead>
@@ -99,6 +100,7 @@
                                     <td >${ not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome } </td>
                                     <td>${ not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }</td>
                                     <td><a class="btn btn-sm btn-primary btn-block" href="RenovarConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_renovar" /></td>
+                                    <td><a class="btn btn-sm btn-primary btn-block" href="AlteraConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_alterar" /></td>
 
 
                                 </tr>
