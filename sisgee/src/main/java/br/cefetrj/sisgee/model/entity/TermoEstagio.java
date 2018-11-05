@@ -67,7 +67,7 @@ public class TermoEstagio {
 	@Column(length = 150, nullable = false)
 	private String cidadeEnderecoTermoEstagio;
 
-	@Column(length = 2, nullable = false)
+	@Column(length = 2)
 	private String estadoEnderecoTermoEstagio;
 
 	@Column(nullable = false)
