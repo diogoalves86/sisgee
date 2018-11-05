@@ -7,11 +7,13 @@ package br.cefetrj.sisgee.view.termoestagio;
 
 import br.cefetrj.sisgee.control.AlunoServices;
 import br.cefetrj.sisgee.control.ConvenioServices;
+import br.cefetrj.sisgee.control.ProfessorOrientadorServices;
 import br.cefetrj.sisgee.control.TermoAditivoServices;
 import br.cefetrj.sisgee.control.TermoEstagioServices;
 import br.cefetrj.sisgee.model.entity.AgenteIntegracao;
 import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.Convenio;
+import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.ProfessorOrientador;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
@@ -19,6 +21,7 @@ import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.UF;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
@@ -35,8 +38,6 @@ import org.apache.log4j.Logger;
 @WebServlet(name = "FormEditarTermoEstagioServlet", urlPatterns = {"/EditarTermoEAditivo"})
 public class FormEditarTermoEstagioServlet extends HttpServlet {
 
-    
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String idEstagio = req.getParameter("ide");
@@ -47,8 +48,12 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         TermoAditivo termoAditivo=null;
         
         Aluno aluno=AlunoServices.buscarAlunoByMatricula(matricula);
+        req.getServletContext().setAttribute("aluno", aluno);
         if(idEstagio!=null){
             termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt(idEstagio));
+            req.getServletContext().setAttribute("termoEstagio", termoEstagio);
+            
+            req.getServletContext().setAttribute("professorOrientador", termoEstagio.getProfessorOrientador());
             
             /** Dados do termo de estágio */
             req.setAttribute("idTermoEstagio", idEstagio);
@@ -56,6 +61,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         
         if(idAluno!=null){
             termoAditivo=TermoAditivoServices.buscarTermoAditivo(Integer.parseInt(idAluno));
+            req.getServletContext().setAttribute("termoAditivo", termoAditivo);
             /** Dados de aluno */
             req.setAttribute("idAluno", aluno.getIdAluno());
         }
@@ -69,6 +75,9 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         req.setAttribute("alCurso", aluno.getCurso());
 
         /** Dados de convenio*/
+        req.getServletContext().setAttribute("convenio", termoEstagio.getConvenio());
+        req.getServletContext().setAttribute("convenioEmpresa", termoEstagio.getConvenio().getEmpresa());
+        
         req.setAttribute("cvNumero", termoEstagio.getConvenio().getNumeroConvenio());
         req.setAttribute("cvNumero2", termoEstagio.getConvenio().getNumero());
         if(termoEstagio.getConvenio().getEmpresa()==null){
@@ -122,11 +131,19 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
             throws ServletException, IOException {
         Locale locale = ServletUtils.getLocale(request);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-
-        //OBRIGATÓRIO
-        Integer idTermoEstagio               = Integer.parseInt(request.getParameter("idTermoEstagio"));
-        Date dataInicioTermoEstagio         = new Date(request.getParameter("dataInicioTermoEstagio"));
         
+        TermoEstagio termoEstagio = (TermoEstagio) request.getServletContext().getAttribute("termoEstagio");
+        
+        // RECUPERANDO RELACIONAMENTOS
+        List<TermoAditivo> termosAditivos   = (List<TermoAditivo>)request.getServletContext().getAttribute("termoAditivo");
+        Aluno aluno = (Aluno)request.getServletContext().getAttribute("aluno");
+        ProfessorOrientador prof = (ProfessorOrientador)request.getServletContext().getAttribute("professorOrientador");
+        Convenio convenio = (Convenio)request.getServletContext().getAttribute("convenio");
+        Empresa convenioEmpresa = (Empresa) request.getServletContext().getAttribute("convenioEmpresa");
+                
+        //OBRIGATÓRIO
+        Date dataInicioTermoEstagio         = new Date(request.getParameter("dataInicioTermoEstagio"));        
+        Date dataFimTermoEstagio            = new Date(request.getParameter("dataFimTermoEstagio"));
         Integer cargaHorariaTermoEstagio    = Integer.parseInt(request.getParameter("cargaHorariaTermoEstagio"));
         Float valorBolsa                    = Float.parseFloat(request.getParameter("valorBolsa"));
         String enderecoTermoEstagio         = (String)request.getParameter("enderecoTermoEstagio");
@@ -142,36 +159,37 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         String cargoSupervisor              = request.getParameter("cargoSupervisor");    
         String nomeAgenciada                = request.getParameter("nomeAgenciada");                
 
-        Aluno aluno = new Aluno((Integer)request.getAttribute("idAluno")); 	
-
-        System.out.println("Parameters Map: "+request.getParameterMap());
+        
         //OBRIGATÓRIO
-        String convenionum = (String)request.getParameter("idConvenio");
-        System.out.println("termo estagio ------>>>>>>>>>>" + convenionum);
-        Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(convenionum);
+        Boolean hasAluno            = (String)request.getParameter("idAluno") != null && !((String)request.getParameter("idAluno")).equals("");
+        Boolean hasIdConvenio       = (String)request.getParameter("idConvenio") != null && !((String)request.getParameter("idConvenio")).equals("");
         //NÃO OBRIGATÓRIO
-        Boolean hasDataFim          = Boolean.parseBoolean(request.getParameter("hasDataFim"));		
-        Boolean hasProfessor        = Boolean.parseBoolean(request.getParameter("hasProfessor"));
+        Boolean hasDataFim          = (String)request.getParameter("dataFimTermoEstagio") != null && !((String)request.getParameter("dataFimTermoEstagio")).equals("");
+        Boolean hasProfessor        = (String)request.getParameter("idProfessorOrientador") != null && !((String)request.getParameter("idProfessorOrientador")).equals("");
         String isAgenteIntegracao   = (String)request.getParameter("isAgenteIntegracao");
 
-        Date dataFimTermoEstagio = null;
-        ProfessorOrientador professorOrientador = null;
-        AgenteIntegracao agenteIntegracao = null;
-
-        if(hasDataFim != null && hasDataFim == true)
+        
+        if(hasDataFim)
             dataFimTermoEstagio = new Date(request.getParameter("dataFimTermoEstagio"));
         
-        if(hasProfessor != null && hasProfessor == true)
-            professorOrientador = new ProfessorOrientador((Integer)request.getAttribute("idProfessor"));
+        if(hasProfessor)
+            prof = ProfessorOrientadorServices.buscarProfessorOrientador(new ProfessorOrientador(Integer.parseInt((String)request.getParameter("idProfessorOrientador"))));
         
-
-        TermoEstagio termoEstagio = new TermoEstagio(dataInicioTermoEstagio, dataFimTermoEstagio, cargaHorariaTermoEstagio,
-                         valorBolsa,  enderecoTermoEstagio,  numeroEnderecoTermoEstagio,
-                         complementoEnderecoTermoEstagio,  bairroEnderecoTermoEstagio,  cepEnderecoTermoEstagio,
-                         cidadeEnderecoTermoEstagio,  estadoEnderecoTermoEstagio,  eEstagioObrigatorio,
-                         aluno,  convenio,  professorOrientador, nomeSupervisor, cargoSupervisor, nomeAgenciada);
-        termoEstagio.setIdTermoEstagio(idTermoEstagio);
-
+        if (hasIdConvenio)
+            convenio = ConvenioServices.buscarConvenioByNumeroConvenio(request.getParameter("numeroConvenio"));
+        
+        if(hasAluno)
+            aluno = AlunoServices.buscarAluno(new Aluno(Integer.parseInt((String)request.getParameter("idAluno"))));
+        
+        
+        Aluno alunoaux = AlunoServices.buscarAluno(aluno);
+        Convenio convenioaux = ConvenioServices.buscarConvenio(convenio);
+        ProfessorOrientador profAux = ProfessorOrientadorServices.buscarProfessorOrientador(prof);
+        // APLICANDO RELACIONAMENTOS RECUPERADOS
+        termoEstagio.setTermosAditivos(termosAditivos);
+        termoEstagio.getConvenio().setEmpresa(convenioEmpresa);
+        
+        System.out.println("Id Termo Estágio: "+termoEstagio.getIdTermoEstagio());
         String msg = "";
         Logger lg = Logger.getLogger(FormEditarTermoEstagioServlet.class);
         try{

@@ -112,7 +112,6 @@ public class TermoEstagioServices {
 	public static void alterarTermoEstagio(TermoEstagio termoEstagio) {
 		
 		GenericDAO<TermoEstagio> termoEstagioDao = PersistenceManager.createGenericDAO(TermoEstagio.class);		
-		
 		try {
                     PersistenceManager.getTransaction().begin();
                     termoEstagioDao.alterar(termoEstagio);
