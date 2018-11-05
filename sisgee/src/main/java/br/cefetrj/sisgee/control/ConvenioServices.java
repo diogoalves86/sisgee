@@ -3,11 +3,13 @@ package br.cefetrj.sisgee.control;
 import java.util.List;
 
 import br.cefetrj.sisgee.model.dao.ConvenioDAO;
+import br.cefetrj.sisgee.model.dao.EmpresaDAO;
 import br.cefetrj.sisgee.model.dao.GenericDAO;
 import br.cefetrj.sisgee.model.dao.PersistenceManager;
 import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
+import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,7 +20,7 @@ import java.util.GregorianCalendar;
  * Serviços de alunos. Trata a lógica de negócios associada com a entidade
  * Convênio.
  *
- * @author Lucas Lima
+ * @author Lucas Lima, Fernando Godoy
  * @since 1.0
  */
 public class ConvenioServices {
@@ -102,7 +104,6 @@ public class ConvenioServices {
      * @param emp
      * @return 
      */
-
     public static Convenio buscarConvenioByNumeroEmpresa(String numero, Empresa emp) {
         ConvenioDAO convenioDao = new ConvenioDAO();
         try {
@@ -176,11 +177,26 @@ public class ConvenioServices {
 		}
 	}
     
-    public static void excluirConvenio(Convenio convenio) {
+    public static void excluirConvenio(Convenio convenio, Empresa empresa, Pessoa pessoa) throws Exception {
+        
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
+        GenericDAO<Empresa> empresaDao = PersistenceManager.createGenericDAO(Empresa.class);
+        GenericDAO<Pessoa> pessoaDao = PersistenceManager.createGenericDAO(Pessoa.class);
+        
+        
+        if(convenio.getTermoEstagios() != null && convenio.getTermoEstagios().size()>=1){
+            System.out.println("Existe Termo de Estagio");
+            throw new Exception();
+        }
+        
         PersistenceManager.getTransaction().begin();
         try {
             convenioDao.excluir(convenio);
+            if(empresa!=null){
+                empresaDao.excluir(empresa);
+            }else{
+                pessoaDao.excluir(pessoa);
+            }
             PersistenceManager.getTransaction().commit();
         } catch (Exception e) {
             PersistenceManager.getTransaction().rollback();

@@ -47,14 +47,11 @@ public class ExcluirConvenioServlet extends HttpServlet {
         String numConvenio = req.getParameter("ncon");
         String [] convenionumero = numConvenio.split("/");
         numConvenio = convenionumero[0];
-        String nome = req.getParameter("nome");
         String codigo = req.getParameter("codigo");
         Empresa empresa = null;
         Convenio convenio = null;
         Pessoa pessoa = null;
         System.out.println(codigo);
-        
-        List<TermoEstagio> listaTermo = TermoEstagioServices.listarTermoEstagio();
         
         
         
@@ -73,7 +70,7 @@ public class ExcluirConvenioServlet extends HttpServlet {
 	Logger lg = Logger.getLogger(ExcluirConvenioServlet.class);
         
 		try{
-			ConvenioServices.excluirConvenio(convenio);
+			ConvenioServices.excluirConvenio(convenio, empresa, pessoa);
 			exclusaoConvenioConcluido = messages.getString("br.cefetrj.sisgee.excluir_convenio_servlet.msg_exclusaoConvenioConcluida");
 			req.setAttribute("msg", exclusaoConvenioConcluido);
 			lg.info(exclusaoConvenioConcluido);
