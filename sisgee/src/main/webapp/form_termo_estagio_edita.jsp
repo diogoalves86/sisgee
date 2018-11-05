@@ -53,6 +53,7 @@
             <form action="EditarTermoEAditivo" method="post">
                 <input type="hidden" id="precisaVerificarTermoEmAberto" name="precisaVerificarTermoEmAberto" value="1" />
                 <input type="hidden" id="idTermoEstagio" name="idTermoEstagio" value="${ idTermoEstagio }" />
+                <input type="hidden" id="idEstagio" name="idEstagio" value="${ idEstagio }" />
                 
                 
                  <fieldset class="form-group dadosAluno">
@@ -69,7 +70,7 @@
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
                                 <div class="input-group">
                                     <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ cvNumero2 }">
-                                    <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value="${ cvId }"> 
+                                    <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value=""> 
                                     <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio"  maxlength="6" value="${ cvNumero2 }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button" id="btnBuscarConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
@@ -306,10 +307,7 @@
                         <div class="form-group col-md-8">
                                 <label for="idProfessorOrientador"></label>
                             <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control" >
-                                <option value="" selected>${ showLocal eq 'sim' ? '' : pfnomeprofessor }</option>
-                                <c:forEach items="${ professores }" var="professor">
-                                    <option value="${ professor.idProfessorOrientador }">${ professornomeProfessorOrientador }</option>
-                                </c:forEach>					
+                                <option value="${ pfnomeprofessor.getIdProfessorOrientador() }">${ pfnomeprofessor.getNomeProfessorOrientador() }</option>
                             </select>
                             <c:if test="${ not empty idProfessorMsg }">
                                 <div class="invalid-feedback">${ idProfessorMsg }</div>
