@@ -55,12 +55,12 @@
                 <input type="hidden" id="idTermoEstagio" name="idTermoEstagio" value="${ idTermoEstagio }" />
                 
                 
-                 <fieldset class="form-group dadosAluno" ${ not empty termoEstagio ? 'disabled' :'' }>
+                 <fieldset class="form-group dadosAluno">
                     <%@include file="import_busca_aluno.jspf"%>
                 </fieldset>
                 
                 <!-- AQUI VEM O CONVÊNIO-->
-                <fieldset class="form-group" ${ not empty termoEstagio ? 'disabled' : '' }>
+                <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.dadosEmpresaConveniada"/></legend>
                     <div class="form-group col-md-12">
                         <!-- AQUI VEM O NOME E NUMERO DO CONVÊNIO-->
