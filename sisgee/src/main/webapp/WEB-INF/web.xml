@@ -10,12 +10,24 @@
         <servlet-class>br.cefetrj.sisgee.view.convenio.RenovarConvenioServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AlteraConvenioServlet</servlet-name>
+        <servlet-class>br.cefetrj.sisgee.view.convenio.AlteraConvenioServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>alterarConvenioServlet</servlet-name>
         <servlet-class>br.cefetrj.sisgee.view.convenio.alterarConvenioServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SalvarAlteracaoConvenioServlet</servlet-name>
+        <servlet-class>br.cefetrj.sisgee.view.convenio.SalvarAlteracaoConvenioServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ValidaRenovarConvenio</servlet-name>
         <servlet-class>br.cefetrj.sisgee.view.convenio.ValidaRenovarConvenio</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValidaAlterarConvenio</servlet-name>
+        <servlet-class>br.cefetrj.sisgee.view.convenio.ValidaAlterarConvenio</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ValidaBuscarConvenioServlet</servlet-name>
@@ -34,12 +46,24 @@
         <url-pattern>/RenovarConvenioServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>AlteraConvenioServlet</servlet-name>
+        <url-pattern>/AlteraConvenioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>alterarConvenioServlet</servlet-name>
         <url-pattern>/alterarConvenioServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SalvarAlteracaoConvenioServlet</servlet-name>
+        <url-pattern>/SalvarAlteracaoConvenioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ValidaRenovarConvenio</servlet-name>
         <url-pattern>/ValidaRenovarConvenio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValidaAlterarConvenio</servlet-name>
+        <url-pattern>/ValidaAlterarConvenio</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ValidaBuscarConvenioServlet</servlet-name>
