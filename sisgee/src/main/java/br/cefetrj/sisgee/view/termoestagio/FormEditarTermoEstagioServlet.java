@@ -48,11 +48,11 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         TermoAditivo termoAditivo=null;
         
         Aluno aluno=AlunoServices.buscarAlunoByMatricula(matricula);
-        req.getServletContext().setAttribute("aluno", aluno);
+        req.setAttribute("aluno", aluno);
         if(idEstagio!=null){
             termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt(idEstagio));
             
-            req.getServletContext().setAttribute("professorOrientador", termoEstagio.getProfessorOrientador());
+            req.setAttribute("professorOrientador", termoEstagio.getProfessorOrientador());
             
             /** Dados do termo de estágio */
             req.setAttribute("idTermoEstagio", idEstagio);
@@ -61,7 +61,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         
         if(idAluno!=null){
             termoAditivo=TermoAditivoServices.buscarTermoAditivo(Integer.parseInt(idAluno));
-            req.getServletContext().setAttribute("termoAditivo", termoAditivo);
+            req.setAttribute("termoAditivo", termoAditivo);
             /** Dados de aluno */
             req.setAttribute("idAluno", aluno.getIdAluno());
         }
@@ -75,8 +75,8 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         req.setAttribute("alCurso", aluno.getCurso());
 
         /** Dados de convenio*/
-        req.getServletContext().setAttribute("convenio", termoEstagio.getConvenio());
-        req.getServletContext().setAttribute("convenioEmpresa", termoEstagio.getConvenio().getEmpresa());
+        req.setAttribute("convenio", termoEstagio.getConvenio());
+        req.setAttribute("convenioEmpresa", termoEstagio.getConvenio().getEmpresa());
         
         req.setAttribute("cvNumero", termoEstagio.getConvenio().getNumeroConvenio());
         req.setAttribute("cvNumero2", termoEstagio.getConvenio().getNumero());
@@ -106,7 +106,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         req.setAttribute("vavalorBolsa",termoEstagio.getValorBolsaVisu(termoAditivo));
         System.out.println("aqui"+termoEstagio.getValorBolsaVisu(termoAditivo));
         /** Dados de Local */
-        req.getServletContext().setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagioVisu(termoAditivo));
+        req.setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagioVisu(termoAditivo));
         req.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagioVisu(termoAditivo));
         req.setAttribute("encomplementoEnderecoTermoEstagio",termoEstagio.getComplementoEnderecoTermoEstagioVisu(termoAditivo));
         req.setAttribute("enbairroEnderecoTermoEstagio",termoEstagio.getBairroEnderecoTermoEstagioVisu(termoAditivo));
