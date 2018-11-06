@@ -124,20 +124,22 @@
                             </c:if>
                         </div>
                             
-                        <div class="form-group col-md-6">
-                            <label for="numeroEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
-                            <input type="text" class="form-control ${ not empty numeroEmpresaMsg ? 'is-invalid': 'is-valid' }" id="numeroEmpresa" name="numeroEmpresa" value="${param.numeroEmpresa}">
-                            <c:if test="${ not empty numeroEmpresaMsg }">
-                                <div class="invalid-feedback">${ numeroEmpresaMsg }</div>
-                            </c:if>
-                        </div>
-                            
-                        <div class="form-group col-md-6">
-                            <label for="anoEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
-                            <input type="text" class="form-control ${ not empty anoEmpresaMsg ? 'is-invalid': 'is-valid' }" id="anoEmpresa" name="anoEmpresa" maxlength="4"  value="${param.anoEmpresa}">
-                            <c:if test="${ not empty anoEmpresaMsg }">
-                                <div class="invalid-feedback">${ anoEmpresaMsg }</div>
-                            </c:if>
+                        <div class="form-row">    
+                            <div class="form-group col-md-6">
+                                <input type="hidden" class="form-control numeroEmpresa numeroEmpresa"  id="numeroEmpresa" name="numeroEmpresa" value="${ param.numeroEmpresa}"> 
+                                <label for="numeroEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
+                                <div class="input-group">						  
+                                    <input type="text" class="form-control numeroEmpresa" id="numeroEmpresa" name="numeroEmpresa" value="${ param.numeroEmpresa }">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <input type="hidden" class="form-control anoEmpresa anoEmpresa"  id="anoEmpresa" name="anoEmpresa" value="${ param.anoEmpresa}"> 
+                                <label for="anoEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
+                                <div class="input-group">						  
+                                    <input type="text" class="form-control anoEmpresa" id="anoEmpresa" name="anoEmpresa" value="${ param.anoEmpresa }">
+                                </div>
+                            </div>    
                         </div>     
 
                     </div>         
@@ -183,22 +185,24 @@
                             </c:if>
                         </div>
                             
-                        <div class="form-group col-md-6">
-                            <label for="numeroPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
-                            <input type="text" class="form-control ${ not empty numeroPessoaMsg ? 'is-invalid': 'is-valid' }" id="numeroPessoa" name="numeroPessoa" value="${param.numeroPessoa}">
-                            <c:if test="${ not empty numeroPessoaMsg }">
-                                <div class="invalid-feedback">${ numeroPessoaMsg }</div>
-                            </c:if>
-                        </div>
-                            
-                        <div class="form-group col-md-6">
-                            <label for="anoPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
-                            <input type="text" class="form-control ${ not empty anoPessoaMsg ? 'is-invalid': 'is-valid' }" id="anoPessoa" name="anoPessoa" maxlength="11"  value="${param.anoPessoa}">
-                            <c:if test="${ not empty anoPessoaMsg }">
-                                <div class="invalid-feedback">${ anoPessoaMsg }</div>
-                            </c:if>
-                        </div>    
+                        <div class="form-row">    
+                            <div class="form-group col-md-6">
+                                <input type="hidden" class="form-control numeroPessoa numeroPessoa"  id="numeroPessoa" name="numeroPessoa" value="${ param.numeroPessoa}"> 
+                                <label for="numeroPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
+                                <div class="input-group">						  
+                                    <input type="text" class="form-control numeroPessoa" id="numeroPessoa" name="numeroPessoa" value="${ param.numeroPessoa }">
+                                </div>
+                            </div>
 
+                            <div class="form-group col-md-6">
+                                <input type="hidden" class="form-control anoPessoa anoPessoa"  id="anoPessoa" name="anoPessoa" value="${ param.anoPessoa}"> 
+                                <label for="anoPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
+                                <div class="input-group">						  
+                                    <input type="text" class="form-control anoPessoa" id="anoPessoa" name="anoPessoa" value="${ param.anoPessoa }">
+                                </div>
+                            </div>    
+                        </div>
+                                
                     </div>
 
                 </fieldset>
@@ -223,7 +227,4 @@
                 
             });
         </script>
-
-
-
     </body>

@@ -93,10 +93,10 @@
 
                         <div class="form-group col-md-6">
 
-                            <label for="dataAssinaturaConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataAssinatura"/></label>
-                            <input type="text" class=" form-control col-sm-4 ${ not empty dataAssinaturaEmpresaMsg ? 'is-invalid': 'is-valid' }" id="dataAssinaturaConvenioEmpresa"  name="dataAssinaturaConvenioEmpresa" value="${param.dataAssinaturaConvenioEmpresa}" >
-                            <c:if test="${ not empty dataAssinaturaEmpresaMsg }">
-                                <div class="invalid-feedback">${ dataAssinaturaEmpresaMsg }</div>
+                            <label for="dataRegistroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataRegistro"/></label>
+                            <input type="text" class=" form-control col-sm-4 ${ not empty dataRegistroEmpresaMsg ? 'is-invalid': 'is-valid' }" id="dataRegistroConvenioEmpresa"  name="dataRegistroConvenioEmpresa" value="${param.dataRegistroConvenioEmpresa}" >
+                            <c:if test="${ not empty dataRegistroEmpresaMsg }">
+                                <div class="invalid-feedback">${ dataRegistroEmpresaMsg }</div>
                             </c:if>
                         </div>
                         <div class="form-group col-md-6">
@@ -145,10 +145,10 @@
                         </div>
                         <div class="form-group col-md-6">
 
-                            <label for="dataAssinaturaConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataAssinatura"/></label>
-                            <input type="text" class=" form-control col-sm-4 ${ not empty dataAssinaturaPessoaMsg ? 'is-invalid': 'is-valid' }" id="dataAssinaturaConvenioPessoa"  name="dataAssinaturaConvenioPessoa" value="${param.dataAssinaturaConvenioPessoa}" >
-                            <c:if test="${ not empty dataAssinaturaPessoaMsg }">
-                                <div class="invalid-feedback">${ dataAssinaturaPessoaMsg }</div>
+                            <label for="dataRegistroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataRegistro"/></label>
+                            <input type="text" class=" form-control col-sm-4 ${ not empty dataRegistroPessoaMsg ? 'is-invalid': 'is-valid' }" id="dataRegistroConvenioPessoa"  name="dataRegistroConvenioPessoa" value="${param.dataRegistroConvenioPessoa}" >
+                            <c:if test="${ not empty dataRegistroPessoaMsg }">
+                                <div class="invalid-feedback">${ dataRegistroPessoaMsg }</div>
                             </c:if>
                         </div>
                         <div class="form-group col-md-6">
@@ -185,8 +185,8 @@
             $(document).ready(function () {
                 $('#cnpjEmpresa').mask('99.999.999/9999-99');
                 $('#cpfPessoa').mask('999.999.999-99');
-                $('#dataAssinaturaConvenioPessoa').mask('99/99/9999');
-                $('#dataAssinaturaConvenioEmpresa').mask('99/99/9999');
+                $('#dataRegistroConvenioPessoa').mask('99/99/9999');
+                $('#dataRegistroConvenioEmpresa').mask('99/99/9999');
                 
             });
         </script>

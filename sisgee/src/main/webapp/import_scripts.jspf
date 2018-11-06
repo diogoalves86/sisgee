@@ -1,6 +1,6 @@
 <script type="text/javascript">
             
-	    $('#dataInicioTermoEstagio, #dataFimTermoEstagio, #dataRescisao, #dataAssinaturaConvenioEmpresa, #dataAssinaturaConvenioPessoa').datepicker({
+	    $('#dataInicioTermoEstagio, #dataFimTermoEstagio, #dataRescisao, #dataRegistroConvenioEmpresa, #dataRegistroConvenioPessoa').datepicker({
 	    	<c:if test="${ lang eq 'pt_BR' }">
 	    	language: 'pt-BR'
 	        </c:if>
