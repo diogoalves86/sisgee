@@ -139,9 +139,9 @@
                         <div class="form-group col-md-6">
 
                             <label for="dataAssinaturaConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataAssinatura"/></label>
-                            <input type="text" class=" form-control col-sm-4 ${ not empty dataAssinaturaEmpresaMsg ? 'is-invalid': 'is-valid' }" id="dataAssinaturaConvenioEmpresa"  name="dataAssinaturaConvenioEmpresa" value="${ not empty dataRegistro ? dataRegistro:''}" >
-                            <c:if test="${ not empty dataAssinaturaEmpresaMsg }">
-                                <div class="invalid-feedback">${ dataAssinaturaEmpresaMsg }</div>
+                            <input type="text" class=" form-control col-sm-4 ${ not empty dataAssinaturaEmpresaMsg ? 'is-invalid': 'is-valid' }" id="dataAssinaturaConvenioPessoa"  name="dataAssinaturaConvenioPessoa" value="${ not empty dataRegistro ? dataRegistro:''}" >
+                            <c:if test="${ not empty dataAssinaturaPessoaMsg }">
+                                <div class="invalid-feedback">${ dataAssinaturaPessoaMsg }</div>
                             </c:if>
                         </div>
                         <div class="form-group col-md-6">
