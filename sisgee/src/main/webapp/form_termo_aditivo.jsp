@@ -77,6 +77,25 @@
                                 <td>${b.getConvenio().pegaCpf()}</td>
                                 <td>${b.getConvenio().pegaNome()}</td>
                                 <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
+                                <td><button type="button" ${ empty b.getTermosAditivos() ? '' : 'disabled="disabled"' } class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="${b.idTermoEstagio}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.36"/></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="ExcluirTermoEstagioServlet?ide=${b.idTermoEstagio}&matricula=${param.matricula}" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.33"/></a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.34"/></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c" varStatus="status">
                                 <tr>

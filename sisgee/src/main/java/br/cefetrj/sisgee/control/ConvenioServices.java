@@ -178,6 +178,12 @@ public class ConvenioServices {
 		}
 	}
     
+    /**
+     * Método para excluir um convenio e a empresa/pessoa relacionada de um banco
+     * @param convenio
+     * @param empresa
+     * @param pessoa
+     */
     public static void excluirConvenio(Convenio convenio, Empresa empresa, Pessoa pessoa) throws Exception {
         
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);

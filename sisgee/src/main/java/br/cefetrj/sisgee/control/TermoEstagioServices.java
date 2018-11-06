@@ -108,7 +108,32 @@ public class TermoEstagioServices {
 		}
 
 	}
+        
+        /**
+	 * Método para excluir um termo de estagio no banco
+	 * @param termoEstagio Termo estagio a excluido
+	 */
+        public static void excluirTermoEstagio(TermoEstagio termoEstagio) throws Exception{
+                
+                GenericDAO<TermoEstagio> termoEstagioDao = PersistenceManager.createGenericDAO(TermoEstagio.class);
+                if (termoEstagio.getTermosAditivos() != null && termoEstagio.getTermosAditivos().size() >= 1) {
+                System.out.println("Existe Termo Aditivo");
+                throw new Exception();
+            }
+                
+		PersistenceManager.getTransaction().begin();
+		try{
+			termoEstagioDao.excluir(termoEstagio);
+			PersistenceManager.getTransaction().commit();
+		}catch(Exception e){
+			//TODO remover saída do console
+			System.out.println(e);
+			PersistenceManager.getTransaction().rollback();
+		}
+        }
 	
+        
+        
 	public static void alterarTermoEstagio(TermoEstagio termoEstagio) {
 		
 		GenericDAO<TermoEstagio> termoEstagioDao = PersistenceManager.createGenericDAO(TermoEstagio.class);		
