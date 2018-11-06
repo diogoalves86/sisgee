@@ -160,7 +160,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         
         TermoEstagio termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt((String)request.getParameter("idEstagio")));
         
-        // APLICANDO RELACIONAMENTOS RECUPERADOS
+        // SETANDO NOVOS VALORES NO OBJETO
         termoEstagio.setDataInicioTermoEstagio(dataInicioTermoEstagio);
         termoEstagio.setDataFimTermoEstagio(dataFimTermoEstagio);
         termoEstagio.setCargaHorariaTermoEstagio(cargaHorariaTermoEstagio);
@@ -172,10 +172,10 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         termoEstagio.setCepEnderecoTermoEstagio(cepEnderecoTermoEstagio);
         termoEstagio.setCidadeEnderecoTermoEstagio(cidadeEnderecoTermoEstagio);
         termoEstagio.setEstadoEnderecoTermoEstagio(estadoEnderecoTermoEstagio);
-        
+        termoEstagio.setAluno(alunoAux);
         termoEstagio.setConvenio(convenioAux);
-        
-        
+        termoEstagio.setNomeAgenciada(nomeAgenciada);
+        termoEstagio.setProfessorOrientador(profAux);
 
         System.out.println("Id Termo Estágio: "+termoEstagio.getIdTermoEstagio());
         String msg = "";
