@@ -48,7 +48,10 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         TermoAditivo termoAditivo=null;
         
         Aluno aluno=AlunoServices.buscarAlunoByMatricula(matricula);
+        List<ProfessorOrientador> listaProfessores = ProfessorOrientadorServices.listarProfessorOrientador();
         req.setAttribute("aluno", aluno);
+        req.setAttribute("listaProfessores", listaProfessores);
+        
         if(idEstagio!=null){
             termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt(idEstagio));
             
@@ -57,6 +60,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
             /** Dados do termo de estágio */
             req.setAttribute("idTermoEstagio", idEstagio);
             req.setAttribute("idEstagio", idEstagio);
+            req.setAttribute("ufTermoEstagio", termoEstagio.getEstadoEnderecoTermoEstagio());
         }
         
         if(idAluno!=null){
@@ -103,7 +107,6 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
 
         /** Dados de Valor Bolsa */
         req.setAttribute("vavalorBolsa",termoEstagio.getValorBolsaVisu(termoAditivo));
-        System.out.println("aqui"+termoEstagio.getValorBolsaVisu(termoAditivo));
         /** Dados de Local */
         req.setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagioVisu(termoAditivo));
         req.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagioVisu(termoAditivo));
@@ -175,7 +178,6 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         termoEstagio.setNomeAgenciada(nomeAgenciada);
         termoEstagio.setProfessorOrientador(profAux);
 
-        System.out.println("Id Termo Estágio: "+termoEstagio.getIdTermoEstagio());
         String msg = "";
         Logger lg = Logger.getLogger(FormEditarTermoEstagioServlet.class);
         try{

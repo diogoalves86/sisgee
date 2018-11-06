@@ -76,7 +76,7 @@
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
                                 <div class="input-group">
                                     <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ cvNumero2 }">
-                                    <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value="${ convenio.getIdConvenio() }"> 
+                                    <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value="${ convenio.getNumero() }"> 
                                     <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio"  maxlength="6" value="${ cvNumero2 }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button" id="btnBuscarConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
@@ -259,7 +259,14 @@
                             <select name="estadoEnderecoTermoEstagio" id="estadoEnderecoTermoEstagio" class="form-control">
                                 <option value="" selected>${showLocal eq 'sim' ? '' :enuf}</option>
                                 <c:forEach items="${ uf }" var="uf">
-                                    <option value="${ uf }">${ uf }</option>
+                                    <c:choose>
+                                        <c:when test="${ uf.equals(ufTermoEstagio) }">
+                                            <option value="${ ufTermoEstagio }" selected>${ ufTermoEstagio }</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${ uf }">${ uf }</option>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:forEach>							
                             </select>
                             <c:if test="${ not empty estadoEnderecoMsg }">
@@ -324,7 +331,16 @@
                         <div class="form-group col-md-8">
                                 <label for="idProfessorOrientador"></label>
                             <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control" >
-                                <option value="${ pfnomeprofessor.getIdProfessorOrientador() }">${ pfnomeprofessor.getNomeProfessorOrientador() }</option>
+                                <c:forEach items="${ listaProfessores }" var="professor">
+                                    <c:choose>
+                                        <c:when test="${professor.getIdProfessorOrientador() ==  pfnomeprofessor.getIdProfessorOrientador()}">
+                                            <option value="${ pfnomeprofessor.getIdProfessorOrientador() }" selected>${ pfnomeprofessor.getNomeProfessorOrientador() }</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${ professor.getIdProfessorOrientador() }">${ professor.getNomeProfessorOrientador() }</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
                             </select>
                             <c:if test="${ not empty idProfessorMsg }">
                                 <div class="invalid-feedback">${ idProfessorMsg }</div>
