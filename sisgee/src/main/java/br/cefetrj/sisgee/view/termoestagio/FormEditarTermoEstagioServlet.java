@@ -147,7 +147,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         String cepEnderecoTermoEstagio      = (String)request.getParameter("cepEnderecoTermoEstagio");
         String cidadeEnderecoTermoEstagio   = (String)request.getParameter("cidadeEnderecoTermoEstagio");
         String estadoEnderecoTermoEstagio   = (String)request.getParameter("estadoEnderecoTermoEstagio");
-        Boolean eEstagioObrigatorio         = Boolean.parseBoolean(request.getParameter("eobrigatorio"));
+        Boolean eEstagioObrigatorio         = ((String)(request.getParameter("eobrigatorio"))).equals("sim") ? true:false;
 
         String nomeSupervisor               = request.getParameter("nomeSupervisor");
         String cargoSupervisor              = request.getParameter("cargoSupervisor");    
@@ -173,6 +173,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         termoEstagio.setCepEnderecoTermoEstagio(cepEnderecoTermoEstagio);
         termoEstagio.setCidadeEnderecoTermoEstagio(cidadeEnderecoTermoEstagio);
         termoEstagio.setEstadoEnderecoTermoEstagio(estadoEnderecoTermoEstagio);
+        termoEstagio.setEEstagioObrigatorio(eEstagioObrigatorio);
         termoEstagio.setAluno(alunoAux);
         termoEstagio.setConvenio(convenioAux);
         termoEstagio.setNomeAgenciada(nomeAgenciada);

@@ -293,16 +293,18 @@
                             </div>
 
                             <div class="custom-controls-stacked d-block my-3" >
-                                <label class="custom-control custom-radio"> 
-                                    <input id="estagioSim" name="eobrigatorio" type="radio" class="custom-control-input" value = "sim"  ${ eobrigatorio eq 'true'? 'checked' : '' }> 
-                                    <span class="custom-control-indicator"></span> 
-                                    <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span>
-                                </label> 
-                                <label class="custom-control custom-radio"> 
-                                    <input id="estagioNao" name="eobrigatorio" type="radio" class="custom-control-input" value = "nao"  ${ eobrigatorio eq 'false'? 'checked' : ''  }> 
-                                    <span class="custom-control-indicator"></span> 
-                                    <span class="custom-control-description"><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span>
-                                </label>
+                                <select name="eobrigatorio" id="eobrigatorio">
+                                    <c:choose>
+                                        <c:when test="${ eobrigatorio }">
+                                            <option value="sim" selected><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_sim"/></option>
+                                            <option value="nao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_nao"/></option>
+                                        </c:when> 
+                                        <c:otherwise>
+                                            <option value="sim"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_sim"/></option>
+                                            <option value="nao" selected><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_nao"/></option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </select>
                             </div>				
                         </div>
 
