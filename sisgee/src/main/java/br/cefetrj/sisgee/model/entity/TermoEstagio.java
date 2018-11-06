@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -73,11 +72,11 @@ public class TermoEstagio {
 	@Column(nullable = false)
 	private Boolean eEstagioObrigatorio;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Aluno aluno;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Convenio convenio;
         
@@ -90,10 +89,10 @@ public class TermoEstagio {
 	@Column()
 	private String nomeAgenciada;         
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private ProfessorOrientador professorOrientador;
 
-	@OneToMany(mappedBy = "termoEstagio", cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "termoEstagio")
 	private List<TermoAditivo> termosAditivos;
 
 	public TermoEstagio() {}
