@@ -6,6 +6,7 @@ import br.cefetrj.sisgee.model.dao.ConvenioDAO;
 import br.cefetrj.sisgee.model.dao.EmpresaDAO;
 import br.cefetrj.sisgee.model.dao.GenericDAO;
 import br.cefetrj.sisgee.model.dao.PersistenceManager;
+import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
@@ -189,13 +190,26 @@ public class ConvenioServices {
             throw new Exception();
         }
         
+        boolean ehAluno = false;
+        for(Aluno aluno : AlunoServices.listarAlunos()){
+            if(aluno.getPessoa().equals(pessoa)){
+                ehAluno = true;
+            }
+        }
+        
         PersistenceManager.getTransaction().begin();
         try {
             convenioDao.excluir(convenio);
             if(empresa!=null){
                 empresaDao.excluir(empresa);
             }else{
-                pessoaDao.excluir(pessoa);
+                if(ehAluno == true){
+                    System.out.println("Pessoa é um aluno");
+                    
+                }else{
+                    pessoaDao.excluir(pessoa);
+                }
+                
             }
             PersistenceManager.getTransaction().commit();
         } catch (Exception e) {

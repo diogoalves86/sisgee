@@ -165,7 +165,14 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
     public static String gerarNumeroConvenio(){
         
         List<Convenio> x = ConvenioServices.listarConvenios();
-        String a = String.valueOf(x.size()+1);
+        int ultimoNumero = 0;
+        for(Convenio convenio : x){
+            ultimoNumero = Integer.parseInt(convenio.getNumero());
+        }
+        ultimoNumero++;
+        System.out.println("ultimoNumero = " + ultimoNumero);//TODO apagar saída do console
+        String a = String.valueOf(ultimoNumero);
+        System.out.println("a = " + a);//TODO apagar saída do console
         return a;
     }
 
