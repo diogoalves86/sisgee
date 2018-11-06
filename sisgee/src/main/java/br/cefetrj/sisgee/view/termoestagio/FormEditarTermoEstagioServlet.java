@@ -153,7 +153,7 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
                
         
         Aluno alunoAux = AlunoServices.buscarAluno(new Aluno(Integer.parseInt((String)request.getParameter("idAluno"))));
-        Convenio convenioAux = ConvenioServices.buscarConvenio(new Convenio(Integer.parseInt(request.getParameter("idConvenio"))));
+        Convenio convenioAux = ConvenioServices.buscarConvenioByNumeroConvenio((String)request.getParameter("idConvenio"));
         ProfessorOrientador profAux = ProfessorOrientadorServices.buscarProfessorOrientador(new ProfessorOrientador(Integer.parseInt((String)request.getParameter("idProfessorOrientador"))));
         
         TermoEstagio termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt((String)request.getParameter("idEstagio")));
