@@ -63,7 +63,6 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
             termoAditivo=TermoAditivoServices.buscarTermoAditivo(Integer.parseInt(idAluno));
             req.setAttribute("termoAditivo", termoAditivo);
             /** Dados de aluno */
-            req.setAttribute("idAluno", aluno.getIdAluno());
         }
         req.setAttribute("uf", uf);
         
@@ -155,7 +154,6 @@ public class FormEditarTermoEstagioServlet extends HttpServlet {
         
         Aluno alunoAux = AlunoServices.buscarAluno(new Aluno(Integer.parseInt((String)request.getParameter("idAluno"))));
         Convenio convenioAux = ConvenioServices.buscarConvenio(new Convenio(Integer.parseInt(request.getParameter("idConvenio"))));
-        System.out.println("IdProfessorOrientador: "+(String)request.getParameter("idProfessorOrientador"));
         ProfessorOrientador profAux = ProfessorOrientadorServices.buscarProfessorOrientador(new ProfessorOrientador(Integer.parseInt((String)request.getParameter("idProfessorOrientador"))));
         
         TermoEstagio termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt((String)request.getParameter("idEstagio")));

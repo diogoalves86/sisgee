@@ -55,6 +55,8 @@
                 <input type="hidden" id="precisaVerificarTermoEmAberto" name="precisaVerificarTermoEmAberto" value="1" />
                 <input type="hidden" id="idTermoEstagio" name="idTermoEstagio" value="${ idTermoEstagio }" />
                 <input type="hidden" id="idEstagio" name="idEstagio" value="${ idEstagio }" />
+                <input type="hidden" id="matriculaAluno" name="matriculaAluno" value="${aluno.getMatricula()}" />
+                <input type="hidden" id="idAluno" name="idAluno" value="${aluno.getIdAluno()}" />
                 <input type="hidden" id="nomeAluno" value="${aluno.getPessoa().getNome()}" />
                 <input type="hidden" id="nomeCursoAluno" value="${aluno.getCurso().getNomeCurso()}" />
                 <input type="hidden" id="unidadeCursoAluno" value="${aluno.getCurso().getCampus()}" />
@@ -74,7 +76,7 @@
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
                                 <div class="input-group">
                                     <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ cvNumero2 }">
-                                    <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value=""> 
+                                    <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value="${ convenio.getIdConvenio() }"> 
                                     <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio"  maxlength="6" value="${ cvNumero2 }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button" id="btnBuscarConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
