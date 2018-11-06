@@ -123,6 +123,22 @@
                                 <div class="invalid-feedback">${ contatoEmpresaMsg }</div>
                             </c:if>
                         </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="numeroEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
+                            <input type="text" class="form-control ${ not empty numeroEmpresaMsg ? 'is-invalid': 'is-valid' }" id="numeroEmpresa" name="numeroEmpresa" value="${param.numeroEmpresa}">
+                            <c:if test="${ not empty numeroEmpresaMsg }">
+                                <div class="invalid-feedback">${ numeroEmpresaMsg }</div>
+                            </c:if>
+                        </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="anoEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
+                            <input type="text" class="form-control ${ not empty anoEmpresaMsg ? 'is-invalid': 'is-valid' }" id="anoEmpresa" name="anoEmpresa" maxlength="4"  value="${param.anoEmpresa}">
+                            <c:if test="${ not empty anoEmpresaMsg }">
+                                <div class="invalid-feedback">${ anoEmpresaMsg }</div>
+                            </c:if>
+                        </div>     
 
                     </div>         
 
@@ -166,6 +182,22 @@
                                 <div class="invalid-feedback">${ telefonePessoaMsg }</div>
                             </c:if>
                         </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="numeroPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
+                            <input type="text" class="form-control ${ not empty numeroPessoaMsg ? 'is-invalid': 'is-valid' }" id="numeroPessoa" name="numeroPessoa" value="${param.numeroPessoa}">
+                            <c:if test="${ not empty numeroPessoaMsg }">
+                                <div class="invalid-feedback">${ numeroPessoaMsg }</div>
+                            </c:if>
+                        </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="anoPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
+                            <input type="text" class="form-control ${ not empty anoPessoaMsg ? 'is-invalid': 'is-valid' }" id="anoPessoa" name="anoPessoa" maxlength="11"  value="${param.anoPessoa}">
+                            <c:if test="${ not empty anoPessoaMsg }">
+                                <div class="invalid-feedback">${ anoPessoaMsg }</div>
+                            </c:if>
+                        </div>    
 
                     </div>
 
