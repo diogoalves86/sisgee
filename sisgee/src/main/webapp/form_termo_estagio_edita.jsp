@@ -51,9 +51,13 @@
             <h5><fmt:message key = "br.cefetrj.sisgee.resources.form.editarTermoEstagio"/></h5>		
         </p>		
             <form action="EditarTermoEAditivo" method="post">
+                <!-- DADOS NECESSÁRIOS VINDOS DO SERVLET -->
                 <input type="hidden" id="precisaVerificarTermoEmAberto" name="precisaVerificarTermoEmAberto" value="1" />
                 <input type="hidden" id="idTermoEstagio" name="idTermoEstagio" value="${ idTermoEstagio }" />
                 <input type="hidden" id="idEstagio" name="idEstagio" value="${ idEstagio }" />
+                <input type="hidden" id="nomeAluno" value="${aluno.getPessoa().getNome()}" />
+                <input type="hidden" id="nomeCursoAluno" value="${aluno.getCurso().getNomeCurso()}" />
+                <input type="hidden" id="unidadeCursoAluno" value="${aluno.getCurso().getCampus()}" />
                 
                 
                  <fieldset class="form-group dadosAluno">
@@ -102,10 +106,21 @@
                                     <input id="tipoConvenio" class="form-control tipoConvenio" type="text" name="tipoConvenio" value="${tConvenio }" readonly> 
                                 </label>						              
                                 <!-- AQUI SELECIONA AGENTE DE INTEGRACAO-->
-                                <label for="isAgenteIntegracao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_agente_integracao"/></label>
-                                <label class="custom-control">
-                                    <input id="isAgenteIntegracao" class="form-control isAgenteIntegracao" type="text" name="isAgenteIntegracao" value="${param.isAgenteIntegracao}" readonly> 
-                                </label>
+                                <div class="custom-controls-stacked d-block my-3">
+                                     <label for="isAgenteIntegracao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_agente_integracao"/></label>
+                                     <label class="custom-control custom-radio">
+
+                                         <input id="agenteSim" class="custom-control-input" type="radio" name="isAgenteIntegracao" ${ agIntegracao == 'true' ? 'checked' : '' } value="true"> 
+                                         <span class="custom-control-indicator"></span> 
+                                         <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span><!-- AQUI SELECIONA SIM PARA AGENTE DE INTEGRACAO-->
+                                     </label>						
+
+                                     <label class="custom-control custom-radio">
+                                         <input id="agenteNao" class="custom-control-input" type="radio" name="isAgenteIntegracao" ${ agIntegracao != 'true' ? 'checked' : '' } value="false"> 
+                                         <span class="custom-control-indicator"></span> 
+                                         <span class="custom-control-description"><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span><!-- AQUI SELECIONA NAO PARA AGENTE DE INTEGRACAO-->
+                                     </label>
+                                 </div>			
                                     <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
                                     <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ nomeAgenciada }">  
                                     <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
@@ -122,15 +137,15 @@
                     <!-- AQUI COMECA EMPRESA-->
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <input type="hidden" class="form-control cnpjEcpf cnpjEcpf"  id="cnpjEcpf1" name="cnpjEcpf1" value="${ param.cnpjEcpf}">    
+                            <input type="hidden" class="form-control cnpjEcpf cnpjEcpf"  id="cnpjEcpf1" name="cnpjEcpf1" value="${ cvCpfCnpj }">    
                             <label for="cnpjEcpf"><fmt:message key = "br.cefetrj.sisgee.resources.form.exibirCPFeCNPJ"/></label>
                             <div class="input-group">						  
-                                <input type="text" class="form-control cnpjEcpf" id="cnpjEcpf" name="cnpjEcpf" value="${ param.cnpjEcpf }" readonly>
+                                <input type="text" class="form-control cnpjEcpf" id="cnpjEcpf" name="cnpjEcpf" value="${ cvCpfCnpj }" readonly>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="nomeEmpresaPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.razaoSocial"/></label>
-                            <input type="text" class="form-control nomeEmpresaPessoa nomeEmpresaPessoa" id="nomeEmpresaPessoa" name="nomeEmpresaPessoa" value="${ param.nomeEmpresaPessoa }" readonly>
+                            <input type="text" class="form-control nomeEmpresaPessoa nomeEmpresaPessoa" id="nomeEmpresaPessoa" name="nomeEmpresaPessoa" value="${ cvNome }" readonly>
                         </div>
                     </div>
                 </fieldset>
@@ -343,7 +358,6 @@
     <%@include file="import_scripts.jspf"%>
     <script>
         $(document).ready(function () {
-            $("#btnBuscarMatricula").click();
             var tamanho = $("#cnpjEcpf1").val().length;
             
             $('#cargaHorariaTermoEstagio').mask('9');
@@ -353,10 +367,18 @@
             $("#cnpjEcpf1").mask("99.999.999/9999-99");        
             $('#cepEnderecoTermoEstagio').mask('99.999-999');
             $('#dataIni').mask('99/99/9999');
-            $("#btnBuscarConvenio").click();
-                      
+            carregaDadosAluno();
         });
         
+        function carregaDadosAluno() {
+            var nomeAluno = $('#nomeAluno').val();
+            var cursoAluno = $('#nomeCursoAluno').val();
+            var campusCursoAluno = $('#unidadeCursoAluno').val();
+            
+            $('#nome').val(nomeAluno);
+            $('#nomeCurso').val(cursoAluno);
+            $('#nomeCampus').val(campusCursoAluno);
+        }
         
         function alerta(){
             alert("aqui");
