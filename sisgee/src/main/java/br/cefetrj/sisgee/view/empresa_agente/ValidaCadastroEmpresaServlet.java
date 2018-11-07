@@ -20,9 +20,6 @@ import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 
 /**
  * Servlet para validar os dados da tela de cadastro de Convenio.
@@ -53,18 +50,16 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
         String cnpjEmpresa = request.getParameter("cnpjEmpresa");
         String nomeEmpresa = request.getParameter("nomeEmpresa");
         String agenteIntegracao = request.getParameter("agenteIntegracao");
-
-        String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
-
-        String dataAssinaturaConvenioPessoa = request.getParameter("dataAssinaturaConvenioPessoa");
+        String dataRegistroConvenioEmpresa = request.getParameter("dataRegistroConvenioEmpresa");
+        String dataRegistroConvenioPessoa = request.getParameter("dataRegistroConvenioPessoa");
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
-
         String cpfPessoa = request.getParameter("cpfPessoa");
         String nomePessoa = request.getParameter("nomePessoa");
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
+        
         if (tipoPessoa.equals("nao")) {
             pessoaJuridica = false;
         }
@@ -278,49 +273,49 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
             }
 
             /**
-             * Validação da Data de Assinatura do Convenio da Pessoa usando os
+             * Validação da Data de Registro do Convenio da Pessoa usando os
              * métodos da Classe ValidaUtils Campo obrigatório
              */
-            Date dataAssinaturaEmpresa = null;
-            String dataAssinaturaMsg = "";
-            String campo = "Data de Assinatura";
+            Date dataRegistroEmpresa = null;
+            String dataRegistroMsg = "";
+            String campo = "Data de Registro";
 
-            dataAssinaturaMsg = ValidaUtils.validaObrigatorio(campo, dataAssinaturaConvenioEmpresa);
-            if (dataAssinaturaMsg.trim().isEmpty()) {
-                dataAssinaturaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioEmpresa);
-                if (dataAssinaturaMsg.trim().isEmpty()) {
-                    dataAssinaturaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataAssinaturaConvenioEmpresa);
-                    if (dataAssinaturaMsg.trim().isEmpty()) {
+            dataRegistroMsg = ValidaUtils.validaObrigatorio(campo, dataRegistroConvenioEmpresa);
+            if (dataRegistroMsg.trim().isEmpty()) {
+                dataRegistroMsg = ValidaUtils.validaDate(campo, dataRegistroConvenioEmpresa);
+                if (dataRegistroMsg.trim().isEmpty()) {
+                    dataRegistroMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataRegistroConvenioEmpresa);
+                    if (dataRegistroMsg.trim().isEmpty()) {
                         try {
                             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                            dataAssinaturaEmpresa = format.parse(dataAssinaturaConvenioEmpresa);
+                            dataRegistroEmpresa = format.parse(dataRegistroConvenioEmpresa);
 
-                            request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
+                            request.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
                         } catch (Exception e) {
                             //TODO trocar saída de console por Log
                             System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
                             isValid = false;
                         }
                     } else {
-                        dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                        request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
+                        dataRegistroMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("dataRegistroEmpresaMsg", dataRegistroMsg);
                         isValid = false;
                         //TODO Fazer log
 
                     }
                 } else {
-                    dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                    request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
+                    dataRegistroMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                    request.setAttribute("dataRegistroEmpresaMsg", dataRegistroMsg);
                     isValid = false;
                     //TODO Fazer log
-                    System.out.println(dataAssinaturaMsg);
+                    System.out.println(dataRegistroMsg);
                 }
             } else {
-                dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
+                dataRegistroMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                request.setAttribute("dataRegistroEmpresaMsg", dataRegistroMsg);
                 isValid = false;
                 //TODO Fazer log
-                System.out.println(dataAssinaturaMsg);
+                System.out.println(dataRegistroMsg);
             }
 
         } else {
@@ -464,47 +459,47 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
              * Validação da Data de Assinatura do Convenio da Pessoa usando os
              * métodos da Classe ValidaUtils Campo obrigatório
              */
-            Date dataAssinaturaPessoa = null;
-            String dataAssinaturaMsg = "";
-            String campo = "Data de Assinatura";
+            Date dataRegistroPessoa = null;
+            String dataRegistroMsg = "";
+            String campo = "Data de Registro";
 
-            dataAssinaturaMsg = ValidaUtils.validaObrigatorio(campo, dataAssinaturaConvenioPessoa);
-            if (dataAssinaturaMsg.trim().isEmpty()) {
-                dataAssinaturaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioPessoa);
-                if (dataAssinaturaMsg.trim().isEmpty()) {
-                    dataAssinaturaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataAssinaturaConvenioPessoa);
-                    if (dataAssinaturaMsg.trim().isEmpty()) {
+            dataRegistroMsg = ValidaUtils.validaObrigatorio(campo, dataRegistroConvenioPessoa);
+            if (dataRegistroMsg.trim().isEmpty()) {
+                dataRegistroMsg = ValidaUtils.validaDate(campo, dataRegistroConvenioPessoa);
+                if (dataRegistroMsg.trim().isEmpty()) {
+                    dataRegistroMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataRegistroConvenioPessoa);
+                    if (dataRegistroMsg.trim().isEmpty()) {
                         try {
                             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                            dataAssinaturaPessoa = format.parse(dataAssinaturaConvenioPessoa);
+                            dataRegistroPessoa = format.parse(dataRegistroConvenioPessoa);
 
-                            request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
+                            request.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
                         } catch (Exception e) {
                             //TODO trocar saída de console por Log
                             System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
                             isValid = false;
                         }
                     } else {
-                        dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                        request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
+                        dataRegistroMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("dataRegistroPessoaMsg", dataRegistroMsg);
                         isValid = false;
                         //TODO Fazer log
 
                     }
 
                 } else {
-                    dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                    request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
+                    dataRegistroMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                    request.setAttribute("dataRegistroPessoaMsg", dataRegistroMsg);
                     isValid = false;
                     //TODO Fazer log
-                    System.out.println(dataAssinaturaMsg);
+                    System.out.println(dataRegistroMsg);
                 }
             } else {
-                dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
+                dataRegistroMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                request.setAttribute("dataRegistroPessoaMsg", dataRegistroMsg);
                 isValid = false;
                 //TODO Fazer log
-                System.out.println(dataAssinaturaMsg);
+                System.out.println(dataRegistroMsg);
             }
 
         }
