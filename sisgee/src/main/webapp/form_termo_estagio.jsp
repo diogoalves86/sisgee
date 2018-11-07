@@ -332,6 +332,8 @@
                         </c:if>				
                     </div>
                 </fieldset>
+                            
+                         
 
                 <c:if test="${ not empty termoEstagio }">
                     <input type="hidden" name="idTermoEstagio" value="${ termoEstagio.idTermoEstagio }" />

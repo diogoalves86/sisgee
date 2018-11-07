@@ -18,8 +18,6 @@ import br.cefetrj.sisgee.control.TermoEstagioServices;
 import br.cefetrj.sisgee.model.entity.AgenteIntegracao;
 import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.Convenio;
-import br.cefetrj.sisgee.model.entity.Empresa;
-import br.cefetrj.sisgee.model.entity.Pessoa;
 import br.cefetrj.sisgee.model.entity.ProfessorOrientador;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
