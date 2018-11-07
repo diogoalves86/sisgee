@@ -20,6 +20,7 @@
     "bootstrap": "4.0.0-beta.2",
     "bootstrap-datepicker": "^1.7.1",
     "jquery-mask-plugin": "^1.14.13",
-    "popper.js": "^1.12.3"
+    "popper.js": "^1.12.3",
+    "bootstrap-select": "^1.13.2"
   }
 }

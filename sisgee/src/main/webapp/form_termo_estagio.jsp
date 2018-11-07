@@ -124,12 +124,12 @@
                                 <label class="custom-control">
                                     <input id="isAgenteIntegracao" class="form-control isAgenteIntegracao" type="text" name="isAgenteIntegracao" value="${param.isAgenteIntegracao}" readonly> 
                                 </label>
-                                    <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
-                                    <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ param.nomeAgenciada}">  
-                                    <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
-                                    <label class="custom-control">
-                                        <input type="text" class="form-control ${ not empty agenciadaMsg ? 'is-invalid': 'is-valid' } nomeAgenciada" id="nomeAgenciada"  name="nomeAgenciada" value="${ param.nomeAgenciada }" maxlength="250">
-                                    </label>
+                                <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
+                                <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ param.nomeAgenciada}">  
+                                <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
+                                <label class="custom-control">
+                                    <input type="text" class="form-control ${ not empty agenciadaMsg ? 'is-invalid': 'is-valid' } nomeAgenciada" id="nomeAgenciada"  name="nomeAgenciada" value="${ param.nomeAgenciada }" maxlength="250">
+                                </label>
                                 <c:if test="${ not empty agenciadaMsg }">
                                     <div class="invalid-feedback">${ agenciadaMsg }</div>
                                 </c:if>  
@@ -257,9 +257,9 @@
                                         <option value="${ uf }" selected>${ uf }</option>
                                     </c:if>
                                     <c:if test="${estadoEnderecoTermoEstagio != uf}">
-                                          <option value="${ uf }">${ uf }</option>
+                                        <option value="${ uf }">${ uf }</option>
                                     </c:if>      
-                                    
+
                                 </c:forEach>							
                             </select>
                             <c:if test="${ not empty estadoEnderecoMsg }">
@@ -313,27 +313,24 @@
                     </div>
                 </div>                        
 
-                <fieldset ${ isVisualizacao eq true ? 'disabled' :'' }>
-                    <div class="form-group col-md-8">
-                        <label for="idProfessorOrientador"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></label>
-                        <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
-                            <option value="">---</option>
-                            <c:forEach items="${ professores }" var="professor">
-                                <c:if test="${professor.idProfessorOrientador eq idProfessor}">
-                                    <option value="${ professor.idProfessorOrientador }" selected> ${ professor.nomeProfessorOrientador }</option>
-                                </c:if>
-                                <c:if test="${idProfessor != professor.idProfessorOrientador}">
-                                    <option value="${ professor.idProfessorOrientador }"> ${ professor.nomeProfessorOrientador }</option>
-                                </c:if>       
-                            </c:forEach>				
-                        </select>
-                        <c:if test="${ not empty idProfessorMsg }">
-                            <div class="invalid-feedback">${ idProfessorMsg }</div>
-                        </c:if>				
-                    </div>
-                </fieldset>
-                            
-                         
+                        <fieldset ${ isVisualizacao eq true ? 'disabled' :'' }>
+                            <div class="form-group col-md-8">
+                                <label for="idProfessorOrientador"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></label>
+                                <select name="idProfessorOrientador" data-live-search="true" id="idProfessorOrientador" class="form-control selectpicker ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }">
+                                    <c:forEach items="${ professores }" var="professor">
+                                        <c:if test="${professor.idProfessorOrientador eq idProfessor}">
+                                            <option value="${ professor.idProfessorOrientador }"> ${ professor.nomeProfessorOrientador }</option>
+                                        </c:if>
+                                        <c:if test="${idProfessor != professor.idProfessorOrientador}">
+                                            <option value="${ professor.idProfessorOrientador }"> ${ professor.nomeProfessorOrientador }</option>
+                                        </c:if>       
+                                    </c:forEach>				
+                                </select>
+                                <c:if test="${ not empty idProfessorMsg }">
+                                    <div class="invalid-feedback">${ idProfessorMsg }</div>
+                                </c:if>				
+                            </div>
+                        </fieldset>
 
                 <c:if test="${ not empty termoEstagio }">
                     <input type="hidden" name="idTermoEstagio" value="${ termoEstagio.idTermoEstagio }" />
@@ -386,7 +383,8 @@
             $("#cnpjEcpf1").mask("99.999.999/9999-99");
             $('#cepEnderecoTermoEstagio').mask('99.999-999');
             $('#dataIni').mask('99/99/9999');
-                    
+            //$('#idProfessorOrientador').editableSelect();
+            $('#idProfessorOrientador').selectpicker();
 
         });
 
@@ -417,7 +415,7 @@
             }
 
         }
-        
+
 
     </script>
 </body>

@@ -42,8 +42,8 @@ public class ValidaAlterarConvenio extends HttpServlet{
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
 
-        String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
-        String dataAssinaturaConvenioPessoa = request.getParameter("dataAssinaturaConvenioPessoa");
+        String dataRegistroConvenioEmpresa = request.getParameter("dataRegistroConvenioEmpresa");
+        String dataRegistroConvenioPessoa = request.getParameter("dataRegistroConvenioPessoa");
 
         String cpfPessoa = request.getParameter("cpfPessoa");
         String nomePessoa = request.getParameter("nomePessoa");
@@ -287,44 +287,44 @@ public class ValidaAlterarConvenio extends HttpServlet{
             }
 
             /**
-             * Validação da Data de Assinatura do Convenio da Empresa usando os
+             * Validação da Data de Registro do Convenio da Empresa usando os
              * métodos da Classe ValidaUtils Campo obrigatório
              */
 
-            Date dataAssinaturaEmpresa = null;
-            String dataAssinaturaEmpresaMsg = "";
-            String campo = "Data de Assinatura";
-            dataAssinaturaEmpresaMsg = ValidaUtils.validaObrigatorio(campo, dataAssinaturaConvenioEmpresa);
-            if(dataAssinaturaEmpresaMsg.trim().isEmpty()){
-                dataAssinaturaEmpresaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioEmpresa);
-                if(dataAssinaturaEmpresaMsg.trim().isEmpty()){
-                    dataAssinaturaEmpresaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataAssinaturaConvenioEmpresa);
-                    if(dataAssinaturaEmpresaMsg.trim().isEmpty()){
+            Date dataRegistroEmpresa = null;
+            String dataRegistroEmpresaMsg = "";
+            String campo = "Data de Registro";
+            dataRegistroEmpresaMsg = ValidaUtils.validaObrigatorio(campo, dataRegistroConvenioEmpresa);
+            if(dataRegistroEmpresaMsg.trim().isEmpty()){
+                dataRegistroEmpresaMsg = ValidaUtils.validaDate(campo, dataRegistroConvenioEmpresa);
+                if(dataRegistroEmpresaMsg.trim().isEmpty()){
+                    dataRegistroEmpresaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataRegistroConvenioEmpresa);
+                    if(dataRegistroEmpresaMsg.trim().isEmpty()){
                         try {
                             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                            dataAssinaturaEmpresa = format.parse(dataAssinaturaConvenioEmpresa);
-                            request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
+                            dataRegistroEmpresa = format.parse(dataRegistroConvenioEmpresa);
+                            request.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
                         } catch (Exception e) {
-                            dataAssinaturaEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                            request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
-                            request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaEmpresaMsg);
+                            dataRegistroEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                            request.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
+                            request.setAttribute("dataRegistroEmpresaMsg", dataRegistroEmpresaMsg);
                             isValid = false;
                             System.out.println(e.getMessage());
                         }
                     }
                     else{
                         request.setAttribute("isEmpresa", "sim");
-                        dataAssinaturaEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                        request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
-                        request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaEmpresaMsg);
+                        dataRegistroEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
+                        request.setAttribute("dataRegistroEmpresaMsg", dataRegistroEmpresaMsg);
                         isValid = false;
                     }
                 }
                 else{
                     request.setAttribute("isEmpresa", "sim");
-                    dataAssinaturaEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                    request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
-                    request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaEmpresaMsg);
+                    dataRegistroEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                    request.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
+                    request.setAttribute("dataRegistroEmpresaMsg", dataRegistroEmpresaMsg);
                     isValid = false;
                 }
             }
@@ -504,52 +504,52 @@ public class ValidaAlterarConvenio extends HttpServlet{
             }
 
             /**
-             * Validação da Data de Assinatura do Convenio da Pessoa usando os
+             * Validação da Data de Registro do Convenio da Pessoa usando os
              * métodos da Classe ValidaUtils Campo obrigatório
              */
 
-            Date dataAssinaturaPessoa = null;
-            String dataAssinaturaPessoaMsg = "";
-            String campo = "dataAssinaturaConvenioPessoa";
-            dataAssinaturaPessoaMsg = ValidaUtils.validaObrigatorio(campo, dataAssinaturaConvenioPessoa);
-            if (dataAssinaturaPessoaMsg.trim().isEmpty()) {
-                dataAssinaturaPessoaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioPessoa);
-                if (dataAssinaturaPessoaMsg.trim().isEmpty()) {
-                    dataAssinaturaPessoaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataAssinaturaConvenioPessoa);
-                    if (dataAssinaturaPessoaMsg.trim().isEmpty()) {
+            Date dataRegistroPessoa = null;
+            String dataRegistroPessoaMsg = "";
+            String campo = "dataRegistroConvenioPessoa";
+            dataRegistroPessoaMsg = ValidaUtils.validaObrigatorio(campo, dataRegistroConvenioPessoa);
+            if (dataRegistroPessoaMsg.trim().isEmpty()) {
+                dataRegistroPessoaMsg = ValidaUtils.validaDate(campo, dataRegistroConvenioPessoa);
+                if (dataRegistroPessoaMsg.trim().isEmpty()) {
+                    dataRegistroPessoaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataRegistroConvenioPessoa);
+                    if (dataRegistroPessoaMsg.trim().isEmpty()) {
                         try {
                             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                            dataAssinaturaPessoa = format.parse(dataAssinaturaConvenioPessoa);
-                            request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
+                            dataRegistroPessoa = format.parse(dataRegistroConvenioPessoa);
+                            request.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
                         } catch (Exception e) {
-                            dataAssinaturaPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                            request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
-                            request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaPessoaMsg);
+                            dataRegistroPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                            request.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
+                            request.setAttribute("dataRegistroPessoaMsg", dataRegistroPessoaMsg);
                             isValid = false;
                             System.out.println(e.getMessage());
                         }
                     }
                     else{
                         request.setAttribute("isPessoa", "sim");
-                        dataAssinaturaPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                        request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
-                        request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaPessoaMsg);
+                        dataRegistroPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
+                        request.setAttribute("dataRegistroPessoaMsg", dataRegistroPessoaMsg);
                         isValid = false;
                     }
                 }
                 else{
                     request.setAttribute("isPessoa", "sim");
-                    dataAssinaturaPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                    request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
-                    request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaPessoaMsg);
+                    dataRegistroPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                    request.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
+                    request.setAttribute("dataRegistroPessoaMsg", dataRegistroPessoaMsg);
                     isValid = false;
                 }
             }
             else{
                 request.setAttribute("isPessoa", "sim");
-                dataAssinaturaPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
-                request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaPessoaMsg);
+                dataRegistroPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                request.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
+                request.setAttribute("dataRegistroPessoaMsg", dataRegistroPessoaMsg);
                 isValid = false;
             }
 
