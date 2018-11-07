@@ -36,7 +36,7 @@ public class ValidaAlterarConvenio extends HttpServlet{
         
         String tipoPessoa = request.getParameter("tipoPessoa");
         String cnpjEmpresa = request.getParameter("cnpjEmpresa");
-        String razaoSocial = request.getParameter("nomeEmpresa");
+        String nomeEmpresa = request.getParameter("nomeEmpresa");
         String agenteIntegracao = request.getParameter("agenteIntegracao");
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
@@ -45,8 +45,8 @@ public class ValidaAlterarConvenio extends HttpServlet{
         String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
         String dataAssinaturaConvenioPessoa = request.getParameter("dataAssinaturaConvenioPessoa");
 
-        String cpf = request.getParameter("cpfPessoa");
-        String nome = request.getParameter("nomePessoa");
+        String cpfPessoa = request.getParameter("cpfPessoa");
+        String nomePessoa = request.getParameter("nomePessoa");
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
 
@@ -130,11 +130,11 @@ public class ValidaAlterarConvenio extends HttpServlet{
              */
 
             String nomeEmpresaMsg = "";
-            nomeEmpresaMsg = ValidaUtils.validaObrigatorio("nomeEmpresa", razaoSocial);
+            nomeEmpresaMsg = ValidaUtils.validaObrigatorio("nomeEmpresa", nomeEmpresa);
             if(nomeEmpresaMsg.trim().isEmpty()){
-                nomeEmpresaMsg = ValidaUtils.validaTamanho("nomeEmpresa", 100, razaoSocial);
+                nomeEmpresaMsg = ValidaUtils.validaTamanho("nomeEmpresa", 100, nomeEmpresa);
                 if(nomeEmpresaMsg.trim().isEmpty()){
-                    request.setAttribute("nomeEmpresa", razaoSocial);
+                    request.setAttribute("nomeEmpresa", nomeEmpresa);
                 }
                 else{
                     request.setAttribute("isEmpresa", "sim");
@@ -306,15 +306,15 @@ public class ValidaAlterarConvenio extends HttpServlet{
             
             String cpfPessoaMsg = "";
             tamanho = 11;
-            cpfPessoaMsg = ValidaUtils.validaObrigatorio("cpfPessoa", cpf);
+            cpfPessoaMsg = ValidaUtils.validaObrigatorio("cpfPessoa", cpfPessoa);
             if(cpfPessoaMsg.trim().isEmpty()){
                 //remove caracteres especiais antes de fazer a validação numérica do CPF
-                cpf = cpf.replaceAll("[.|/|-]", "");
-                cpfPessoaMsg = ValidaUtils.validaInteger("cpfPessoa", cpf);
+                cpfPessoa = cpfPessoa.replaceAll("[.|/|-]", "");
+                cpfPessoaMsg = ValidaUtils.validaInteger("cpfPessoa", cpfPessoa);
                 if(cpfPessoaMsg.trim().isEmpty()){
-                    cpfPessoaMsg = ValidaUtils.validaTamanhoExato("cpfPessoa", tamanho, cpf);
+                    cpfPessoaMsg = ValidaUtils.validaTamanhoExato("cpfPessoa", tamanho, cpfPessoa);
                     if(cpfPessoaMsg.trim().isEmpty()){
-                        request.setAttribute("cpfPessoa", cpf);
+                        request.setAttribute("cpfPessoa", cpfPessoa);
                     }
                     else{
                         request.setAttribute("isPessoa", "sim");
@@ -345,13 +345,13 @@ public class ValidaAlterarConvenio extends HttpServlet{
              */
 
             String nomePessoaMsg = "";
-            nomePessoaMsg = ValidaUtils.validaObrigatorio("nomePessoa", nome);
+            nomePessoaMsg = ValidaUtils.validaObrigatorio("nomePessoa", nomePessoa);
             if (nomePessoaMsg.trim().isEmpty()) {
-                nomePessoaMsg = ValidaUtils.validaTamanho("nomePessoa", 100, nome);
+                nomePessoaMsg = ValidaUtils.validaTamanho("nomePessoa", 100, nomePessoa);
                 if (nomePessoaMsg.trim().isEmpty()) {
-                    nomePessoaMsg = ValidaUtils.validaSomenteLetras("nomePessoa", nome);
+                    nomePessoaMsg = ValidaUtils.validaSomenteLetras("nomePessoa", nomePessoa);
                     if (nomePessoaMsg.trim().isEmpty()) {
-                        request.setAttribute("nomePessoa", nome);
+                        request.setAttribute("nomePessoa", nomePessoa);
                     }
                     else{
                         request.setAttribute("isPessoa", "sim");
