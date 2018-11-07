@@ -39,7 +39,7 @@ public class Convenio implements Serializable {
     private String ano;
 
     @Column(nullable = false)
-    private Date dataRegistro;
+    private Date dataAssinatura;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Empresa empresa;
@@ -64,19 +64,19 @@ public class Convenio implements Serializable {
         this.idConvenio = idConvenio;
     }  
     
-    public Convenio(String ano, String numero, Date dataRegistro, Empresa empresa) {
+    public Convenio(String ano, String numero, Date dataAssinatura, Empresa empresa) {
         this.ano=ano;
         this.numero=numero;
-        this.dataRegistro = dataRegistro;
+        this.dataAssinatura = dataAssinatura;
         this.empresa = empresa;
         this.pessoa=null;
 
     }
 
-    public Convenio(String ano, String numero, Date dataRegistro, Pessoa pessoa) {
+    public Convenio(String ano, String numero, Date dataAssinatura, Pessoa pessoa) {
         this.ano=ano;
         this.numero=numero;
-        this.dataRegistro = dataRegistro;
+        this.dataAssinatura = dataAssinatura;
         this.pessoa = pessoa;
         this.empresa= null;
 
@@ -97,21 +97,21 @@ public class Convenio implements Serializable {
     }
 
     
-    public Date getDataRegistro() {
-        return dataRegistro;
+    public Date getDataAssinatura() {
+        return dataAssinatura;
     }
 
     public Date getDataFinal(){
         Calendar cal = Calendar.getInstance();
-        cal.setTime(this.dataRegistro);
+        cal.setTime(this.dataAssinatura);
         cal.add(Calendar.YEAR, 5);
         return cal.getTime();
         
     }    
     
-    public void setDataRegistro(Date dataRegistro) {
-        this.dataRegistro = dataRegistro;
-        this.ano = new SimpleDateFormat("yyyy").format(dataRegistro);
+    public void setDataAssinatura(Date dataAssinatura) {
+        this.dataAssinatura = dataAssinatura;
+        this.ano = new SimpleDateFormat("yyyy").format(dataAssinatura);
     }
 
     public Pessoa getPessoa() {

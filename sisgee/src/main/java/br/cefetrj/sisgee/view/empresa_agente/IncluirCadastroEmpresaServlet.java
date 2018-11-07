@@ -54,8 +54,8 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
         String nomeEmpresa = request.getParameter("nomeEmpresa");
         String agenteIntegracao = request.getParameter("agenteIntegracao");
         
-        Date dataRegistroConvenio = (Date)request.getAttribute("dataRegistroConvenioPessoa");
-        Date dataRegistroConvenioEmpresa = (Date)request.getAttribute("dataRegistroConvenioEmpresa");
+        Date dataAssinaturaConvenio = (Date)request.getAttribute("dataAssinaturaConvenioPessoa");
+        Date dataAssinaturaConvenioEmpresa = (Date)request.getAttribute("dataAssinaturaConvenioEmpresa");
         
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
@@ -100,7 +100,7 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
 
             }
             try {
-                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataRegistroConvenioEmpresa),gerarNumeroConvenio(), dataRegistroConvenioEmpresa, empresa);
+                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataAssinaturaConvenioEmpresa),gerarNumeroConvenio(), dataAssinaturaConvenioEmpresa, empresa);
                 convenio.setNumeroConvenio();
                 ConvenioServices.incluirConvenio(convenio);
                 msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
@@ -136,7 +136,7 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
             }
             try {
                 
-                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataRegistroConvenio),gerarNumeroConvenio(), dataRegistroConvenio, pessoa);
+                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataAssinaturaConvenio),gerarNumeroConvenio(), dataAssinaturaConvenio, pessoa);
                 convenio.setNumeroConvenio();
                 
                 ConvenioServices.incluirConvenio(convenio);

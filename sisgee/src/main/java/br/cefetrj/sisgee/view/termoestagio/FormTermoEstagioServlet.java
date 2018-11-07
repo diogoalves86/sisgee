@@ -404,6 +404,8 @@ public class FormTermoEstagioServlet extends HttpServlet {
         String cepEnderecoMsg = "";
         campo = "CEP";
         tamanho = 15;
+        cepEnderecoMsg = ValidaUtils.validaObrigatorio(campo, cepEnderecoTermoEstagio);
+        if (cepEnderecoMsg.trim().isEmpty()) {
             cepEnderecoMsg = ValidaUtils.validaTamanho(campo, tamanho, cepEnderecoTermoEstagio);
             if (bairroEnderecoMsg.trim().isEmpty()) {
                 request.setAttribute("cepEnderecoTermoEstagio", cepEnderecoTermoEstagio);
@@ -415,6 +417,13 @@ public class FormTermoEstagioServlet extends HttpServlet {
                 //TODO Fazer log
                 System.out.println(cepEnderecoMsg);
             }
+        } else {
+            cepEnderecoMsg = messages.getString(cepEnderecoMsg);
+            request.setAttribute("cepEnderecoMsg", cepEnderecoMsg);
+            isValid = false;
+            //TODO Fazer log
+            System.out.println(cepEnderecoMsg);
+        }
 
         /**
          * Validação da Cidade do endereço do TermoEstagio, usando métodos da

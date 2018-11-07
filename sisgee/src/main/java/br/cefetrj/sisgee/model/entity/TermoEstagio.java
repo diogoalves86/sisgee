@@ -60,7 +60,7 @@ public class TermoEstagio {
 	@Column(length = 150, nullable = false)
 	private String bairroEnderecoTermoEstagio;
 
-	@Column(length = 15)
+	@Column(length = 15, nullable = false)
 	private String cepEnderecoTermoEstagio;
 
 	@Column(length = 150, nullable = false)

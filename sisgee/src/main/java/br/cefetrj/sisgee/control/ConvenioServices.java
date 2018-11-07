@@ -48,7 +48,7 @@ public class ConvenioServices {
         List<Convenio> x = convenioDao.buscarTodos();
         List<Convenio> aVencer = new ArrayList();
         for (Convenio convenio : x) {
-            Date dataAssinou = convenio.getDataRegistro();
+            Date dataAssinou = convenio.getDataAssinatura();
             Date dataFinal = convenio.getDataFinal();
             Date dataHoje = new Date();
 

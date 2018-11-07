@@ -280,7 +280,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="cepEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.cep"/></label>
-                        <input type="text" class="form-control" id="cepEnderecoTermoEstagio" name="cepEnderecoTermoEstagio" value="${encepEnderecoTermoEstagio }">
+                        <input type="text" class="form-control ${ not empty cepEnderecoMsg ? 'is-invalid': not empty cepEnderecoMsg ? 'is-invalid' : 'is-valid' }" id="cepEnderecoTermoEstagio" name="cepEnderecoTermoEstagio" value="${encepEnderecoTermoEstagio }">
                         <c:if test="${ not empty cepEnderecoMsg }">
                             <div class="invalid-feedback">${ cepEnderecoMsg }</div>
                         </c:if>
