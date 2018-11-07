@@ -115,6 +115,39 @@
                                             <td><button class="btn btn-sm btn-primary" type="button" ${'disabled="disabled"'}><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
                                             </c:otherwise>
                                         </c:choose>
+                                    <!-- Modal -->
+
+                                <div class="modal fade" id="${c.idTermoAditivo}_${b.idTermoEstagio}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                                    <div class="modal-dialog" role="document">
+
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+
+                                                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.32"/></h5>
+
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                                                    <span aria-hidden="true">&times;</span>
+
+                                                </button>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+
+                                                <a href="ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.33"/></a>
+
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.34"/></button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
                                 </tr>
                             </c:forEach>
                         </c:forEach>
