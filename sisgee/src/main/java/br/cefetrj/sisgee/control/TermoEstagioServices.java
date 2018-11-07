@@ -134,9 +134,16 @@ public class TermoEstagioServices {
 	
         
         
-	public static void alterarTermoEstagio(TermoEstagio termoEstagio) {
+	public static void alterarTermoEstagio(TermoEstagio termoEstagio) throws Exception{
 		
-		GenericDAO<TermoEstagio> termoEstagioDao = PersistenceManager.createGenericDAO(TermoEstagio.class);		
+		GenericDAO<TermoEstagio> termoEstagioDao = PersistenceManager.createGenericDAO(TermoEstagio.class);
+                if (termoEstagio.getTermosAditivos() != null && termoEstagio.getTermosAditivos().size() >= 1) {
+                System.out.println("Existe Termo Aditivo");
+                throw new Exception();
+            }else{
+                    System.out.println("Não existe termo aditivo");//TODO excluir saida do console
+                }
+             
 		try {
                     PersistenceManager.getTransaction().begin();
                     termoEstagioDao.alterar(termoEstagio);
