@@ -77,8 +77,25 @@
                                 <td>${b.getConvenio().pegaCpf()}</td>
                                 <td>${b.getConvenio().pegaNome()}</td>
                                 <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.37" /></a></td>
-                                <td><button type="button" ${ status.last ? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
-
+                                <td><button type="button" ${ empty b.getTermosAditivos() ? '' : 'disabled="disabled"' } class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+                                <td><button ${ b.getTermosAditivos().size() > 0 ? 'disabled="disabled"' : '' } class="btn btn-sm btn-primary btn-block" onclick="window.location.href = 'EditarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}'" ><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
+                                <!-- Modal -->
+                            <div class="modal fade" id="${b.idTermoEstagio}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.39"/></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="ExcluirTermoEstagioServlet?ide=${b.idTermoEstagio}&matricula=${param.matricula}" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.33"/></a>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.34"/></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c" varStatus="status">
                                 <tr>
@@ -98,23 +115,6 @@
                                             <td><button class="btn btn-sm btn-primary" type="button" ${'disabled="disabled"'}><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
                                             </c:otherwise>
                                         </c:choose>
-                                    <!-- Modal -->
-                                <div class="modal fade" id="${c.idTermoAditivo}_${b.idTermoEstagio}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel"><fmt:message key = "br.cefetrj.sisgee.32"/></h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="ExcluirTermoAditivoServlet?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.33"/></a>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.34"/></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 </tr>
                             </c:forEach>
                         </c:forEach>
@@ -235,60 +235,116 @@
                 </div>
             </div>
         </div>
-    </div>
+        <%@include file="import_footer.jspf"%>
 
-    <%@include file="import_footer.jspf"%>
-    <%@include file="import_finalbodyscripts.jspf"%>
-    <script type="text/javascript">
-        function hablitarButoes() {
-            $("#btnNovoAditivo").prop("disabled", false);
-            $("#btnNovoAditivo").removeClass("btn-secondary");
-            $("#btnNovoAditivo").addClass("btn-primary");
+        <%@include file="import_finalbodyscripts.jspf"%>
 
-            $("#btnListarAditivo").prop("disabled", false);
-            $("#btnListarAditivo").removeClass("btn-secondary");
-            $("#btnListarAditivo").addClass("btn-primary");
-        }
-        var buscarAlunoCallback = function myCallback(json) {
-            if (json != null) {
-                if (json.idTermoEstagioAtivo != null && json.idTermoEstagioAtivo != "") {
-                    //atribui o id do termo de estágio para o campo hidden
+        <script type="text/javascript">
 
-                    //tem termo de estágio, ativa os botões
-                    hablitarButoes();
-                } else {
-                    //não tem termo de estágio
-                }
+            function hablitarButoes() {
+
+                $("#btnNovoAditivo").prop("disabled", false);
+
+                $("#btnNovoAditivo").removeClass("btn-secondary");
+
+                $("#btnNovoAditivo").addClass("btn-primary");
+
+
+
+                $("#btnListarAditivo").prop("disabled", false);
+
+                $("#btnListarAditivo").removeClass("btn-secondary");
+
+                $("#btnListarAditivo").addClass("btn-primary");
+
             }
-        }
-    </script>
-    <%@include file="import_scripts.jspf"%>
-    <script type="text/javascript">
 
-        $(document).ready(function () {
-            $(".form-check-input").change(function () {
-                $('#idAlunoAdt').val($("#idAluno").val());
+            var buscarAlunoCallback = function myCallback(json) {
+
+                if (json != null) {
+
+                    if (json.idTermoEstagioAtivo != null && json.idTermoEstagioAtivo != "") {
+
+                        //atribui o id do termo de estágio para o campo hidden
+
+
+
+                        //tem termo de estágio, ativa os botões
+
+                        hablitarButoes();
+
+                    } else {
+
+                        //não tem termo de estágio
+
+                    }
+
+                }
+
+            }
+
+        </script>
+
+        <%@include file="import_scripts.jspf"%>
+
+        <script type="text/javascript">
+
+
+
+            $(document).ready(function () {
+
+                $(".form-check-input").change(function () {
+
+                    $('#idAlunoAdt').val($("#idAluno").val());
+
+                });
+
+
+
+                if ($("#idAluno").val() != "") {
+
+
+
+                }
+
             });
 
-            if ($("#idAluno").val() != "") {
+
+
+
+
+            $(".alterar").on('click', function () {
+
+                var id = $(this).data('id'); //recuperar qual o id da linha
+
+                //agora vamos usar o id da linha para recuperar cada campo..
+
+                var nome = $('#nome' + id).text(); //vai retornar nome da linha do botão
+
+                var descricao = $('#descricao' + id).text(); //vai retornar descricao da linha do botao
+
+                //..assim por diante..
+
+                //agora voce pode jogar esses valores no seu modal
+
+                //depois de jogar tudo, voce pode exibir seu modal manualmente:
+
+                $("#DialogAlterarMaterial").modal();
+
+            });
+
+
+
+            function termoAditivo() {
+
+                document.getElementById("termoAditivo").value = "sim";
 
             }
-        });
-        $(".alterar").on('click', function () {
-            var id = $(this).data('id'); //recuperar qual o id da linha
-            //agora vamos usar o id da linha para recuperar cada campo..
-            var nome = $('#nome' + id).text(); //vai retornar nome da linha do botão
-            var descricao = $('#descricao' + id).text(); //vai retornar descricao da linha do botao
-            //..assim por diante..
-            //agora voce pode jogar esses valores no seu modal
-            //depois de jogar tudo, voce pode exibir seu modal manualmente:
-            $("#DialogAlterarMaterial").modal();
-        });
 
-        function termoAditivo() {
-            document.getElementById("termoAditivo").value = "sim";
-        }
-    </script>
+        </script>
 
-</body>
+
+
+    </body>
+
 </html>

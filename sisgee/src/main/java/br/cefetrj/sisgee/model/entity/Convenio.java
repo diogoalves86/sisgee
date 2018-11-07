@@ -57,7 +57,12 @@ public class Convenio implements Serializable {
     //construtor so com numero
     public Convenio(String numeroConvenio) {
         this.numeroConvenio = numeroConvenio;
-    }     
+    }  
+    
+    //construtor so com numero
+    public Convenio(int idConvenio) {
+        this.idConvenio = idConvenio;
+    }  
     
     public Convenio(String ano, String numero, Date dataAssinatura, Empresa empresa) {
         this.ano=ano;

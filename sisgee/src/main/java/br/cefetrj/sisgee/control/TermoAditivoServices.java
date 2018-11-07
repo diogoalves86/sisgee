@@ -18,11 +18,6 @@ import br.cefetrj.sisgee.model.entity.TermoEstagio;
  */
 public class TermoAditivoServices {
 
-    /**
-     * Recupera todos os Termos Aditivos e retorna em uma lista.
-     *
-     * @return lista com todos os Termos Aditivos
-     */
     public static List<TermoAditivo> listarTermoAditivo() {
         GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);
         return termoAditivoDao.buscarTodos();
@@ -50,7 +45,6 @@ public class TermoAditivoServices {
         GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);
         PersistenceManager.getTransaction().begin();
         try {
-            
             termoAditivoDao.alterar(termoAditivo);
             PersistenceManager.getTransaction().commit();
         } catch (Exception e) {
@@ -80,16 +74,18 @@ public class TermoAditivoServices {
         GenericDAO<TermoAditivo> termoAditivoDao = PersistenceManager.createGenericDAO(TermoAditivo.class);
         List<TermoEstagio> listaTermoEstagio = TermoEstagioServices.listarTermoEstagio();
 
-        for (TermoEstagio termo : TermoEstagioServices.listarTermoEstagio()) {
+        for (TermoEstagio termo : listaTermoEstagio) {
             List<TermoAditivo> aditivos = termo.getTermosAditivos();
-            if (termoAditivo.equals(aditivos.get(aditivos.size() - 1))) {
+            System.out.println(termo.getIdTermoEstagio());
+            System.out.println(termo.getTermosAditivos());//TODO retirar saida do console
+            if (aditivos != null && aditivos.size() != 0 && termoAditivo.equals(aditivos.get(aditivos.size() - 1))) {
                 ultimo = true;
+                break;
             }
         }
         if (ultimo == false) {
             throw new Exception();
         }
-
         PersistenceManager.getTransaction().begin();
         try {
             termoAditivoDao.excluir(termoAditivo);
@@ -128,11 +124,6 @@ public class TermoAditivoServices {
         }
     }
 
-    /**
-     *
-     * @param termoAditivo termo aditivo que irá atualizar o termo de estágio
-     * @return termoEstagio termo de estágio atualizado pelo termo aditivo
-     */
     public static TermoEstagio termoEstagioAtualizadoByTermoAditivo(TermoAditivo termoAditivo) {
         TermoEstagio termoEstagio = TermoEstagioServices.buscarTermoEstagio(termoAditivo.getTermoEstagio().getIdTermoEstagio());
 
@@ -180,5 +171,4 @@ public class TermoAditivoServices {
 
         return termoEstagio;
     }
-
 }
