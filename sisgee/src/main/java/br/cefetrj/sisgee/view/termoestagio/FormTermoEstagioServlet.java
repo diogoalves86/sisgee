@@ -754,7 +754,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
             List<TermoEstagio> termosEstagio = aluno.getTermoEstagios();
             for (TermoEstagio t : termosEstagio) {
                 if (((aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio() == null && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataFimTermoEstagio().compareTo(cal.getTime()) > 0))
-                        || (aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio().compareTo(cal.getTime()) > 0)) {
+                        || ( aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataRescisaoTermoEstagio() != null && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size() - 1).getDataRescisaoTermoEstagio().compareTo(cal.getTime()) > 0)) {
                     hasTermoAberto = true;
                     break;
                 }
