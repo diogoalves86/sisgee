@@ -44,16 +44,18 @@ public class SalvarAlteracaoConvenioServlet extends HttpServlet {
         Date dataAssinaturaConvenioEmpresa = (Date) request.getAttribute("dataAssinaturaConvenioEmpresa");
         Date dataAssinaturaConvenioPessoa = (Date) request.getAttribute("dataAssinaturaConvenioPessoa");
         
-        boolean agenteIntegracao = (boolean) request.getAttribute("agenteIntegracao");
+        String agenteIntegracao = request.getParameter("agenteIntegracao");
         String cnpjEmpresa = request.getParameter("cnpjEmpresa");
         String nomeEmpresa = request.getParameter("nomeEmpresa");
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
+        
+       Boolean ehAgente = Boolean.parseBoolean(agenteIntegracao);
 
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero);
         if (convenio.getEmpresa() != null) {
-            convenio.getEmpresa().setAgenteIntegracao(agenteIntegracao);
+            convenio.getEmpresa().setAgenteIntegracao(ehAgente);
             convenio.getEmpresa().setCnpjEmpresa(cnpjEmpresa);
             convenio.getEmpresa().setRazaoSocial(nomeEmpresa);
             convenio.getEmpresa().setContatoEmpresa(contatoEmpresa);

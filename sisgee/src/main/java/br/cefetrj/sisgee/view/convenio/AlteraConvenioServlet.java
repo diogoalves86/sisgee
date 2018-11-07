@@ -43,18 +43,18 @@ public class AlteraConvenioServlet extends HttpServlet {
             }else{
                 req.setAttribute("naoAgenteIntegracao", "sim");
             }
-            req.setAttribute("cnpj", convenio.getEmpresa().getCnpjEmpresa());
-            req.setAttribute("razao", convenio.getEmpresa().getRazaoSocial());
-            req.setAttribute("dataRegistro", convenio.getDataAssinatura());
+            req.setAttribute("cnpjEmpresa", convenio.getEmpresa().getCnpjEmpresa());
+            req.setAttribute("nomeEmpresa", convenio.getEmpresa().getRazaoSocial());
+            req.setAttribute("dataAssinaturaConvenioEmpresa", convenio.getDataAssinatura());
             req.setAttribute("emailEmpresa", convenio.getEmpresa().getEmailEmpresa());
             req.setAttribute("telefoneEmpresa", convenio.getEmpresa().getTelefoneEmpresa());
             req.setAttribute("contatoEmpresa", convenio.getEmpresa().getContatoEmpresa());
                
         }else{
             req.setAttribute("isPessoa", "sim");
-            req.setAttribute("cpf", convenio.getPessoa().getCpf());
-            req.setAttribute("nome", convenio.getPessoa().getNome());
-            req.setAttribute("dataRegistro", convenio.getDataAssinatura());
+            req.setAttribute("cpfPessoa", convenio.getPessoa().getCpf());
+            req.setAttribute("nomePessoa", convenio.getPessoa().getNome());
+            req.setAttribute("dataAssinaturaConvenioPessoa", convenio.getDataAssinatura());
             req.setAttribute("emailPessoa", convenio.getPessoa().getEmail());
             req.setAttribute("telefonePessoa", convenio.getPessoa().getTelefone());
             
