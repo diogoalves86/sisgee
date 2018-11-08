@@ -53,10 +53,11 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
         String cnpjEmpresa = request.getParameter("cnpjEmpresa");
         String nomeEmpresa = request.getParameter("nomeEmpresa");
         String agenteIntegracao = request.getParameter("agenteIntegracao");
+        String numero = request.getParameter("numero");
+        String ano = request.getParameter("ano");
+        String dataAssinaturaConvenioEmpresa = request.getParameter("dataRegistroConvenioEmpresa");
 
-        String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
-
-        String dataAssinaturaConvenioPessoa = request.getParameter("dataAssinaturaConvenioPessoa");
+        String dataAssinaturaConvenioPessoa = request.getParameter("dataRegistroConvenioPessoa");
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
@@ -514,8 +515,10 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
          * inclusão ou devolver para o formulário com as mensagens.
          */
         if (isValid) {
+            request.setAttribute("numero", numero);
+            request.setAttribute("ano", ano);
             request.getRequestDispatcher("/IncluirCadastroEmpresaServlet").forward(request, response);
-
+            
         } else {
             String msg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_atencao");
             request.setAttribute("msg", msg);

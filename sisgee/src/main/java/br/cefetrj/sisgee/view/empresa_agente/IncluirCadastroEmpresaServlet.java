@@ -28,6 +28,7 @@ import java.util.List;
 
 /**
  * Servlet responsável por incluir cadastro de empresa
+ *
  * @author Matheus
  */
 @WebServlet("/IncluirCadastroEmpresaServlet")
@@ -36,11 +37,14 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
-     * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
-     * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+     *
+     * @param request um objeto HttpServletRequest que contém a solicitação
+     * feita pelo cliente do servlet.
+     * @param response um objeto HttpServletResponse que contém a resposta que o
+     * servlet envia para o cliente
      * @throws ServletException se o pedido do service não puder ser tratado
-     * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+     * @throws IOException se um erro de entrada ou saída for detectado quando o
+     * servlet manipula o pedido
      */
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -53,22 +57,22 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
         String cnpjEmpresa = request.getParameter("cnpjEmpresa");
         String nomeEmpresa = request.getParameter("nomeEmpresa");
         String agenteIntegracao = request.getParameter("agenteIntegracao");
-        
-        Date dataAssinaturaConvenio = (Date)request.getAttribute("dataAssinaturaConvenioPessoa");
-        Date dataAssinaturaConvenioEmpresa = (Date)request.getAttribute("dataAssinaturaConvenioEmpresa");
-        
+
+        Date dataAssinaturaConvenioPessoa = (Date) request.getAttribute("dataAssinaturaConvenioPessoa");
+        Date dataAssinaturaConvenioEmpresa = (Date) request.getAttribute("dataAssinaturaConvenioEmpresa");
+
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
-        
-       
+
         String cpfPessoa = request.getParameter("cpfPessoa");
         String nomePessoa = request.getParameter("nomePessoa");
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
-        
+        String numeroConvenio = request.getParameter("numero");
+        String anoConvenio = request.getParameter("ano");
         if (tipoPessoa.equals("nao")) {
-            
+
             pessoaJuridica = false;
         }
 
@@ -78,13 +82,24 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
         empresa.setContatoEmpresa(contatoEmpresa);
         empresa.setEmailEmpresa(emailEmpresa);
         empresa.setTelefoneEmpresa(telefoneEmpresa);
-        
 
         Pessoa pessoa = new Pessoa(nomePessoa, cpfPessoa.replaceAll("[.|/|-]", ""));
         pessoa.setEmail(emailPessoa);
         pessoa.setTelefone(telefonePessoa);
 
         if (pessoaJuridica) {
+            String numero = "";
+            String ano = "";
+            if (numeroConvenio != null && !numeroConvenio.equals("")) {
+                numero = numeroConvenio;
+            } else {
+                numero = gerarNumeroConvenio();
+            }
+            if (anoConvenio != null && !anoConvenio.equals("")) {
+                ano = anoConvenio;
+            } else {
+                ano = new SimpleDateFormat("yyyy").format(dataAssinaturaConvenioEmpresa);
+            }
             String msg = "";
             Logger lg = Logger.getLogger(IncluirCadastroEmpresaServlet.class);
             try {
@@ -99,8 +114,9 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
 
             }
+
             try {
-                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataAssinaturaConvenioEmpresa),gerarNumeroConvenio(), dataAssinaturaConvenioEmpresa, empresa);
+                Convenio convenio = new Convenio(ano, numero, dataAssinaturaConvenioEmpresa, empresa);
                 convenio.setNumeroConvenio();
                 ConvenioServices.incluirConvenio(convenio);
                 msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
@@ -135,10 +151,20 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
 
             }
             try {
-                
-                Convenio convenio = new Convenio(new SimpleDateFormat("yyyy").format(dataAssinaturaConvenio),gerarNumeroConvenio(), dataAssinaturaConvenio, pessoa);
+                String numero = "";
+                String ano = "";
+                if (numeroConvenio != null && !numeroConvenio.equals("")) {
+                    numero = numeroConvenio;
+                } else {
+                    numero = gerarNumeroConvenio();
+                }
+                if (anoConvenio != null && !anoConvenio.equals("")) {
+                    ano = anoConvenio;
+                } else {
+                    ano = new SimpleDateFormat("yyyy").format(dataAssinaturaConvenioPessoa);
+                }
+                Convenio convenio = new Convenio(ano, numero, dataAssinaturaConvenioEmpresa, pessoa);
                 convenio.setNumeroConvenio();
-                
                 ConvenioServices.incluirConvenio(convenio);
                 msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
                 request.setAttribute("msg", msg);
@@ -157,16 +183,16 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
         }
 
     }
-    
+
     /**
      * Metodo que gera um numero de convenio
+     *
      * @return uma string
      */
-    public static String gerarNumeroConvenio(){
-        
+    public static String gerarNumeroConvenio() {
         List<Convenio> x = ConvenioServices.listarConvenios();
         int ultimoNumero = 0;
-        for(Convenio convenio : x){
+        for (Convenio convenio : x) {
             ultimoNumero = Integer.parseInt(convenio.getNumero());
         }
         ultimoNumero++;

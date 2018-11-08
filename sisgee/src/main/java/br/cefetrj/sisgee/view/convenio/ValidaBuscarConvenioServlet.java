@@ -5,13 +5,9 @@
  */
 package br.cefetrj.sisgee.view.convenio;
 
-import br.cefetrj.sisgee.control.ConvenioServices;
-import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;

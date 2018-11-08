@@ -48,7 +48,7 @@ public class ConvenioServices {
         List<Convenio> x = convenioDao.buscarTodos();
         List<Convenio> aVencer = new ArrayList();
         for (Convenio convenio : x) {
-            Date dataAssinou = convenio.getDataAssinatura();
+            Date dataAssinou = convenio.getDataRegistro();
             Date dataFinal = convenio.getDataFinal();
             Date dataHoje = new Date();
 
@@ -137,7 +137,6 @@ public class ConvenioServices {
      * @param empresa
      * @return
      */
-
     public static Convenio buscarConvenioByEmpresa(Empresa empresa) {
         ConvenioDAO convenioDao = new ConvenioDAO();
         try {
@@ -154,7 +153,6 @@ public class ConvenioServices {
      * @param pessoa
      * @return
      */
-
     public static Convenio buscarConvenioByPessoa(Pessoa pessoa) {
         ConvenioDAO convenioDao = new ConvenioDAO();
         try {
