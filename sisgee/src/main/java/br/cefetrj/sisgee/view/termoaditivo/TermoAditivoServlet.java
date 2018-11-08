@@ -177,9 +177,7 @@ public class TermoAditivoServlet extends HttpServlet {
                     request.setAttribute("showLocal", endereco);
                     request.setAttribute("showSupervisor", supervisor);
                     request.setAttribute("showProfessor", professor);
-
                     request.setAttribute("professores", professores);
-
                 } else {
                     msg = messages.getString("br.cefetrj.sisgee.form_termo_aditivo_servlet.msg_termo_estagio_invalido");
                     request.setAttribute("msg", msg);

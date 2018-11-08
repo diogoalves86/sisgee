@@ -41,7 +41,6 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
         Aluno aluno = AlunoServices.buscarAlunoByMatricula(request.getParameter("matricula"));
         String idAditivo = request.getParameter("idTermoAditivo");
-        final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         final Calendar cal = Calendar.getInstance();
 
         /**
@@ -77,6 +76,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
          * campos de Professor
          */
         String idProfessorOrientador = request.getParameter("idProfessorOrientador");
+        System.out.println(idProfessorOrientador);
         String idTermoEstagio = request.getParameter("idTermoEstagio");
 
         /**
@@ -259,34 +259,39 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                 String idProfessorMsg = "";
                 campo = "Professor Orientador";
                 Boolean hasProfessor = false;
-                idProfessorMsg = ValidaUtils.validaObrigatorio(campo, idProfessorOrientador);
-                if (idProfessorMsg.trim().isEmpty()) {
-                    idProfessorMsg = ValidaUtils.validaInteger(campo, idProfessorOrientador);
+                if (idProfessorOrientador != null && !idProfessorOrientador.equals("")) {
+                    idProfessorMsg = ValidaUtils.validaObrigatorio(campo, idProfessorOrientador);
                     if (idProfessorMsg.trim().isEmpty()) {
-                        Integer idProfessor = Integer.parseInt(idProfessorOrientador);
-                        List<ProfessorOrientador> listaProfessores = ProfessorOrientadorServices.listarProfessorOrientador();
-                        if (listaProfessores != null) {
-                            if (listaProfessores.contains(new ProfessorOrientador(idProfessor))) {
-                                professorOrientador = ProfessorOrientadorServices.buscarProfessorOrientador(new ProfessorOrientador(idProfessor));
-                                request.setAttribute("idProfessor", idProfessor);
-                                hasProfessor = true;
+                        idProfessorMsg = ValidaUtils.validaInteger(campo, idProfessorOrientador);
+                        if (idProfessorMsg.trim().isEmpty()) {
+                            Integer idProfessor = Integer.parseInt(idProfessorOrientador);
+                            List<ProfessorOrientador> listaProfessores = ProfessorOrientadorServices.listarProfessorOrientador();
+                            if (listaProfessores != null) {
+                                if (listaProfessores.contains(new ProfessorOrientador(idProfessor))) {
+                                    professorOrientador = ProfessorOrientadorServices.buscarProfessorOrientador(new ProfessorOrientador(idProfessor));
+                                    request.setAttribute("idProfessor", idProfessor);
+                                    hasProfessor = true;
+                                } else {
+                                    idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
+                                    isValid = false;
+                                }
                             } else {
-                                idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
+                                idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.lista_professores_vazia");
                                 isValid = false;
+                                System.out.println(idProfessorMsg);
                             }
                         } else {
-                            idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.lista_professores_vazia");
+                            idProfessorMsg = messages.getString(idProfessorMsg);
+                            request.setAttribute("idProfessorMsg", idProfessorMsg);
                             isValid = false;
-                            //TODO Fazer log
                             System.out.println(idProfessorMsg);
                         }
-                    } else {
-                        idProfessorMsg = messages.getString(idProfessorMsg);
-                        request.setAttribute("idProfessorMsg", idProfessorMsg);
-                        isValid = false;
-                        //TODO Fazer log
-                        System.out.println(idProfessorMsg);
+
                     }
+                } else {
+                    idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
+                    request.setAttribute("idProfessorMsg", idProfessorMsg);
+                    isValid = false;
                 }
                 request.setAttribute("hasProfessor", hasProfessor);
             }
@@ -566,7 +571,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
 
                     TermoAditivoServices.atualizarTermoAditivo(termoAditivo2);
                 }
-
+                System.out.println("Chegou no prof");
                 if (showProfessor != null && showProfessor.equals("sim")) {
                     TermoAditivo termoAditivo3 = new TermoAditivo();
                     termoAditivo3.setIdTermoAditivo(Integer.parseInt(idAditivo));
@@ -586,7 +591,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
 
                 if (showValorBolsa != null && showValorBolsa.equals("sim")) {
                     TermoAditivo termoAditivo4 = new TermoAditivo();
-                    
+
                     termoAditivo4.setIdTermoAditivo(Integer.parseInt(idAditivo));
                     termoAditivo4.setValorBolsaTermoAditivo(valor);
                     termoAditivo4.setTipoAditivo("Valor da Bolsa");
@@ -627,7 +632,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                 if (showSupervisor != null && showSupervisor.equals("sim")) {
                     System.out.println("Entrou no Supervisor");
                     TermoAditivo termoAditivo6 = new TermoAditivo();
-                    
+
                     termoAditivo6.setIdTermoAditivo(Integer.parseInt(idAditivo));
                     termoAditivo6.setEobrigatorio(eobrigatorio);
                     termoAditivo6.setNomeSupervisor(nomeSupervisor);
@@ -726,7 +731,9 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                 request.setAttribute("showValorBolsa", showValorBolsa);
                 request.setAttribute("showLocal", showLocal);
                 request.setAttribute("showSupervisor", showSupervisor);
-
+                request.setAttribute("professores", professores);
+                request.setAttribute("idTermoAditivo", idAditivo);
+                request.setAttribute("idTermoEstagio", termoEstagio.getIdTermoEstagio());
                 msg += "Alguns campos precisam de atenção";
                 String aditivo = "sim";
                 //request = carregarListas(request);

@@ -335,8 +335,8 @@
                 <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></legend>
                 <div class="form-group col-md-8">
                     <label for="idProfessorOrientador"></label>
-                    <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
-                        <option value="" selected>${ showLocal eq 'sim' ? '' : pfnomeprofessor }</option>
+                    <select name="nomeProfessorOrientador" id="nomeProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
+                        <option value="" selected>${ showProfessor eq 'sim' ? '' : pfnomeprofessor }</option>
                         <c:forEach items="${professores}" var="professor">
                             <option value="${professor.idProfessorOrientador}">${professor.nomeProfessorOrientador}</option>
                         </c:forEach>					
@@ -356,7 +356,7 @@
             <input type="hidden" name="showValorBolsa" value="${ showValorBolsa }" />
             <input type="hidden" name="showLocal" value="${ showLocal }" />
             <input type="hidden" name="showSupervisor" value="${ showSupervisor }" />
-
+            <input type="hidden" name="idProfessorOrientador" id="idProfessorOrientador"/>
             <button type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.salvar"/></button>
             <c:choose>
                 <c:when test="${ not empty termoEstagio }">
@@ -400,6 +400,11 @@
             $("#cnpjEcpf1").mask("99.999.999/9999-99");
             $('#cepEnderecoTermoEstagio').mask('99.999-999');
             $('#dataIni').mask('99/99/9999');
+            $('#nomeProfessorOrientador').editableSelect().on('select.editable-select', 
+            function (e, li) {
+                $('#idProfessorOrientador').val(li.val());
+                
+            });
 
         });
 
