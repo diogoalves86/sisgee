@@ -162,10 +162,15 @@ public class ConvenioServices {
      * Método para fazer um merge de um convenio
      * @param convenio 
      */
-    public static void alterarConvenio(Convenio convenio) {
+    public static void alterarConvenio(Convenio convenio) throws Exception {
 		
 		GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);		
-		
+		 
+                if (convenio.getTermoEstagios() != null && convenio.getTermoEstagios().size() >= 1) {
+                    System.out.println("Existe Termo de Estagio");
+                    throw new Exception();
+                }
+
 		try {
 			PersistenceManager.getTransaction().begin();
 			convenioDao.alterar(convenio);
