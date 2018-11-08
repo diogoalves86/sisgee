@@ -18,8 +18,8 @@ public class AlteraConvenioServlet extends HttpServlet {
     
     /**
      * 
-     * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
-     * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+     * @param req um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
+     * @param resp um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
      * @throws ServletException se o pedido do service não puder ser tratado
      * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
      */
