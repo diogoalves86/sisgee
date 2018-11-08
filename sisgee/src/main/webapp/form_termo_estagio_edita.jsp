@@ -110,7 +110,7 @@
                                 <!-- AQUI SELECIONA AGENTE DE INTEGRACAO-->
                                 <div class="custom-controls-stacked d-block my-3">
                                      <label for="isAgenteIntegracao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_agente_integracao"/></label>
-                                     <label class="custom-control custom-radio">
+                                    <label class="custom-control custom-radio">
 
                                          <input id="agenteSim" class="custom-control-input" type="radio" name="isAgenteIntegracao" ${ agIntegracao == 'true' ? 'checked' : '' } value="true"> 
                                          <span class="custom-control-indicator"></span> 
@@ -293,18 +293,32 @@
                             </div>
 
                             <div class="custom-controls-stacked d-block my-3" >
-                                <select name="eobrigatorio" id="eobrigatorio">
-                                    <c:choose>
-                                        <c:when test="${ eobrigatorio }">
-                                            <option value="sim" selected><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_sim"/></option>
-                                            <option value="nao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_nao"/></option>
-                                        </c:when> 
-                                        <c:otherwise>
-                                            <option value="sim"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_sim"/></option>
-                                            <option value="nao" selected><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_nao"/></option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </select>
+                                <c:choose>
+                                    <c:when test="${ eobrigatorio }">
+                                        <label class="custom-control custom-radio">
+                                            <input class="custom-control-input"  name="eobrigatorio" type="radio" value="sim" checked />
+                                            <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span>
+                                        </label>
+                                        <label class="custom-control custom-radio">
+                                            <input class="custom-control-input"  name="eobrigatorio" type="radio" value="nao" />
+                                            <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span>
+                                        </label>
+                                    </c:when> 
+                                    <c:otherwise>
+                                        <label class="custom-control custom-radio">
+                                            <input class="custom-control-input"  name="eobrigatorio" type="radio" value="sim"/>
+                                            <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span>
+                                        </label>
+                                        <label class="custom-control custom-radio">
+                                            <input class="custom-control-input"  name="eobrigatorio" type="radio" value="nao" checked/>
+                                            <span class="custom-control-indicator"></span> 
+                                            <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span>
+                                        </label>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>				
                         </div>
 
