@@ -3,6 +3,7 @@ package br.cefetrj.sisgee.view.convenio;
 import br.cefetrj.sisgee.control.ConvenioServices;
 import br.cefetrj.sisgee.model.entity.Convenio;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +46,9 @@ public class AlteraConvenioServlet extends HttpServlet {
             }
             req.setAttribute("cnpjEmpresa", convenio.getEmpresa().getCnpjEmpresa());
             req.setAttribute("nomeEmpresa", convenio.getEmpresa().getRazaoSocial());
-            req.setAttribute("dataRegistroConvenioEmpresa", convenio.getDataRegistro());
+            String dataRegistroEmpresa = null;
+            dataRegistroEmpresa = new SimpleDateFormat("dd/MM/yyyy").format(convenio.getDataRegistro());
+            req.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
             req.setAttribute("emailEmpresa", convenio.getEmpresa().getEmailEmpresa());
             req.setAttribute("telefoneEmpresa", convenio.getEmpresa().getTelefoneEmpresa());
             req.setAttribute("contatoEmpresa", convenio.getEmpresa().getContatoEmpresa());
