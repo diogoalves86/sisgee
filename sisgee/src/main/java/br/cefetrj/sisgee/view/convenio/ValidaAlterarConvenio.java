@@ -55,7 +55,6 @@ public class ValidaAlterarConvenio extends HttpServlet{
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero);
 
         boolean isValid = true;
-        Integer tamanho = 0;
 
         if(convenio.getEmpresa() != null){
             request.setAttribute("isEmpresa", tipoPessoa);
@@ -64,21 +63,20 @@ public class ValidaAlterarConvenio extends HttpServlet{
              * ValidaUtils Campo obrigatório; Tamanho de 14 caracteres;
              */
             String cnpjEmpresaMsg = "";
-            tamanho = 14;
             cnpjEmpresaMsg = ValidaUtils.validaObrigatorio("cnpjEmpresa", cnpjEmpresa);
             if(cnpjEmpresaMsg.trim().isEmpty()){
                 //remove caracteres especiais antes de fazer a validação numérica do CNPJ
                 cnpjEmpresa = cnpjEmpresa.replaceAll("[.|/|-]", "");
                 cnpjEmpresaMsg = ValidaUtils.validaInteger("cnpjEmpresa", cnpjEmpresa);
                 if(cnpjEmpresaMsg.trim().isEmpty()){
-                    cnpjEmpresaMsg = ValidaUtils.validaTamanhoExato("cnpjEmpresa", tamanho, cnpjEmpresa);
+                    cnpjEmpresaMsg = ValidaUtils.validaTamanhoExato("cnpjEmpresa", 14, cnpjEmpresa);
                     if(cnpjEmpresaMsg.trim().isEmpty()){
                         request.setAttribute("cnpjEmpresa", cnpjEmpresa);
                     }
                     else{
                         request.setAttribute("isEmpresa", "sim");
                         cnpjEmpresaMsg = messages.getString(cnpjEmpresaMsg);
-                        cnpjEmpresaMsg = ServletUtils.mensagemFormatada(cnpjEmpresaMsg, locale, tamanho);
+                        cnpjEmpresaMsg = ServletUtils.mensagemFormatada(cnpjEmpresaMsg, locale, 14);
                         request.setAttribute("cnpjEmpresa", cnpjEmpresa);
                         request.setAttribute("cnpjEmpresaMsg", cnpjEmpresaMsg);
                         isValid = false;
@@ -145,7 +143,7 @@ public class ValidaAlterarConvenio extends HttpServlet{
                 else{
                     request.setAttribute("isEmpresa", "sim");
                     nomeEmpresaMsg = messages.getString(nomeEmpresaMsg);
-                    nomeEmpresaMsg = ServletUtils.mensagemFormatada(nomeEmpresaMsg, locale, tamanho);
+                    nomeEmpresaMsg = ServletUtils.mensagemFormatada(nomeEmpresaMsg, locale, 100);
                     request.setAttribute("nomeEmpresa", nomeEmpresa);
                     request.setAttribute("nomeEmpresaMsg", nomeEmpresaMsg);
                     isValid = false;
@@ -338,14 +336,13 @@ public class ValidaAlterarConvenio extends HttpServlet{
              */
             
             String cpfPessoaMsg = "";
-            tamanho = 11;
             cpfPessoaMsg = ValidaUtils.validaObrigatorio("cpfPessoa", cpfPessoa);
             if(cpfPessoaMsg.trim().isEmpty()){
                 //remove caracteres especiais antes de fazer a validação numérica do CPF
                 cpfPessoa = cpfPessoa.replaceAll("[.|/|-]", "");
                 cpfPessoaMsg = ValidaUtils.validaInteger("cpfPessoa", cpfPessoa);
                 if(cpfPessoaMsg.trim().isEmpty()){
-                    cpfPessoaMsg = ValidaUtils.validaTamanhoExato("cpfPessoa", tamanho, cpfPessoa);
+                    cpfPessoaMsg = ValidaUtils.validaTamanhoExato("cpfPessoa", 11, cpfPessoa);
                     if(cpfPessoaMsg.trim().isEmpty()){
                         request.setAttribute("cpfPessoa", cpfPessoa);
                     }
@@ -368,7 +365,7 @@ public class ValidaAlterarConvenio extends HttpServlet{
             else{
                 request.setAttribute("isPessoa", "sim");
                 cpfPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
-                cpfPessoaMsg = ServletUtils.mensagemFormatada(cpfPessoaMsg, locale, tamanho);
+                cpfPessoaMsg = ServletUtils.mensagemFormatada(cpfPessoaMsg, locale, 11);
                 request.setAttribute("cpfPessoa", cpfPessoa);
                 request.setAttribute("cpfPessoaMsg", cpfPessoaMsg);
                 isValid = false;

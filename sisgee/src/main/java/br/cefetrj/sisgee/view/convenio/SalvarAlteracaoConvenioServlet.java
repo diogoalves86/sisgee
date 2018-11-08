@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
-
 /**
  * Servlet para salvar dados alterados do convenio
  *
@@ -28,6 +27,7 @@ public class SalvarAlteracaoConvenioServlet extends HttpServlet {
      * @throws ServletException se o pedido do service não puder ser tratado
      * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
      */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -35,7 +35,7 @@ public class SalvarAlteracaoConvenioServlet extends HttpServlet {
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
 
         String numero = (String) request.getSession().getAttribute("numero");
-        
+
         String cpfPessoa = request.getParameter("cpfPessoa");
         String nomePessoa = request.getParameter("nomePessoa");
         String emailPessoa = request.getParameter("emailPessoa");
@@ -50,11 +50,13 @@ public class SalvarAlteracaoConvenioServlet extends HttpServlet {
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
-        
-       Boolean ehAgente = Boolean.parseBoolean(agenteIntegracao);
+
+        Boolean ehAgente = Boolean.parseBoolean(agenteIntegracao);
 
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero);
-        if (convenio.getEmpresa() != null) {
+        if(convenio.getEmpresa() != null){
+            cnpjEmpresa = cnpjEmpresa.replaceAll("[.|/|-]", "");
+            telefoneEmpresa = telefoneEmpresa.replaceAll("[.|/|-]", "");
             convenio.getEmpresa().setAgenteIntegracao(ehAgente);
             convenio.getEmpresa().setCnpjEmpresa(cnpjEmpresa);
             convenio.getEmpresa().setRazaoSocial(nomeEmpresa);
@@ -64,7 +66,10 @@ public class SalvarAlteracaoConvenioServlet extends HttpServlet {
             convenio.setDataRegistro(dataRegistroConvenioEmpresa);
 
             convenio.setNumeroConvenio();
-        } else {
+        }
+        else{
+            cpfPessoa = cpfPessoa.replaceAll("[.|/|-]", "");
+            telefonePessoa = telefonePessoa.replaceAll("[.|/|-]", "");
             convenio.getPessoa().setCpf(cpfPessoa);
             convenio.getPessoa().setNome(nomePessoa);
             convenio.getPessoa().setTelefone(telefonePessoa);
@@ -76,14 +81,15 @@ public class SalvarAlteracaoConvenioServlet extends HttpServlet {
 
         String msg = "";
         Logger lg = Logger.getLogger(SalvarAlteracaoConvenioServlet.class);
-        try {
+
+        try{
             ConvenioServices.alterarConvenio(convenio);
             msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
             request.setAttribute("msg", msg);
             request.setAttribute("numeroConvenioGerado", convenio.getNumeroConvenio());
             request.getRequestDispatcher("/form_empresa_sucesso.jsp").forward(request, response);
-            
-        } catch (Exception e) {
+        }
+        catch (Exception e){
             msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
             request.setAttribute("msg", msg);
             lg.error("Exception ao tentar alterar um convenio", e);
@@ -92,6 +98,4 @@ public class SalvarAlteracaoConvenioServlet extends HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
-
 }
-
