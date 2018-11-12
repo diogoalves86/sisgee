@@ -163,21 +163,10 @@
                     
 
                 </fieldset>
-                           
-                <c:choose>
-                    <c:when test="${ not empty termoEstagio }">
-                        <button disabled type="submit" class="btn btn-primary" >
-                        <i class="far fa-save"></i> 
-                        <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_salvar"/>
-                        </button>
-                    </c:when>
-                    <c:otherwise>
                         <button type="submit" class="btn btn-primary" >
                         <i class="far fa-save"></i> 
                         <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_salvar"/>
                         </button>
-                    </c:otherwise>
-                </c:choose>
                
                 <button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'index.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>
 

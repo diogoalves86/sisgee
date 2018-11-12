@@ -158,7 +158,16 @@
                                 </div>
 
                             </div>
-                            <td><a class="btn btn-sm btn-primary btn-block" href="AlteraConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_alterar" /></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${ not empty termoEstagio }">
+                                        <button type="button" class="btn btn-sm btn-primary btn-block" disabled ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_alterar" /></button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="btn btn-sm btn-primary btn-block" href="AlteraConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_alterar" />
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
 
                             </tr>
 
