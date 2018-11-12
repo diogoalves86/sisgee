@@ -138,9 +138,10 @@
                             </div>						
                             <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
                             <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ nomeAgenciada}">  
-                            <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
-                            <label class="custom-control">
-                                <input type="text" class="form-control" id="nomeAgenciada"  name="nomeAgenciada" value="${ nomeAgenciada }" maxlength="20">
+                            <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="nomeAgenciada"  name="nomeAgenciada" value="${ nomeAgenciada }" maxlength="20">
+                                </div>
                             </label>
                         </div>
                     </div> 
@@ -279,7 +280,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="cepEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.cep"/></label>
-                        <input type="text" class="form-control" id="cepEnderecoTermoEstagio" name="cepEnderecoTermoEstagio" value="${encepEnderecoTermoEstagio }">
+                        <input type="text" class="form-control ${ not empty cepEnderecoMsg ? 'is-invalid': not empty cepEnderecoMsg ? 'is-invalid' : 'is-valid' }" id="cepEnderecoTermoEstagio" name="cepEnderecoTermoEstagio" value="${encepEnderecoTermoEstagio }">
                         <c:if test="${ not empty cepEnderecoMsg }">
                             <div class="invalid-feedback">${ cepEnderecoMsg }</div>
                         </c:if>
@@ -334,8 +335,8 @@
                 <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></legend>
                 <div class="form-group col-md-8">
                     <label for="idProfessorOrientador"></label>
-                    <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
-                        <option value="" selected>${ showLocal eq 'sim' ? '' : pfnomeprofessor }</option>
+                    <select name="nomeProfessorOrientador" id="nomeProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
+                        <option value="" selected>${ showProfessor eq 'sim' ? '' : pfnomeprofessor }</option>
                         <c:forEach items="${professores}" var="professor">
                             <option value="${professor.idProfessorOrientador}">${professor.nomeProfessorOrientador}</option>
                         </c:forEach>					
@@ -355,7 +356,7 @@
             <input type="hidden" name="showValorBolsa" value="${ showValorBolsa }" />
             <input type="hidden" name="showLocal" value="${ showLocal }" />
             <input type="hidden" name="showSupervisor" value="${ showSupervisor }" />
-
+            <input type="hidden" name="idProfessorOrientador" id="idProfessorOrientador"/>
             <button type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.salvar"/></button>
             <c:choose>
                 <c:when test="${ not empty termoEstagio }">
@@ -393,12 +394,17 @@
             var tamanho = $("#cnpjEcpf1").val().length;
 
             $('#cargaHorariaTermoEstagio').mask('9');
-            $('#valorBolsa').mask('000.000,00', {reverse: true});
+            //$('#valorBolsa').mask('000.000,00', {reverse: true});
             $('#dataInicioTermoEstagio').mask('99/99/9999');
             $('#dataFimTermoEstagio').mask('99/99/9999');
             $("#cnpjEcpf1").mask("99.999.999/9999-99");
             $('#cepEnderecoTermoEstagio').mask('99.999-999');
             $('#dataIni').mask('99/99/9999');
+            $('#nomeProfessorOrientador').editableSelect().on('select.editable-select', 
+            function (e, li) {
+                $('#idProfessorOrientador').val(li.val());
+                
+            });
 
         });
 

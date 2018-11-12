@@ -47,8 +47,6 @@
                         </div>
                     </div>
 
-
-
                     <div class=" isAI AI" ${ empty param.tipoPessoa ? "style='display:none'" : param.tipoPessoa == "nao" ? "style='display:none'" : "" } >     
 
                         <div class="form-row "  >
@@ -71,9 +69,6 @@
                                     <div class="invalid-feedback">${ agenteIntegracaoMsg }</div>
                                 </c:if>
                             </div>
-
-
-
 
                         </div>
                         <div class="form-group col-md-6">
@@ -124,23 +119,21 @@
                             </c:if>
                         </div>
                             
-                        <div class="form-row">    
-                            <div class="form-group col-md-6">
-                                <input type="hidden" class="form-control numeroEmpresa numeroEmpresa"  id="numeroEmpresa" name="numeroEmpresa" value="${ param.numeroEmpresa}"> 
-                                <label for="numeroEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
-                                <div class="input-group">						  
-                                    <input type="text" class="form-control numeroEmpresa" id="numeroEmpresa" name="numeroEmpresa" value="${ param.numeroEmpresa }">
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <input type="hidden" class="form-control anoEmpresa anoEmpresa"  id="anoEmpresa" name="anoEmpresa" value="${ param.anoEmpresa}"> 
-                                <label for="anoEmpresa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
-                                <div class="input-group">						  
-                                    <input type="text" class="form-control anoEmpresa" id="anoEmpresa" name="anoEmpresa" value="${ param.anoEmpresa }">
-                                </div>
-                            </div>    
-                        </div>     
+                        <div class="form-group col-md-6">
+                            <label for="numero"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
+                            <input type="text" class="form-control ${ not empty numeroMsg ? 'is-invalid': 'is-valid' }" id="numero" name="numero" value="${param.numero}">
+                            <c:if test="${ not empty numeroMsg }">
+                                <div class="invalid-feedback">${ numeroMsg }</div>
+                            </c:if>
+                        </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="ano"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
+                            <input type="text" class="form-control ${ not empty anoMsg ? 'is-invalid': 'is-valid' }" id="ano" name="ano" value="${param.ano}">
+                            <c:if test="${ not empty anoMsg }">
+                                <div class="invalid-feedback">${ anoMsg }</div>
+                            </c:if>
+                        </div>    
 
                     </div>         
 
@@ -185,24 +178,23 @@
                             </c:if>
                         </div>
                             
-                        <div class="form-row">    
-                            <div class="form-group col-md-6">
-                                <input type="hidden" class="form-control numeroPessoa numeroPessoa"  id="numeroPessoa" name="numeroPessoa" value="${ param.numeroPessoa}"> 
-                                <label for="numeroPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
-                                <div class="input-group">						  
-                                    <input type="text" class="form-control numeroPessoa" id="numeroPessoa" name="numeroPessoa" value="${ param.numeroPessoa }">
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <input type="hidden" class="form-control anoPessoa anoPessoa"  id="anoPessoa" name="anoPessoa" value="${ param.anoPessoa}"> 
-                                <label for="anoPessoa"><fmt:message key = "br.cefetrj.sisgee.resources.form.ano"/></label>
-                                <div class="input-group">						  
-                                    <input type="text" class="form-control anoPessoa" id="anoPessoa" name="anoPessoa" value="${ param.anoPessoa }">
-                                </div>
-                            </div>    
+                            
+                        <div class="form-group col-md-6">
+                            <label for="numero"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
+                            <input type="text" class="form-control ${ not empty numeroMsg ? 'is-invalid': 'is-valid' }" id="numero" name="numero" value="${param.numero}">
+                            <c:if test="${ not empty numeroMsg }">
+                                <div class="invalid-feedback">${ numeroMsg }</div>
+                            </c:if>
                         </div>
-                                
+                            
+                        <div class="form-group col-md-6">
+                            <label for="ano"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
+                            <input type="text" class="form-control ${ not empty anoMsg ? 'is-invalid': 'is-valid' }" id="ano" name="ano" value="${param.ano}">
+                            <c:if test="${ not empty anoMsg }">
+                                <div class="invalid-feedback">${ anoMsg }</div>
+                            </c:if>
+                        </div>
+
                     </div>
 
                 </fieldset>
@@ -227,4 +219,5 @@
                 
             });
         </script>
+
     </body>

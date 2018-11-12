@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  * Classe referente ao convênio
@@ -38,7 +39,9 @@ public class Convenio implements Serializable {
     @Column(length = 4, nullable = false)
     private String ano;
 
+    //alteração de dataAssinatura para dataRegistro
     @Column(nullable = false)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataRegistro;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -57,7 +60,12 @@ public class Convenio implements Serializable {
     //construtor so com numero
     public Convenio(String numeroConvenio) {
         this.numeroConvenio = numeroConvenio;
-    }     
+    }  
+    
+    //construtor so com numero
+    public Convenio(int idConvenio) {
+        this.idConvenio = idConvenio;
+    }  
     
     public Convenio(String ano, String numero, Date dataRegistro, Empresa empresa) {
         this.ano=ano;

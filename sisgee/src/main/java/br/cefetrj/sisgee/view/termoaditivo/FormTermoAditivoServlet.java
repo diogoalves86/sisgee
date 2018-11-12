@@ -266,35 +266,41 @@ public class FormTermoAditivoServlet extends HttpServlet {
                 String idProfessorMsg = "";
                 campo = "Professor Orientador";
                 Boolean hasProfessor = false;
-                idProfessorMsg = ValidaUtils.validaObrigatorio(campo, idProfessorOrientador);
-                if (idProfessorMsg.trim().isEmpty()) {
-                    idProfessorMsg = ValidaUtils.validaInteger(campo, idProfessorOrientador);
+                if (idProfessorOrientador != null && !idProfessorOrientador.equals("")) {
+                    idProfessorMsg = ValidaUtils.validaObrigatorio(campo, idProfessorOrientador);
                     if (idProfessorMsg.trim().isEmpty()) {
-                        Integer idProfessor = Integer.parseInt(idProfessorOrientador);
-                        List<ProfessorOrientador> listaProfessores = ProfessorOrientadorServices.listarProfessorOrientador();
-                        if (listaProfessores != null) {
-                            if (listaProfessores.contains(new ProfessorOrientador(idProfessor))) {
-                                professorOrientador = ProfessorOrientadorServices.buscarProfessorOrientador(new ProfessorOrientador(idProfessor));
-                                request.setAttribute("idProfessor", idProfessor);
-                                hasProfessor = true;
-                            } else {
-                                idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
-                                isValid = false;
+                        idProfessorMsg = ValidaUtils.validaInteger(campo, idProfessorOrientador);
+                        if (idProfessorMsg.trim().isEmpty()) {
+                            Integer idProfessor = Integer.parseInt(idProfessorOrientador);
+                            List<ProfessorOrientador> listaProfessores = ProfessorOrientadorServices.listarProfessorOrientador();
+                            if (listaProfessores != null) {
+                                if (listaProfessores.contains(new ProfessorOrientador(idProfessor))) {
+                                    professorOrientador = ProfessorOrientadorServices.buscarProfessorOrientador(new ProfessorOrientador(idProfessor));
+                                    request.setAttribute("idProfessor", idProfessor);
+                                    hasProfessor = true;
+                                } else {
+                                    idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
+                                    isValid = false;
 
+                                }
+                            } else {
+                                idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.lista_professores_vazia");
+                                isValid = false;
+                                //TODO Fazer log
+                                System.out.println(idProfessorMsg);
                             }
                         } else {
-                            idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.lista_professores_vazia");
+                            idProfessorMsg = messages.getString(idProfessorMsg);
+                            request.setAttribute("idProfessorMsg", idProfessorMsg);
                             isValid = false;
                             //TODO Fazer log
                             System.out.println(idProfessorMsg);
                         }
-                    } else {
-                        idProfessorMsg = messages.getString(idProfessorMsg);
-                        request.setAttribute("idProfessorMsg", idProfessorMsg);
-                        isValid = false;
-                        //TODO Fazer log
-                        System.out.println(idProfessorMsg);
                     }
+                } else {
+                    idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
+                    request.setAttribute("idProfessorMsg", idProfessorMsg);
+                    isValid = false;
                 }
                 request.setAttribute("hasProfessor", hasProfessor);
             }
@@ -425,6 +431,8 @@ public class FormTermoAditivoServlet extends HttpServlet {
                 String cepEnderecoMsg = "";
                 campo = "CEP";
                 tamanho = 15;
+                cepEnderecoMsg = ValidaUtils.validaObrigatorio(campo, cepEnderecoTermoAditivo);
+                if (cepEnderecoMsg.trim().isEmpty()) {
                     cepEnderecoMsg = ValidaUtils.validaTamanho(campo, tamanho, cepEnderecoTermoAditivo);
                     if (bairroEnderecoMsg.trim().isEmpty()) {
                         request.setAttribute("cepEnderecoTermoEstagio", cepEnderecoTermoAditivo);
@@ -436,6 +444,13 @@ public class FormTermoAditivoServlet extends HttpServlet {
                         //TODO Fazer log
                         System.out.println(cepEnderecoMsg);
                     }
+                } else {
+                    cepEnderecoMsg = messages.getString(cepEnderecoMsg);
+                    request.setAttribute("cepEnderecoMsg", cepEnderecoMsg);
+                    isValid = false;
+                    //TODO Fazer log
+                    System.out.println(cepEnderecoMsg);
+                }
 
                 /**
                  * Validação da Cidade do endereço do TermoEstagio, usando
@@ -725,7 +740,8 @@ public class FormTermoAditivoServlet extends HttpServlet {
                 //request = carregarListas(request);
                 request.setAttribute("msg", msg);
                 request.setAttribute("aditivo", aditivo);
-
+                request.setAttribute("professores", professores);
+                
                 request.getRequestDispatcher("/form_termo_adciona_aditivo.jsp").forward(request, response);
             }
         } catch (Exception e) {

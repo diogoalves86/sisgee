@@ -313,24 +313,26 @@
                     </div>
                 </div>                        
 
-                        <fieldset ${ isVisualizacao eq true ? 'disabled' :'' }>
-                            <div class="form-group col-md-8">
-                                <label for="idProfessorOrientador"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></label>
-                                <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }">
-                                    <c:forEach items="${ professores }" var="professor">
-                                        <c:if test="${professor.idProfessorOrientador eq idProfessor}">
-                                            <option value="${ professor.idProfessorOrientador }"> ${ professor.nomeProfessorOrientador }</option>
-                                        </c:if>
-                                        <c:if test="${idProfessor != professor.idProfessorOrientador}">
-                                            <option value="${ professor.idProfessorOrientador }"> ${ professor.nomeProfessorOrientador }</option>
-                                        </c:if>       
-                                    </c:forEach>				
-                                </select>
-                                <c:if test="${ not empty idProfessorMsg }">
-                                    <div class="invalid-feedback">${ idProfessorMsg }</div>
-                                </c:if>				
-                            </div>
-                        </fieldset>
+                <fieldset ${ isVisualizacao eq true ? 'disabled' :'' }>
+                    <div class="form-group col-md-8">
+                        <label for="idProfessorOrientador"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></label>
+                        <select name="nomeProfessorOrientador" id="nomeProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
+                            <option value="">---</option>
+                            <c:forEach items="${ professores }" var="professor">
+                                <c:if test="${professor.idProfessorOrientador eq idProfessor}">
+                                    <option value="${ professor.idProfessorOrientador }" selected> ${ professor.nomeProfessorOrientador }</option>
+                                </c:if>
+                                <c:if test="${idProfessor != professor.idProfessorOrientador}">
+                                    <option value="${ professor.idProfessorOrientador }"> ${ professor.nomeProfessorOrientador }</option>
+                                </c:if>       
+                            </c:forEach>				
+                        </select>
+                        <c:if test="${ not empty idProfessorMsg }">
+                            <div class="invalid-feedback">${ idProfessorMsg }</div>
+                        </c:if>				
+                    </div>
+                </fieldset>
+                <input type="hidden" name="idProfessorOrientador" id="idProfessorOrientador"/>
 
                 <c:if test="${ not empty termoEstagio }">
                     <input type="hidden" name="idTermoEstagio" value="${ termoEstagio.idTermoEstagio }" />
@@ -383,7 +385,11 @@
             $("#cnpjEcpf1").mask("99.999.999/9999-99");
             $('#cepEnderecoTermoEstagio').mask('99.999-999');
             $('#dataIni').mask('99/99/9999');
-            $('#idProfessorOrientador').editableSelect();
+            $('#nomeProfessorOrientador').editableSelect().on('select.editable-select',
+                    function (e, li) {
+                        $('#idProfessorOrientador').val(li.val());
+
+                    });
 
         });
 
