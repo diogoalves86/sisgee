@@ -166,10 +166,10 @@ public class ConvenioServices {
 		
 		GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);		
 		 
-                if (convenio.getTermoEstagios() != null && convenio.getTermoEstagios().size() >= 1) {
+                /*if (convenio.getTermoEstagios() != null && convenio.getTermoEstagios().size() >= 1) {
                     System.out.println("Existe Termo de Estagio");
                     throw new Exception();
-                }
+                }*/
 
 		try {
 			PersistenceManager.getTransaction().begin();

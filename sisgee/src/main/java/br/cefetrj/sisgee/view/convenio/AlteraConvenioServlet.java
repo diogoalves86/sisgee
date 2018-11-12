@@ -52,6 +52,12 @@ public class AlteraConvenioServlet extends HttpServlet {
             req.setAttribute("emailEmpresa", convenio.getEmpresa().getEmailEmpresa());
             req.setAttribute("telefoneEmpresa", convenio.getEmpresa().getTelefoneEmpresa());
             req.setAttribute("contatoEmpresa", convenio.getEmpresa().getContatoEmpresa());
+            String termoEstagio = null;
+            if(!(convenio.getTermoEstagios().isEmpty())){
+                termoEstagio = "Convênio possui termo de estágio";
+            }
+            req.setAttribute("termoEstagio", termoEstagio);
+            
                
         }else{
             req.setAttribute("isPessoa", "sim");
