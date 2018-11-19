@@ -41,6 +41,7 @@ public class ValidaAlterarConvenio extends HttpServlet{
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
+        String numeroEmpresa = request.getParameter("numeroEmpresa");
 
         String dataRegistroConvenioEmpresa = request.getParameter("dataRegistroConvenioEmpresa");
         String dataRegistroConvenioPessoa = request.getParameter("dataRegistroConvenioPessoa");
@@ -325,6 +326,39 @@ public class ValidaAlterarConvenio extends HttpServlet{
                     request.setAttribute("dataRegistroEmpresaMsg", dataRegistroEmpresaMsg);
                     isValid = false;
                 }
+            }
+            
+            String numeroEmpresaMsg = "";
+            numeroEmpresaMsg = ValidaUtils.validaObrigatorio("Número Convênio Empresa", numeroEmpresa);
+            if (numeroEmpresaMsg.trim().isEmpty()) {
+                numeroEmpresaMsg = ValidaUtils.validaInteger("Número Convênio Empresa", numeroEmpresa);
+                if (numeroEmpresaMsg.trim().isEmpty()) {
+                    numeroEmpresaMsg = ValidaUtils.validaTamanho("Número Convênio Empresa", 5, numeroEmpresa);
+                    if (numeroEmpresaMsg.trim().isEmpty()) {
+                        Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(numeroEmpresa);
+                        if (conv == null) {
+                            request.setAttribute("numeroEmpresa", numeroEmpresa);
+                        } else {
+                            numeroEmpresaMsg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_numeroConvenio_invalido");
+                            request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
+                            isValid = false;
+                        }
+                    } else {
+                        numeroEmpresaMsg = messages.getString(numeroEmpresaMsg);
+                        numeroEmpresaMsg = ServletUtils.mensagemFormatada(numeroEmpresaMsg, locale, 5);
+                        request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
+                        isValid = false;
+                    }
+                } else {
+                    numeroEmpresaMsg = messages.getString(numeroEmpresaMsg);
+                    numeroEmpresaMsg = ServletUtils.mensagemFormatada(numeroEmpresaMsg, locale, 5);
+                    request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
+                    isValid = false;
+                }
+            } else {
+                numeroEmpresaMsg = messages.getString(numeroEmpresaMsg);
+                request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
+                isValid = false;
             }
 
         }

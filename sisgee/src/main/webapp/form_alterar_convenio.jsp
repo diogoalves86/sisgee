@@ -115,6 +115,22 @@
                                 <div class="invalid-feedback">${ contatoEmpresaMsg }</div>
                             </c:if>
                         </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="numeroEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
+                            <input type="text" disabled class="form-control ${ not empty numeroEmpresaMsg ? 'is-invalid': '' }" id="numeroEmpresa" name="numeroEmpresa" value="${ not empty numeroEmpresa ? numeroEmpresa :'' }">
+                            <c:if test="${ not empty numeroEmpresaMsg }">
+                                <div class="invalid-feedback">${ numeroEmpresaMsg }</div>
+                            </c:if>
+                        </div>
+                                
+                        <div class="form-group col-md-6">
+                            <label for="anoEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
+                            <input type="text" disabled class="form-control ${ not empty anoEmpresaMsg ? 'is-invalid': '' }" id="anoEmpresa" name="anoEmpresa" value="${ not empty anoEmpresa ? anoEmpresa :'' }">
+                            <c:if test="${ not empty anoEmpresaMsg }">
+                                <div class="invalid-feedback">${ anoEmpresaMsg }</div>
+                            </c:if>
+                        </div>
 
                             </c:if>
                       
@@ -157,6 +173,22 @@
                             <input type="text" class="form-control ${ not empty telefonePessoaMsg ? 'is-invalid': 'is-valid' }" id="telefonePessoa" name="telefonePessoa" maxlength="11"  value="${ not empty telefonePessoa ? telefonePessoa :'' }">
                             <c:if test="${ not empty telefonePessoaMsg }">
                                 <div class="invalid-feedback">${ telefonePessoaMsg }</div>
+                            </c:if>
+                        </div>
+                            
+                        <div class="form-group col-md-6">
+                            <label for="numeroPessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
+                            <input type="text" disabled class="form-control ${ not empty numeroPessoaMsg ? 'is-invalid': '' }" id="numeroPessoa" name="numeroPessoa" value="${ not empty numeroPessoa ? numeroPessoa :'' }">
+                            <c:if test="${ not empty numeroPessoaMsg }">
+                                <div class="invalid-feedback">${ numeroPessoaMsg }</div>
+                            </c:if>
+                        </div>
+                                
+                        <div class="form-group col-md-6">
+                            <label for="anoPessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
+                            <input type="text" disabled class="form-control ${ not empty anoPessoaMsg ? 'is-invalid': '' }" id="anoPessoa" name="anoPessoa" value="${ not empty anoPessoa ? anoPessoa :'' }">
+                            <c:if test="${ not empty anoPessoaMsg }">
+                                <div class="invalid-feedback">${ anoPessoaMsg }</div>
                             </c:if>
                         </div>
                             </c:if>
