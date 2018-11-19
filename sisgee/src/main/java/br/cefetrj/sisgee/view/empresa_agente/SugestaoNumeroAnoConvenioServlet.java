@@ -29,7 +29,7 @@ public class SugestaoNumeroAnoConvenioServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+            throws ServletException, IOException {
         String numeroSugerido = gerarNumeroConvenio();
         request.setAttribute("numeroEmpresa", numeroSugerido);
         request.setAttribute("numeroPessoa", numeroSugerido);
@@ -41,15 +41,14 @@ public class SugestaoNumeroAnoConvenioServlet extends HttpServlet {
 
     private String gerarNumeroConvenio() {
         List<Convenio> x = ConvenioServices.listarConvenios();
-        Random Rand = new Random();
-        int sugestao = 0;
-        boolean numValido = false;
+        int sugestao = x.size() + 1;
+        boolean numValido = true;
         do {
             numValido = true;
-            sugestao = (Rand.nextInt(99998) + 1);
-            for(Convenio conv: x){
-                if(conv.getNumeroConvenio().equals(Integer.toString(sugestao))){
+            for (Convenio conv : x) {
+                if (conv.getNumero().equals(Integer.toString(sugestao))) {
                     numValido = false;
+                    sugestao++;
                 }
             }
         } while (!numValido);
