@@ -35,10 +35,10 @@ public class AlteraConvenioServlet extends HttpServlet {
         
         
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numeroConvenio);
-        String termoEstagioMsg = null;
+        String termoEstagio = null;
         if(!convenio.getTermoEstagios().isEmpty()){
-            termoEstagioMsg = "Convênio possui termo de estágio";
-            req.setAttribute("termoEstagioMsg", termoEstagioMsg);
+            termoEstagio = "Convênio possui termo de estágio";
+            req.setAttribute("termoEstagioMsg", termoEstagio);
             req.getRequestDispatcher("form_renovar_convenio.jsp").forward(req, resp);   
         }
         else{

@@ -21,7 +21,7 @@
 
             <h5 class="offset-5"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_renovar" /></h5>		
             <fieldset class="form-group col-auto offset-1">
-                    <c:if test="${ not empty termoEstagioMsg }">
+                    <c:if test="${ not empty termoEstagio }">
                         <div class="alert alert-warning" role="alert">
                             <fmt:message key="br.cefetrj.sisgee.form_alterar_convenio.msg_convenio_termo_estagio" />
                         </div>
