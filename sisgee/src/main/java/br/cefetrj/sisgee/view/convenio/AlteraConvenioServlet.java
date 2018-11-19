@@ -35,9 +35,9 @@ public class AlteraConvenioServlet extends HttpServlet {
         
         
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numeroConvenio);
-       
+       String termoEstagio = null;
         if(!convenio.getTermoEstagios().isEmpty()){
-            
+            termoEstagio = "Convênio possui termo de estágio";
         }
         else{
             if(convenio.getEmpresa()!=null){
@@ -71,12 +71,13 @@ public class AlteraConvenioServlet extends HttpServlet {
                 req.setAttribute("anoPessoa", convenio.getAno());
 
             }
+        }
+            req.setAttribute("termoEstagio", termoEstagio);
             req.getSession().setAttribute("numero", numeroConvenio);
 
             req.setAttribute("convenioAlterar", convenio);
 
             req.getRequestDispatcher("form_alterar_convenio.jsp").forward(req, resp);
-        }
     }
 
 }

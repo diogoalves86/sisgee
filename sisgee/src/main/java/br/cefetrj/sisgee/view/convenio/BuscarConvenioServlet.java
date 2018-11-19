@@ -73,6 +73,11 @@ public class BuscarConvenioServlet extends HttpServlet {
             if (!numero.equals("")) {
                 try {
                     convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero.trim());
+                    String termoEstagio = null;
+                        if(!(convenio.getTermoEstagios().isEmpty())){
+                            termoEstagio = "Convênio possui termo de estágio";
+                        }
+                    request.setAttribute("termoEstagio", termoEstagio);
                 } catch (Exception e) {
                     msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
                     request.setAttribute("msg", msg);
@@ -115,6 +120,11 @@ public class BuscarConvenioServlet extends HttpServlet {
                     for (Pessoa x : pessoas) {
                         try {
                             convenio = ConvenioServices.buscarConvenioByPessoa(x);
+                            String termoEstagio = null;
+                            if(!(convenio.getTermoEstagios().isEmpty())){
+                                termoEstagio = "Convênio possui termo de estágio";
+                            }
+                        request.setAttribute("termoEstagio", termoEstagio);
                         } catch (Exception e) {
                             msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
                             request.setAttribute("msg", msg);
@@ -134,6 +144,11 @@ public class BuscarConvenioServlet extends HttpServlet {
                     for (Empresa x : empresas) {
                         try {
                             convenio = ConvenioServices.buscarConvenioByEmpresa(x);
+                            String termoEstagio = null;
+                            if(!(convenio.getTermoEstagios().isEmpty())){
+                                termoEstagio = "Convênio possui termo de estágio";
+                            }
+                        request.setAttribute("termoEstagio", termoEstagio);
                         } catch (Exception e) {
                             msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
                             request.setAttribute("msg", msg);
