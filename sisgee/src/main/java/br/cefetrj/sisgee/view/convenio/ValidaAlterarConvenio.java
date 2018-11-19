@@ -42,6 +42,7 @@ public class ValidaAlterarConvenio extends HttpServlet{
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
         String numeroEmpresa = request.getParameter("numeroEmpresa");
+        String anoEmpresa = request.getParameter("anoEmpresa");
 
         String dataRegistroConvenioEmpresa = request.getParameter("dataRegistroConvenioEmpresa");
         String dataRegistroConvenioPessoa = request.getParameter("dataRegistroConvenioPessoa");
@@ -50,6 +51,8 @@ public class ValidaAlterarConvenio extends HttpServlet{
         String nomePessoa = request.getParameter("nomePessoa");
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
+        String numeroPessoa = request.getParameter("numeroPessoa");
+        String anoPessoa = request.getParameter("anoPessoa");
 
         String numero = (String) request.getSession().getAttribute("numero");
 
@@ -339,25 +342,58 @@ public class ValidaAlterarConvenio extends HttpServlet{
                         if (conv == null) {
                             request.setAttribute("numeroEmpresa", numeroEmpresa);
                         } else {
+                            request.setAttribute("isEmpresa", "sim");
                             numeroEmpresaMsg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_numeroConvenio_invalido");
                             request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
                             isValid = false;
                         }
                     } else {
+                        request.setAttribute("isEmpresa", "sim");
                         numeroEmpresaMsg = messages.getString(numeroEmpresaMsg);
                         numeroEmpresaMsg = ServletUtils.mensagemFormatada(numeroEmpresaMsg, locale, 5);
                         request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
                         isValid = false;
                     }
                 } else {
+                    request.setAttribute("isEmpresa", "sim");
                     numeroEmpresaMsg = messages.getString(numeroEmpresaMsg);
                     numeroEmpresaMsg = ServletUtils.mensagemFormatada(numeroEmpresaMsg, locale, 5);
                     request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
                     isValid = false;
                 }
             } else {
+                request.setAttribute("isEmpresa", "sim");
                 numeroEmpresaMsg = messages.getString(numeroEmpresaMsg);
                 request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
+                isValid = false;
+            }
+            
+            String anoEmpresaMsg = "";
+            anoEmpresaMsg = ValidaUtils.validaObrigatorio("Ano Convênio Empresa", anoEmpresa);
+            if (anoEmpresaMsg.trim().isEmpty()) {
+                anoEmpresaMsg = ValidaUtils.validaInteger("Ano Convênio Empresa", anoEmpresa);
+                if (anoEmpresaMsg.trim().isEmpty()) {
+                    anoEmpresaMsg = ValidaUtils.validaTamanhoExato("Ano Convênio Empresa", 4, anoEmpresa);
+                    if (anoEmpresaMsg.trim().isEmpty()) {
+                        request.setAttribute("anoEmpresa", anoEmpresa);
+                    } else {
+                        request.setAttribute("isEmpresa", "sim");
+                        anoEmpresaMsg = messages.getString(anoEmpresaMsg);
+                        anoEmpresaMsg = ServletUtils.mensagemFormatada(anoEmpresaMsg, locale, 4);
+                        request.setAttribute("anoEmpresaMsg", anoEmpresaMsg);
+                        isValid = false;
+                    }
+                } else {
+                    request.setAttribute("isEmpresa", "sim");
+                    anoEmpresaMsg = messages.getString(anoEmpresaMsg);
+                    anoEmpresaMsg = ServletUtils.mensagemFormatada(anoEmpresaMsg, locale, 4);
+                    request.setAttribute("anoEmpresaMsg", anoEmpresaMsg);
+                    isValid = false;
+                }
+            } else {
+                request.setAttribute("isEmpresa", "sim");
+                anoEmpresaMsg = messages.getString(anoEmpresaMsg);
+                request.setAttribute("anoEmpresaMsg", anoEmpresaMsg);
                 isValid = false;
             }
 
@@ -581,6 +617,65 @@ public class ValidaAlterarConvenio extends HttpServlet{
                 dataRegistroPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                 request.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
                 request.setAttribute("dataRegistroPessoaMsg", dataRegistroPessoaMsg);
+                isValid = false;
+            }
+            
+            String numeroPessoaMsg = "";
+            numeroPessoaMsg = ValidaUtils.validaObrigatorio("Número Convênio Pessoa", numeroPessoa);
+            if (numeroPessoaMsg.trim().isEmpty()) {
+                numeroPessoaMsg = ValidaUtils.validaInteger("Número Convênio Pessoa", numeroPessoa);
+                if (numeroPessoaMsg.trim().isEmpty()) {
+                    numeroPessoaMsg = ValidaUtils.validaTamanho("Número Convênio Pessoa", 5, numeroPessoa);
+                    if (numeroPessoaMsg.trim().isEmpty()) {
+                        Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(numeroPessoa);
+                        if (conv == null) {
+                            request.setAttribute("numeroPessoa", numeroPessoa);
+                        } else {
+                            numeroPessoaMsg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_numeroConvenio_invalido");
+                            request.setAttribute("numeroPessoaMsg", numeroPessoaMsg);
+                            isValid = false;
+                        }
+                    } else {
+                        numeroPessoaMsg = messages.getString(numeroPessoaMsg);
+                        numeroPessoaMsg = ServletUtils.mensagemFormatada(numeroPessoaMsg, locale, 5);
+                        request.setAttribute("numeroPessoaMsg", numeroPessoaMsg);
+                        isValid = false;
+                    }
+                } else {
+                    numeroPessoaMsg = messages.getString(numeroPessoaMsg);
+                    numeroPessoaMsg = ServletUtils.mensagemFormatada(numeroPessoaMsg, locale, 5);
+                    request.setAttribute("numeroPessoaMsg", numeroPessoaMsg);
+                    isValid = false;
+                }
+            } else {
+                numeroPessoaMsg = messages.getString(numeroPessoaMsg);
+                request.setAttribute("numeroPessoaMsg", numeroPessoaMsg);
+                isValid = false;
+            }
+
+            String anoPessoaMsg = "";
+            anoPessoaMsg = ValidaUtils.validaObrigatorio("Ano Convênio Pessoa", anoPessoa);
+            if (anoPessoaMsg.trim().isEmpty()) {
+                anoPessoaMsg = ValidaUtils.validaInteger("Ano Convênio Pessoa", anoPessoa);
+                if (anoPessoaMsg.trim().isEmpty()) {
+                    anoPessoaMsg = ValidaUtils.validaTamanhoExato("Ano Convênio Pessoa", 4, anoPessoa);
+                    if (anoPessoaMsg.trim().isEmpty()) {
+                        request.setAttribute("anoPessoa", anoPessoa);
+                    } else {
+                        anoPessoaMsg = messages.getString(anoPessoaMsg);
+                        anoPessoaMsg = ServletUtils.mensagemFormatada(anoPessoaMsg, locale, 4);
+                        request.setAttribute("anoPessoaMsg", anoPessoaMsg);
+                        isValid = false;
+                    }
+                } else {
+                    anoPessoaMsg = messages.getString(anoPessoaMsg);
+                    anoPessoaMsg = ServletUtils.mensagemFormatada(anoPessoaMsg, locale, 4);
+                    request.setAttribute("anoPessoaMsg", anoPessoaMsg);
+                    isValid = false;
+                }
+            } else {
+                anoPessoaMsg = messages.getString(anoPessoaMsg);
+                request.setAttribute("anoPessoaMsg", anoPessoaMsg);
                 isValid = false;
             }
 
