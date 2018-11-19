@@ -16,13 +16,7 @@
 
             <p class="tituloForm">
             <h5 class="offset-5"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_alterar" /></h5>
-            <c:choose>
-            <c:when test="${ not empty termoEstagio }">
-                <div class="alert alert-warning" role="alert">
-                    <fmt:message key="br.cefetrj.sisgee.form_alterar_convenio.msg_convenio_termo_estagio" />
-                </div>
-            </c:when>
-            <c:otherwise>
+            
             <form id="meuForm" action="ValidaAlterarConvenio" method="POST">
                 <fieldset class="form-group">
 
@@ -216,8 +210,6 @@
                 <button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'index.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>
 
             </form>
-            </c:otherwise>
-            </c:choose>
         </div>
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
