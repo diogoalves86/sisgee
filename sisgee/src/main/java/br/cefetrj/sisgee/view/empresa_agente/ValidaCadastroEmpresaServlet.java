@@ -52,9 +52,9 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Locale locale = ServletUtils.getLocale(request);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-
+        String numeroSugerido = request.getParameter("numeroSugerido");
+        System.out.print(numeroSugerido);
         String tipoPessoa = request.getParameter("tipoPessoa");
-
         boolean pessoaJuridica = true;
 
         if (tipoPessoa.equals("nao")) {
@@ -651,6 +651,7 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
             request.setAttribute("anoEmpresa", anoEmpresa);
             request.setAttribute("numeroPessoa", numeroPessoa);
             request.setAttribute("numeroEmpresa", numeroEmpresa);
+            request.setAttribute("numeroSugerido", numeroSugerido);
             String msg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_atencao");
             request.setAttribute("msg", msg);
             request.getRequestDispatcher("/form_empresa.jsp").forward(request, response);

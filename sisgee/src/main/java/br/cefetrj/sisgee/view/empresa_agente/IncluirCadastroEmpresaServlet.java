@@ -90,18 +90,6 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
         pessoa.setTelefone(telefonePessoa);
 
         if (pessoaJuridica) {
-            String numero = "";
-            String ano = "";
-            if (numeroEmpresa != null && !numeroEmpresa.equals("")) {
-                numero = numeroEmpresa;
-            } else {
-                numero = gerarNumeroConvenio();
-            }
-            if (anoEmpresa != null && !anoEmpresa.equals("")) {
-                ano = anoEmpresa;
-            } else {
-                ano = Integer.toString(Year.now().getValue());
-            }
             String msg = "";
             Logger lg = Logger.getLogger(IncluirCadastroEmpresaServlet.class);
             try {
@@ -115,7 +103,7 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
             try {
-                Convenio convenio = new Convenio(ano, numero, new SimpleDateFormat("dd/MM/yyyy").parse(dataAssinaturaConvenioEmpresa), empresa);
+                Convenio convenio = new Convenio(anoEmpresa, numeroEmpresa, new SimpleDateFormat("dd/MM/yyyy").parse(dataAssinaturaConvenioEmpresa), empresa);
                 convenio.setNumeroConvenio();
                 ConvenioServices.incluirConvenio(convenio);
                 msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
@@ -145,19 +133,8 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
             try {
-                String numero = "";
-                String ano = "";
-                if (numeroPessoa != null && !numeroPessoa.equals("")) {
-                    numero = numeroPessoa;
-                } else {
-                    numero = gerarNumeroConvenio();
-                }
-                if (anoPessoa != null && !anoPessoa.equals("")) {
-                    ano = anoPessoa;
-                } else {
-                    ano = Integer.toString(Year.now().getValue());
-                }
-                Convenio convenio = new Convenio(ano, numero, new SimpleDateFormat("dd/MM/yyyy").parse(dataAssinaturaConvenioPessoa), pessoa);
+
+                Convenio convenio = new Convenio(anoPessoa, numeroPessoa, new SimpleDateFormat("dd/MM/yyyy").parse(dataAssinaturaConvenioPessoa), pessoa);
                 convenio.setNumeroConvenio();
                 ConvenioServices.incluirConvenio(convenio);
                 msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
@@ -177,23 +154,4 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
         }
 
     }
-
-    /**
-     * Metodo que gera um numero de convenio
-     *
-     * @return uma string
-     */
-    public static String gerarNumeroConvenio() {
-        List<Convenio> x = ConvenioServices.listarConvenios();
-        int ultimoNumero = 0;
-        for (Convenio convenio : x) {
-            ultimoNumero = Integer.parseInt(convenio.getNumero());
-        }
-        ultimoNumero++;
-        System.out.println("ultimoNumero = " + ultimoNumero);//TODO apagar saída do console
-        String a = String.valueOf(ultimoNumero);
-        System.out.println("a = " + a);//TODO apagar saída do console
-        return a;
-    }
-
 }

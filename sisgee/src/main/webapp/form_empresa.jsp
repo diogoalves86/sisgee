@@ -107,15 +107,22 @@
                                 <div class="invalid-feedback">${ contatoEmpresaMsg }</div>
                             </c:if>
                         </div>
-                            
-                        <div class="form-group col-md-6">
+
+                        <div class="form-group col-md-8">
                             <label for="numeroEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
-                            <input type="text" class="form-control ${ not empty numeroEmpresaMsg ? 'is-invalid': 'is-valid' }" id="numeroEmpresa" name="numeroEmpresa" value="${numeroEmpresa}">
-                            <c:if test="${ not empty numeroEmpresaMsg }">
-                                <div class="invalid-feedback">${numeroEmpresaMsg }</div>
-                            </c:if>
+                            <div class="input-group">
+                                <input type="text" class="form-control ${ not empty numeroEmpresaMsg ? 'is-invalid': 'is-valid' }" id="numeroEmpresa" name="numeroEmpresa" value="${numeroEmpresa}">
+                                <span class="input-group-btn"> 
+                                    <button class="btn btn-primary" type="button" id="btnSetarNumeroSugerido" onClick="setValorSugeridoEmpresa()"><fmt:message key = "br.cefetrj.sisgee.form_empresa.btn_usar_numero_sugerido"/></button>
+                                </span>
+                                <c:if test="${ not empty numeroEmpresaMsg }">
+                                    <div class="invalid-feedback">${numeroEmpresaMsg }</div>
+                                </c:if>
+                            </div>
+
                         </div>
-                            
+
+
                         <div class="form-group col-md-6">
                             <label for="anoEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
                             <input type="text" class="form-control ${ not empty anoEmpresaMsg ? 'is-invalid': 'is-valid' }" id="anoEmpresa" name="anoEmpresa" value="${anoEmpresa}">
@@ -166,16 +173,21 @@
                                 <div class="invalid-feedback">${ telefonePessoaMsg }</div>
                             </c:if>
                         </div>
-                            
-                            
-                        <div class="form-group col-md-6">
+
+
+                        <div class="form-group col-md-8">
                             <label for="numeroPessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
-                            <input type="text" class="form-control ${ not empty numeroPessoaMsg ? 'is-invalid': 'is-valid' }" id="numeroPessoa" name="numeroPessoa" value="${numeroPessoa}">
-                            <c:if test="${ not empty numeroPessoaMsg }">
-                                <div class="invalid-feedback">${numeroPessoaMsg }</div>
-                            </c:if>
+                            <div class="input-group">
+                                <input type="text" class="form-control ${ not empty numeroPessoaMsg ? 'is-invalid': 'is-valid' }" id="numeroPessoa" name="numeroPessoa" value="${numeroPessoa}">
+                                <span class="input-group-btn"> 
+                                    <button class="btn btn-primary" type="button" id="btnSetarNumeroSugeridoPessoa" onClick="setValorSugeridoPessoa()"><fmt:message key = "br.cefetrj.sisgee.form_empresa.btn_usar_numero_sugerido"/></button>
+                                </span>
+                                <c:if test="${ not empty numeroPessoaMsg }">
+                                    <div class="invalid-feedback">${numeroPessoaMsg }</div>
+                                </c:if>
+                            </div>
                         </div>
-                            
+
                         <div class="form-group col-md-6">
                             <label for="anoPessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
                             <input type="text" class="form-control ${ not empty anoPessoaMsg ? 'is-invalid': 'is-valid' }" id="anoPessoa" name="anoPessoa" value="${anoPessoa}">
@@ -187,7 +199,7 @@
                     </div>
 
                 </fieldset>
-
+                <input type ="hidden" name="numeroSugerido" value="${numeroSugerido}">
                 <button type="submit" class="btn btn-primary" ><i class="far fa-save"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_salvar"/></button>
                 <button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'index.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>
 
@@ -197,14 +209,26 @@
         <%@include file="import_finalbodyscripts.jspf"%>
         <%@include file="import_scripts.jspf"%>
 
-       
+
         <script>
             $(document).ready(function () {
                 $('#cnpjEmpresa').mask('99.999.999/9999-99');
                 $('#cpfPessoa').mask('999.999.999-99');
                 $('#dataRegistroConvenioEmpresa').mask('99/99/9999');
                 $('#dataRegistroConvenioPessoa').mask('99/99/9999');
+                $('#numeroEmpresa').mask('999999');
+                $('#numeroPessoa').mask('999999');
+                $('#anoPessoa').mask('9999');
+                $('#anoEmpresa').mask('9999');
             });
-        </script>
 
+
+            function setValorSugeridoEmpresa() {
+                document.getElementById("numeroEmpresa").value = "${numeroSugerido}";
+            }
+            
+            function setValorSugeridoPessoa() {
+                document.getElementById("numeroPessoa").value = "${numeroSugerido}";
+            }
+        </script>
     </body>
