@@ -106,13 +106,20 @@
                                     <td>${b.getConvenio().pegaCpf()}</td>
                                     <td>${b.getConvenio().pegaNome()}</td>
                                     <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.37" /></td>
-                                    <td><button type="button" ${status.last? '' : 'disabled="disabled"'} class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+                                    <c:choose>
+                                        <c:when test="${status.last}">
+                                            <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${c.idTermoAditivo}_${b.idTermoEstagio}"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <td><button class="btn btn-sm btn-primary" type="button" ${'disabled="disabled"'} onClick="informacao()"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <c:choose>
                                             <c:when test="${status.last}">
                                             <td><a class="btn btn-sm btn-primary" href="AlterarTermoAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" ><fmt:message key="br.cefetrj.sisgee.36" /></a></td>
                                             </c:when>
                                             <c:otherwise>
-                                            <td><button class="btn btn-sm btn-primary" type="button" ${'disabled="disabled"'}><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
+                                            <td><button class="btn btn-sm btn-primary" type="button" ${'disabled="disabled"'} onClick="informacao()"><fmt:message key="br.cefetrj.sisgee.36" /></button></td>
                                             </c:otherwise>
                                         </c:choose>
                                     <!-- Modal -->
@@ -372,6 +379,10 @@
 
                 document.getElementById("termoAditivo").value = "sim";
 
+            }
+            
+            function informacao(){
+                alert("<fmt:message key="br.cefetrj.sisgee.form_alterar_termo_aditivo.msg_erro_botao"></fmt:message>");
             }
 
         </script>
