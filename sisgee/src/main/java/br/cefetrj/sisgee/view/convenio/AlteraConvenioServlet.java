@@ -42,6 +42,7 @@ public class AlteraConvenioServlet extends HttpServlet {
             req.getRequestDispatcher("form_renovar_convenio.jsp").forward(req, resp);   
         }
         else{
+            req.setAttribute("numeroSugerido", convenio.getNumero());
             if(convenio.getEmpresa()!=null){
                 req.setAttribute("isEmpresa", "sim");
                 if(convenio.getEmpresa().isAgenteIntegracao()){

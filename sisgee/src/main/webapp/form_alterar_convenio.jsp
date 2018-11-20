@@ -226,11 +226,11 @@
             });
             
             function setValorSugeridoEmpresa() {
-                document.getElementById("numeroEmpresa").value = "${numeroEmpresa}";
+                document.getElementById("numeroEmpresa").value = "${numeroSugerido}";
             }
             
             function setValorSugeridoPessoa() {
-                document.getElementById("numeroPessoa").value = "${numeroPessoa}";
+                document.getElementById("numeroPessoa").value = "${numeroSugerido}";
             }
         </script>
 
