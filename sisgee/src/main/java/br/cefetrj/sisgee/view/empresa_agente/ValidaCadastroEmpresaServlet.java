@@ -381,12 +381,19 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
             if (anoEmpresaMsg.trim().isEmpty()) {
                 anoEmpresaMsg = ValidaUtils.validaInteger("Ano Convênio Empresa", anoEmpresa);
                 if (anoEmpresaMsg.trim().isEmpty()) {
-                    anoEmpresaMsg = ValidaUtils.validaTamanhoExato("Ano Convênio Empresa", tamanho, anoEmpresa);
+                    anoEmpresaMsg = ValidaUtils.validaPositivo("Ano Convênio Empresa", anoEmpresa);
                     if (anoEmpresaMsg.trim().isEmpty()) {
-                        request.setAttribute("anoEmpresa", anoEmpresa);
+                        anoEmpresaMsg = ValidaUtils.validaTamanhoExato("Ano Convênio Empresa", tamanho, anoEmpresa);
+                        if (anoEmpresaMsg.trim().isEmpty()) {
+                            request.setAttribute("anoEmpresa", anoEmpresa);
+                        } else {
+                            anoEmpresaMsg = messages.getString(anoEmpresaMsg);
+                            anoEmpresaMsg = ServletUtils.mensagemFormatada(anoEmpresaMsg, locale, tamanho);
+                            request.setAttribute("anoEmpresaMsg", anoEmpresaMsg);
+                            isValid = false;
+                        }
                     } else {
                         anoEmpresaMsg = messages.getString(anoEmpresaMsg);
-                        anoEmpresaMsg = ServletUtils.mensagemFormatada(anoEmpresaMsg, locale, tamanho);
                         request.setAttribute("anoEmpresaMsg", anoEmpresaMsg);
                         isValid = false;
                     }
@@ -592,11 +599,18 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
                 if (numeroPessoaMsg.trim().isEmpty()) {
                     numeroPessoaMsg = ValidaUtils.validaTamanho("Número Convênio Pessoa", tamanho, numeroPessoa);
                     if (numeroPessoaMsg.trim().isEmpty()) {
-                        Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(numeroPessoa);
-                        if (conv == null) {
-                            request.setAttribute("numeroPessoa", numeroPessoa);
+                        numeroPessoaMsg = ValidaUtils.validaPositivo("Número Convênio Pessoa", numeroPessoa);
+                        if (numeroPessoaMsg.trim().isEmpty()) {
+                            Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(numeroPessoa);
+                            if (conv == null) {
+                                request.setAttribute("numeroPessoa", numeroPessoa);
+                            } else {
+                                numeroPessoaMsg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_numeroConvenio_invalido");
+                                request.setAttribute("numeroPessoaMsg", numeroPessoaMsg);
+                                isValid = false;
+                            }
                         } else {
-                            numeroPessoaMsg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_numeroConvenio_invalido");
+                            numeroPessoaMsg = messages.getString(numeroPessoaMsg);
                             request.setAttribute("numeroPessoaMsg", numeroPessoaMsg);
                             isValid = false;
                         }
@@ -624,12 +638,19 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
             if (anoPessoaMsg.trim().isEmpty()) {
                 anoPessoaMsg = ValidaUtils.validaInteger("Ano Convênio Pessoa", anoPessoa);
                 if (anoPessoaMsg.trim().isEmpty()) {
-                    anoPessoaMsg = ValidaUtils.validaTamanhoExato("Ano Convênio Pessoa", tamanho, anoPessoa);
+                    anoPessoaMsg = ValidaUtils.validaPositivo("Ano Convênio Pessoa", anoPessoa);
                     if (anoPessoaMsg.trim().isEmpty()) {
-                        request.setAttribute("anoPessoa", anoPessoa);
+                        anoPessoaMsg = ValidaUtils.validaTamanhoExato("Ano Convênio Pessoa", tamanho, anoPessoa);
+                        if (anoPessoaMsg.trim().isEmpty()) {
+                            request.setAttribute("anoPessoa", anoPessoa);
+                        } else {
+                            anoPessoaMsg = messages.getString(anoPessoaMsg);
+                            anoPessoaMsg = ServletUtils.mensagemFormatada(anoPessoaMsg, locale, tamanho);
+                            request.setAttribute("anoPessoaMsg", anoPessoaMsg);
+                            isValid = false;
+                        }
                     } else {
                         anoPessoaMsg = messages.getString(anoPessoaMsg);
-                        anoPessoaMsg = ServletUtils.mensagemFormatada(anoPessoaMsg, locale, tamanho);
                         request.setAttribute("anoPessoaMsg", anoPessoaMsg);
                         isValid = false;
                     }
