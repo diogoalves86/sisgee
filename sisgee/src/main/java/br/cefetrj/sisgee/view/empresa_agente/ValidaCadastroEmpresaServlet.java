@@ -342,11 +342,18 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
                 if (numeroEmpresaMsg.trim().isEmpty()) {
                     numeroEmpresaMsg = ValidaUtils.validaTamanho("Número Convênio Empresa", tamanho, numeroEmpresa);
                     if (numeroEmpresaMsg.trim().isEmpty()) {
-                        Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(numeroEmpresa);
-                        if (conv == null) {
-                            request.setAttribute("numeroEmpresa", numeroEmpresa);
+                        numeroEmpresaMsg = ValidaUtils.validaPositivo("Número Convênio Empresa", numeroEmpresa);
+                        if (numeroEmpresaMsg.trim().isEmpty()) {
+                            Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(numeroEmpresa);
+                            if (conv == null) {
+                                request.setAttribute("numeroEmpresa", numeroEmpresa);
+                            } else {
+                                numeroEmpresaMsg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_numeroConvenio_invalido");
+                                request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
+                                isValid = false;
+                            }
                         } else {
-                            numeroEmpresaMsg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_numeroConvenio_invalido");
+                            numeroEmpresaMsg = messages.getString(numeroEmpresaMsg);
                             request.setAttribute("numeroEmpresaMsg", numeroEmpresaMsg);
                             isValid = false;
                         }

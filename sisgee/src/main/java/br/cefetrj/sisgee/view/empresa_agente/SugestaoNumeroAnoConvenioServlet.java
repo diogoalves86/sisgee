@@ -45,11 +45,10 @@ public class SugestaoNumeroAnoConvenioServlet extends HttpServlet {
         boolean numValido = true;
         do {
             numValido = true;
-            for (Convenio conv : x) {
-                if (conv.getNumero().equals(Integer.toString(sugestao))) {
-                    numValido = false;
-                    sugestao++;
-                }
+            Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(Integer.toString(sugestao));
+            if (conv != null) {
+                numValido = false;
+                sugestao++;
             }
         } while (!numValido);
         String numero = String.valueOf(sugestao);
