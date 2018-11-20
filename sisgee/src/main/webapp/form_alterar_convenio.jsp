@@ -16,7 +16,7 @@
 
             <p class="tituloForm">
             <h5 class="offset-5"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_alterar" /></h5>
-            
+
             <form id="meuForm" action="ValidaAlterarConvenio" method="POST">
                 <fieldset class="form-group">
 
@@ -115,27 +115,6 @@
                                 <div class="invalid-feedback">${ contatoEmpresaMsg }</div>
                             </c:if>
                         </div>
-                            
-                        <div class="form-group col-md-8">
-                            <label for="numeroEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
-                            <div class="input-group">
-                                <input type="text" class="form-control ${ not empty numeroEmpresaMsg ? 'is-invalid': 'is-valid' }" id="numeroEmpresa" name="numeroEmpresa" value="${ not empty numeroEmpresa ? numeroEmpresa :'' }">
-                                <span class="input-group-btn"> 
-                                    <button class="btn btn-primary" type="button" id="btnSetarNumeroSugerido" onClick="setValorSugeridoEmpresa()"><fmt:message key = "br.cefetrj.sisgee.form_empresa.btn_usar_numero_sugerido"/></button>
-                                </span>
-                                <c:if test="${ not empty numeroEmpresaMsg }">
-                                    <div class="invalid-feedback">${numeroEmpresaMsg }</div>
-                                </c:if>
-                            </div>
-                        </div>
-                                
-                        <div class="form-group col-md-6">
-                            <label for="anoEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
-                            <input type="text" class="form-control ${ not empty anoEmpresaMsg ? 'is-invalid': 'is-valid' }" id="anoEmpresa" name="anoEmpresa" value="${ not empty anoEmpresa ? anoEmpresa :'' }">
-                            <c:if test="${ not empty anoEmpresaMsg }">
-                                <div class="invalid-feedback">${ anoEmpresaMsg }</div>
-                            </c:if>
-                        </div>
 
                             </c:if>
                       
@@ -180,27 +159,6 @@
                                 <div class="invalid-feedback">${ telefonePessoaMsg }</div>
                             </c:if>
                         </div>
-                            
-                        <div class="form-group col-md-8">
-                            <label for="numeroPessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_numero"/></label>
-                            <div class="input-group">
-                                <input type="text" class="form-control ${ not empty numeroPessoaMsg ? 'is-invalid': 'is-valid' }" id="numeroPessoa" name="numeroPessoa" value="${ not empty numeroPessoa ? numeroPessoa :'' }">
-                                <span class="input-group-btn"> 
-                                    <button class="btn btn-primary" type="button" id="btnSetarNumeroSugeridoPessoa" onClick="setValorSugeridoPessoa()"><fmt:message key = "br.cefetrj.sisgee.form_empresa.btn_usar_numero_sugerido"/></button>
-                                </span>
-                                <c:if test="${ not empty numeroPessoaMsg }">
-                                    <div class="invalid-feedback">${numeroPessoaMsg }</div>
-                                </c:if>
-                            </div>
-                        </div>
-                                
-                        <div class="form-group col-md-6">
-                            <label for="anoPessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_ano"/></label>
-                            <input type="text" class="form-control ${ not empty anoPessoaMsg ? 'is-invalid': 'is-valid' }" id="anoPessoa" name="anoPessoa" value="${ not empty anoPessoa ? anoPessoa :'' }">
-                            <c:if test="${ not empty anoPessoaMsg }">
-                                <div class="invalid-feedback">${ anoPessoaMsg }</div>
-                            </c:if>
-                        </div>
                             </c:if>
                     
 
@@ -224,14 +182,6 @@
                 $('#dataRegistroConvenioEmpresa').mask('99/99/9999');
                 
             });
-            
-            function setValorSugeridoEmpresa() {
-                document.getElementById("numeroEmpresa").value = "${numeroEmpresa}";
-            }
-            
-            function setValorSugeridoPessoa() {
-                document.getElementById("numeroPessoa").value = "${numeroPessoa}";
-            }
         </script>
 
 
