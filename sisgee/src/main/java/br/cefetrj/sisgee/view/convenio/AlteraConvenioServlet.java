@@ -35,39 +35,51 @@ public class AlteraConvenioServlet extends HttpServlet {
         
         
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numeroConvenio);
-       
-        
-        if(convenio.getEmpresa()!=null){
-            req.setAttribute("isEmpresa", "sim");
-            if(convenio.getEmpresa().isAgenteIntegracao()){
-                req.setAttribute("simAgenteIntegracao", "sim");
-            }else{
-                req.setAttribute("naoAgenteIntegracao", "sim");
-            }
-            req.setAttribute("cnpjEmpresa", convenio.getEmpresa().getCnpjEmpresa());
-            req.setAttribute("nomeEmpresa", convenio.getEmpresa().getRazaoSocial());
-            String dataRegistroEmpresa = null;
-            dataRegistroEmpresa = new SimpleDateFormat("dd/MM/yyyy").format(convenio.getDataRegistro());
-            req.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
-            req.setAttribute("emailEmpresa", convenio.getEmpresa().getEmailEmpresa());
-            req.setAttribute("telefoneEmpresa", convenio.getEmpresa().getTelefoneEmpresa());
-            req.setAttribute("contatoEmpresa", convenio.getEmpresa().getContatoEmpresa());
-               
-        }else{
-            req.setAttribute("isPessoa", "sim");
-            req.setAttribute("cpfPessoa", convenio.getPessoa().getCpf());
-            req.setAttribute("nomePessoa", convenio.getPessoa().getNome());
-            req.setAttribute("dataRegistroConvenioPessoa", convenio.getDataRegistro());
-            req.setAttribute("emailPessoa", convenio.getPessoa().getEmail());
-            req.setAttribute("telefonePessoa", convenio.getPessoa().getTelefone());
-            
+        String termoEstagio = null;
+        if(!convenio.getTermoEstagios().isEmpty()){
+            termoEstagio = "Convênio possui termo de estágio";
+            req.setAttribute("termoEstagioMsg", termoEstagio);
+            req.getRequestDispatcher("form_renovar_convenio.jsp").forward(req, resp);   
         }
-        req.getSession().setAttribute("numero", numeroConvenio);
+        else{
+            if(convenio.getEmpresa()!=null){
+                req.setAttribute("isEmpresa", "sim");
+                if(convenio.getEmpresa().isAgenteIntegracao()){
+                    req.setAttribute("simAgenteIntegracao", "sim");
+                }else{
+                    req.setAttribute("naoAgenteIntegracao", "sim");
+                }
+                req.setAttribute("cnpjEmpresa", convenio.getEmpresa().getCnpjEmpresa());
+                req.setAttribute("nomeEmpresa", convenio.getEmpresa().getRazaoSocial());
+                String dataRegistroEmpresa = null;
+                dataRegistroEmpresa = new SimpleDateFormat("dd/MM/yyyy").format(convenio.getDataRegistro());
+                req.setAttribute("dataRegistroConvenioEmpresa", dataRegistroEmpresa);
+                req.setAttribute("emailEmpresa", convenio.getEmpresa().getEmailEmpresa());
+                req.setAttribute("telefoneEmpresa", convenio.getEmpresa().getTelefoneEmpresa());
+                req.setAttribute("contatoEmpresa", convenio.getEmpresa().getContatoEmpresa());
+                req.setAttribute("numeroEmpresa", convenio.getNumero());
+                req.setAttribute("anoEmpresa", convenio.getAno());
+
+            }else{
+                req.setAttribute("isPessoa", "sim");
+                req.setAttribute("cpfPessoa", convenio.getPessoa().getCpf());
+                req.setAttribute("nomePessoa", convenio.getPessoa().getNome());
+                String dataRegistroPessoa = null;
+                dataRegistroPessoa = new SimpleDateFormat("dd/MM/yyyy").format(convenio.getDataRegistro());
+                req.setAttribute("dataRegistroConvenioPessoa", dataRegistroPessoa);
+                req.setAttribute("emailPessoa", convenio.getPessoa().getEmail());
+                req.setAttribute("telefonePessoa", convenio.getPessoa().getTelefone());
+                req.setAttribute("numeroPessoa", convenio.getNumero());
+                req.setAttribute("anoPessoa", convenio.getAno());
+
+            }
         
-        req.setAttribute("convenioAlterar", convenio);
-  
-        req.getRequestDispatcher("form_alterar_convenio.jsp").forward(req, resp);
-        
+            req.getSession().setAttribute("numero", numeroConvenio);
+
+            req.setAttribute("convenioAlterar", convenio);
+
+            req.getRequestDispatcher("form_alterar_convenio.jsp").forward(req, resp);
+        }
     }
 
 }
