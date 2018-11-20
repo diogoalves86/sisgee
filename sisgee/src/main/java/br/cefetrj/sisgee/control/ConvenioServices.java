@@ -164,17 +164,31 @@ public class ConvenioServices {
     }
 
     /**
+     * Método para fazer um merge de um convenio
+     *
+     * @param convenio
+     */
+    public static void alterarConvenio(Convenio convenio) {
+
+        GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
+
+        try {
+            PersistenceManager.getTransaction().begin();
+            convenioDao.alterar(convenio);
+            PersistenceManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            PersistenceManager.getTransaction().rollback();
+        }
+    }
+
+    /**
      * Método para excluir um convenio e a empresa/pessoa relacionada de um
      * banco
      *
      * @param convenio
      * @param empresa
      * @param pessoa
-     */
-    /**
-     * Método para fazer um merge de um convenio
-     *
-     * @param convenio
      */
     public static void excluirConvenio(Convenio convenio, Empresa empresa, Pessoa pessoa) throws Exception {
 
@@ -210,25 +224,6 @@ public class ConvenioServices {
             }
             PersistenceManager.getTransaction().commit();
         } catch (Exception e) {
-            PersistenceManager.getTransaction().rollback();
-        }
-    }
-
-    public static void alterarConvenio(Convenio convenio) throws Exception {
-
-        GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
-
-        if (convenio.getTermoEstagios() != null && convenio.getTermoEstagios().size() >= 1) {
-            System.out.println("Existe Termo de Estagio");
-            throw new Exception();
-        }
-
-        try {
-            PersistenceManager.getTransaction().begin();
-            convenioDao.alterar(convenio);
-            PersistenceManager.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
             PersistenceManager.getTransaction().rollback();
         }
     }

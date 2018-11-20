@@ -102,7 +102,7 @@
                                 <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_renovar" /></th>
 
                                 <th scope="col"><fmt:message key="br.cefetrj.sisgee.31" /></th>
-                                <th scope="col"><fmt:message key="br.cefetrj.sisgee.36" /></th>
+
 
 
                             </tr>
@@ -124,6 +124,10 @@
                                 <td><a class="btn btn-sm btn-primary btn-block" href="RenovarConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_renovar" /></td>
 
                                 <td><button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#${ not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }"><fmt:message key="br.cefetrj.sisgee.31" /></button></td>
+
+
+
+
 
                                 <!-- Modal -->
 
@@ -158,7 +162,6 @@
                                 </div>
 
                             </div>
-                            <td><a class="btn btn-sm btn-primary btn-block" href="AlteraConvenioServlet?convenio=${b.numeroConvenio}" ><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_clique_alterar" /></td>
 
                             </tr>
 
