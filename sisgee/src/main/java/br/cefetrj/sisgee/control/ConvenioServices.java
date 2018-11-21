@@ -169,9 +169,7 @@ public class ConvenioServices {
      * @param convenio
      */
     public static void alterarConvenio(Convenio convenio) {
-
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
-
         try {
             PersistenceManager.getTransaction().begin();
             convenioDao.alterar(convenio);
@@ -195,12 +193,6 @@ public class ConvenioServices {
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
         GenericDAO<Empresa> empresaDao = PersistenceManager.createGenericDAO(Empresa.class);
         GenericDAO<Pessoa> pessoaDao = PersistenceManager.createGenericDAO(Pessoa.class);
-
-        if (convenio.getTermoEstagios() != null && convenio.getTermoEstagios().size() >= 1) {
-            System.out.println("Existe Termo de Estagio");
-            throw new Exception();
-        }
-
         boolean ehAluno = false;
         for (Aluno aluno : AlunoServices.listarAlunos()) {
             if (aluno.getPessoa().equals(pessoa)) {

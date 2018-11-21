@@ -42,7 +42,6 @@ public class ExcluirConvenioServlet extends HttpServlet {
             throws ServletException, IOException {
         Locale locale = ServletUtils.getLocale(req);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-
         String numConvenio = req.getParameter("ncon");
         String[] convenionumero = numConvenio.split("/");
         numConvenio = convenionumero[0];
@@ -51,32 +50,26 @@ public class ExcluirConvenioServlet extends HttpServlet {
         Convenio convenio = null;
         Pessoa pessoa = null;
         System.out.println(codigo);
-
         if (codigo.length() == 11) {
             pessoa = PessoaServices.buscarPessoaByCpf(codigo);
         } else if (codigo.length() == 14) {
             empresa = EmpresaServices.buscarEmpresaByCnpj(codigo);
         }
-
         if (numConvenio != null) {
-
             convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numConvenio);
         }
         String exclusaoConvenioConcluido = "";
         String msgOcorreuErro = "";
         Logger lg = Logger.getLogger(ExcluirConvenioServlet.class);
-
         try {
             ConvenioServices.excluirConvenio(convenio, empresa, pessoa);
             exclusaoConvenioConcluido = messages.getString("br.cefetrj.sisgee.excluir_convenio_servlet.msg_exclusaoConvenioConcluida");
             req.setAttribute("msg", exclusaoConvenioConcluido);
             lg.info(exclusaoConvenioConcluido);
             req.getRequestDispatcher("/index.jsp").forward(req, resp);
-
         } catch (Exception e) {
             msgOcorreuErro = messages.getString("br.cefetrj.sisgee.excluir_convenio_servlet.msg_ocorreuErro");
             req.setAttribute("msg", msgOcorreuErro);
-
             lg.error("Exception ao tentar Excluir o Convenio", e);
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }

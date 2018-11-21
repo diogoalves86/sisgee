@@ -86,7 +86,9 @@ public class TermoAditivoServices {
         if (ultimo == false) {
             throw new Exception();
         }
-        PersistenceManager.getTransaction().begin();
+        if (!PersistenceManager.getTransaction().isActive()) {
+            PersistenceManager.getTransaction().begin();
+        }
         try {
             termoAditivoDao.excluir(termoAditivo);
             PersistenceManager.getTransaction().commit();

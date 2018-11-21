@@ -30,7 +30,7 @@ public class Convenio implements Serializable {
     @GeneratedValue
     private Integer idConvenio;
 
-    @Column(length = 10, nullable = false)
+    @Column(length = 11, nullable = false)
     private String numeroConvenio;
     
     @Column(length = 6, nullable = false)
@@ -51,7 +51,7 @@ public class Convenio implements Serializable {
     @JoinColumn()
     private Pessoa pessoa;
 
-    @OneToMany(mappedBy = "convenio")
+    @OneToMany(mappedBy = "convenio", fetch = FetchType.EAGER)
     private List<TermoEstagio> termoEstagios;
 
     public Convenio() {
@@ -165,6 +165,10 @@ public class Convenio implements Serializable {
     public void setTermoEstagio(List<TermoEstagio> termoEstagios) {
         this.termoEstagios = termoEstagios;
     }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
     
     /**
      * Método que retorna o nome seja da pessoa fisica ou juridica
@@ -188,9 +192,7 @@ public class Convenio implements Serializable {
         }
         else{
             return empresa.getCnpjEmpresa();
-        }    
-        
-         
+        }
     }
     @Override
     public int hashCode() {

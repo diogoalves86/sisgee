@@ -335,7 +335,7 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
             }
 
             String numeroEmpresaMsg = "";
-            tamanho = 5;
+            tamanho = 6;
             numeroEmpresaMsg = ValidaUtils.validaObrigatorio("Número Convênio Empresa", numeroEmpresa);
             if (numeroEmpresaMsg.trim().isEmpty()) {
                 numeroEmpresaMsg = ValidaUtils.validaInteger("Número Convênio Empresa", numeroEmpresa);
@@ -592,7 +592,7 @@ public class ValidaCadastroEmpresaServlet extends HttpServlet {
             }
 
             String numeroPessoaMsg = "";
-            tamanho = 5;
+            tamanho = 6;
             numeroPessoaMsg = ValidaUtils.validaObrigatorio("Número Convênio Pessoa", numeroPessoa);
             if (numeroPessoaMsg.trim().isEmpty()) {
                 numeroPessoaMsg = ValidaUtils.validaInteger("Número Convênio Pessoa", numeroPessoa);
