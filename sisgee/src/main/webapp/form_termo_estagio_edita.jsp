@@ -51,7 +51,7 @@
             <h5><fmt:message key = "br.cefetrj.sisgee.resources.form.editarTermoEstagio"/></h5>		
         </p>		
             <form action="EditarTermoEAditivo" method="post">
-                <!-- DADOS NECESSÁRIOS VINDOS DO SERVLET -->
+                <!-- DADOS NECESSÃRIOS VINDOS DO SERVLET -->
                 <input type="hidden" id="precisaVerificarTermoEmAberto" name="precisaVerificarTermoEmAberto" value="1" />
                 <input type="hidden" id="idTermoEstagio" name="idTermoEstagio" value="${ idTermoEstagio }" />
                 <input type="hidden" id="idEstagio" name="idEstagio" value="${ idEstagio }" />
@@ -62,15 +62,15 @@
                 <input type="hidden" id="unidadeCursoAluno" value="${aluno.getCurso().getCampus()}" />
                 
                 
-                 <fieldset class="form-group dadosAluno">
+                 <fieldset class="form-group dadosAluno" disabled>
                     <%@include file="import_busca_aluno.jspf"%>
                 </fieldset>
                 
-                <!-- AQUI VEM O CONVÊNIO-->
+                <!-- AQUI VEM O CONVÃŠNIO-->
                 <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.dadosEmpresaConveniada"/></legend>
                     <div class="form-group col-md-12">
-                        <!-- AQUI VEM O NOME E NUMERO DO CONVÊNIO-->
+                        <!-- AQUI VEM O NOME E NUMERO DO CONVÃŠNIO-->
                         <div class="input-group">  
                             <div class="form-group col-md-5">
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
@@ -100,7 +100,7 @@
                                 </div>     
                             </div>
                         </div>   
-                        <!-- AQUI TERMINA O NOME E NUMERO DO CONVÊNIO-->
+                        <!-- AQUI TERMINA O NOME E NUMERO DO CONVÃŠNIO-->
                         <div class="form-group">
                             <div class="input-group">
                                 <label><fmt:message key = "br.cefetrj.sisgee.resources.form.tipoPJ_PF"/></label>                                
@@ -151,9 +151,9 @@
                         </div>
                     </div>
                 </fieldset>
-                <!-- Aqui Começa O termo Aditivo -->
+                <!-- Aqui ComeÃ§a O termo Aditivo -->
                 
-                <!-- Aqui começa Vigencia-->
+                <!-- Aqui comeÃ§a Vigencia-->
                 <c:if test="${ not empty periodoMsg }">
                     <div class="alert alert-danger" role="alert">${ periodoMsg }</div>
                 </c:if>
@@ -180,7 +180,7 @@
                 </fieldset>
                 <!-- Aqui Termina Vigencia-->
                 
-                <!-- Aqui começa Carga Horária-->
+                <!-- Aqui comeÃ§a Carga HorÃ¡ria-->
                 <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.cargaHorariaAluno"/></legend>
                     <div class="form-row">
@@ -193,9 +193,9 @@
                         </div>
                     </div>
                 </fieldset>
-                <!-- Aqui Termina Carga Horária-->
+                <!-- Aqui Termina Carga HorÃ¡ria-->
                 
-                <!-- Aqui começa Valor Bolsa-->
+                <!-- Aqui comeÃ§a Valor Bolsa-->
                 <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.valorBolsaEstagio"/></legend>
                     <div class="form-row">
@@ -210,7 +210,7 @@
                 </fieldset>
                 <!-- Aqui termina Valor Bolsa-->
 
-                <!-- Aqui começa local estágio-->
+                <!-- Aqui comeÃ§a local estÃ¡gio-->
                 <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.localEstagio"/></legend>
                     <div class="form-row">
@@ -282,9 +282,9 @@
                         </div>
                     </div>
                 </fieldset>
-                <!-- Aqui começa local estágio-->
+                <!-- Aqui comeÃ§a local estÃ¡gio-->
                 
-                <!-- Aqui começa Supervisor-->
+                <!-- Aqui comeÃ§a Supervisor-->
                 <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.20"/></legend>    
                         <div class="form-row" > 
@@ -341,7 +341,7 @@
                 </fieldset>
                 <!-- Aqui termina Supervisor-->
                 
-                <!-- Aqui começa Professor Orientador-->             
+                <!-- Aqui comeÃ§a Professor Orientador-->             
                 <fieldset class="form-group">
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></legend>
                         <div class="form-group col-md-8">
@@ -432,12 +432,12 @@
             if(tipoDeAluno != null){            
                 if (tipoDeAluno == "tecnico") {
                     dataNova.setMonth(dataNova.getMonth() + 6);
-                    tipoDeAluno = "Curso Técnico";
+                    tipoDeAluno = "Curso TÃ©cnico";
                 }else{
                     dataNova.setMonth(dataNova.getMonth() + 12);
-                    tipoDeAluno = "Graduação";
+                    tipoDeAluno = "GraduaÃ§Ã£o";
                 }            
-                document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
+                document.getElementById("dataIni").innerHTML = "Esse EstÃ¡gio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
             }
                               
         }   
