@@ -49,7 +49,7 @@ public class TermoAditivoAux {
 	@Column(length = 150, nullable = true)
 	private String bairroEnderecoTermoAditivo;
 
-	@Column(length = 15, nullable = true)
+	@Column(length = 15)
 	private String cepEnderecoTermoAditivo;
 
 	@Column(length = 150, nullable = true)

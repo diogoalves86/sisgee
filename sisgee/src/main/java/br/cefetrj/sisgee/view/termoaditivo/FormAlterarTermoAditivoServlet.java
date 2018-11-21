@@ -422,8 +422,6 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                 String cepEnderecoMsg = "";
                 campo = "CEP";
                 tamanho = 15;
-                cepEnderecoMsg = ValidaUtils.validaObrigatorio(campo, cepEnderecoTermoAditivo);
-                if (cepEnderecoMsg.trim().isEmpty()) {
                     cepEnderecoMsg = ValidaUtils.validaTamanho(campo, tamanho, cepEnderecoTermoAditivo);
                     if (bairroEnderecoMsg.trim().isEmpty()) {
                         request.setAttribute("cepEnderecoTermoEstagio", cepEnderecoTermoAditivo);
@@ -435,13 +433,7 @@ public class FormAlterarTermoAditivoServlet extends HttpServlet {
                         //TODO Fazer log
                         System.out.println(cepEnderecoMsg);
                     }
-                } else {
-                    cepEnderecoMsg = messages.getString(cepEnderecoMsg);
-                    request.setAttribute("cepEnderecoMsg", cepEnderecoMsg);
-                    isValid = false;
-                    //TODO Fazer log
-                    System.out.println(cepEnderecoMsg);
-                }
+
 
                 /**
                  * Validação da Cidade do endereço do TermoEstagio, usando
