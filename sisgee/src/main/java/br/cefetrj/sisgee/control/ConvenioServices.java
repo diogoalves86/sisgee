@@ -171,11 +171,6 @@ public class ConvenioServices {
      * @param empresa
      * @param pessoa
      */
-    /**
-     * Método para fazer um merge de um convenio
-     *
-     * @param convenio
-     */
     public static void excluirConvenio(Convenio convenio, Empresa empresa, Pessoa pessoa) throws Exception {
 
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
